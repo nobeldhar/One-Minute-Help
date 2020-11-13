@@ -4,7 +4,6 @@ import android.app.Application
 import com.decimalab.minutehelp.OneMinuteHelpApp
 import com.decimalab.minutehelp.di.module.ActivityModule
 import com.decimalab.minutehelp.di.module.AppModule
-import com.nobel.dhar.offer.di.module.ViewModelFactoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

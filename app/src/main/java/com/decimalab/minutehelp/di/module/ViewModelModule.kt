@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.decimalab.minutehelp.factory.AppViewModelFactory
 import com.decimalab.minutehelp.ui.login.LoginViewModel
+import com.decimalab.minutehelp.ui.register.RegisterViewModel
 import com.nobel.dhar.offer.di.util.ViewModelKey
 
 import dagger.Binds
@@ -16,7 +17,12 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
-    abstract fun bindHomeViewModel(loginViewModel: LoginViewModel): ViewModel
+    abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterViewModel::class)
+    abstract fun bindRegisterViewModel(registerViewModel: RegisterViewModel): ViewModel
 
 
     @Binds

@@ -3,6 +3,7 @@
     package="com.decimalab.minutehelp">
 
     <application
+        android:name=".OneMinuteHelpApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

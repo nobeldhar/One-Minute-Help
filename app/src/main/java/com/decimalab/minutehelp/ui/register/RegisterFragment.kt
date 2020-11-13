@@ -6,15 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.decimalab.minutehelp.R
+import com.decimalab.minutehelp.factory.AppViewModelFactory
+import com.decimalab.minutehelp.ui.login.LoginViewModel
+import javax.inject.Inject
 
 class RegisterFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RegisterFragment()
-    }
-
-    private lateinit var viewModel: RegisterViewModel
+    @Inject
+    lateinit var viewModelFactory: AppViewModelFactory
+    private val viewModel:RegisterViewModel by viewModels<RegisterViewModel> { viewModelFactory }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -23,7 +25,6 @@ class RegisterFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
