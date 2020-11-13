@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.factory.AppViewModelFactory
 import dagger.android.support.DaggerFragment
@@ -25,7 +24,7 @@ class LoginFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        val root = inflater.inflate(R.layout.fragment_login, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
         loginViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
