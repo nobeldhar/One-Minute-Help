@@ -1,5 +1,6 @@
 package com.decimalab.minutehelp.di.module
 
+import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordFragment
 import com.decimalab.minutehelp.ui.gallery.GalleryFragment
 import com.decimalab.minutehelp.ui.login.LoginFragment
 import com.decimalab.minutehelp.ui.register.RegisterFragment
@@ -22,6 +23,9 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeSlideFragment(): SlideshowFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeForgotPassFragment(): ForgotPasswordFragment
 
 
 }
