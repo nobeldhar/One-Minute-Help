@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.decimalab.minutehelp.factory.AppViewModelFactory
 import com.decimalab.minutehelp.ui.login.LoginViewModel
 import com.decimalab.minutehelp.ui.register.RegisterViewModel
-import com.nobel.dhar.offer.di.util.ViewModelKey
+import com.decimalab.minutehelp.di.util.ViewModelKey
 
 import dagger.Binds
 import dagger.Module

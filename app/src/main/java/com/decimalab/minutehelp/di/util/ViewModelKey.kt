@@ -1,4 +1,4 @@
-package com.nobel.dhar.offer.di.util
+package com.decimalab.minutehelp.di.util
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

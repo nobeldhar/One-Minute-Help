@@ -22,4 +22,12 @@
     <style name="Theme.Minutehelp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Minutehelp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="EditText.White" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlHighlight">@android:color/white</item>
+        <item name="colorControlNormal">@color/grey_10</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+
+    </style>
 </resources>
