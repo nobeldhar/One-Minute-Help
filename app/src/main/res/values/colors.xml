@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="blue_grey_800">#2E4983</color>
+    <color name="blue_grey_300">#90A4AE</color>
+    <color name="blue_grey_400">#78909C</color>
+    <color name="grey_10">#e6e6e6</color>
+
+    <color name="btn_login_color">#0B255E</color>
+    <color name="hint_color">#2E4983</color>
+
+
 </resources>
