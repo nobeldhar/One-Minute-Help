@@ -4,11 +4,14 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.NonNull
+import com.decimalab.minutehelp.data.remote.RequestInterceptor
+import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -55,9 +58,20 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(@NonNull gson: Gson): Retrofit {
+    fun provideHttpClient(sharedPrefsHelper: SharedPrefsHelper): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(RequestInterceptor(sharedPrefsHelper))
+            /*.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addNetworkInterceptor(StethoInterceptor())*/
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(@NonNull gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.jsonbin.io/b/")
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
 /*
             .client(okHttpClient)

@@ -15,17 +15,16 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
     private val USER_PASSWORD = "qb_user_password"
     private val USER_FULL_NAME = "qb_user_full_name"
     private val USER_TAGS = "qb_user_tags"
+    private val USER_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
 
-    private var instance: SharedPrefsHelper? = null
 
-
-    fun delete(key: String?) {
-        if (sharedPreferences!!.contains(key)) {
+    private fun delete(key: String?) {
+        if (sharedPreferences.contains(key)) {
             getEditor().remove(key).commit()
         }
     }
 
-    fun save(key: String?, value: Any?) {
+    private fun save(key: String?, value: Any?) {
         val editor = getEditor()
         if (value is Boolean) {
             editor.putBoolean(key, (value as Boolean?)!!)
@@ -46,16 +45,16 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
     }
 
     operator fun <T> get(key: String?): T? {
-        return sharedPreferences!!.all[key] as T?
+        return sharedPreferences.all[key] as T?
     }
 
     operator fun <T> get(key: String?, defValue: T): T {
-        val returnValue = sharedPreferences!!.all[key] as T?
+        val returnValue = sharedPreferences.all[key] as T?
         return returnValue ?: defValue
     }
 
-    fun has(key: String?): Boolean {
-        return sharedPreferences!!.contains(key)
+    private fun has(key: String?): Boolean {
+        return sharedPreferences.contains(key)
     }
 
 
@@ -65,6 +64,7 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         save(USER_PASSWORD, qbUser.getPassword())
         save(USER_FULL_NAME, qbUser.getFullName())
         save(USER_TAGS, qbUser.getTags().getItemsAsString())
+        save(USER_KEY_ACCESS_TOKEN)
     }*/
 
     fun removeQbUser() {
@@ -73,6 +73,11 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         delete(USER_PASSWORD)
         delete(USER_FULL_NAME)
         delete(USER_TAGS)
+        delete(USER_KEY_ACCESS_TOKEN)
+    }
+
+    fun getAccessTokenFromPreference(): String? {
+        return sharedPreferences.getString(USER_KEY_ACCESS_TOKEN, null)
     }
 
     /*fun getQbUser(): QBUser? {
@@ -97,7 +102,7 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         }
     }*/
 
-    fun hasQbUser(): Boolean {
+    fun hasUser(): Boolean {
         return has(USER_LOGIN) && has(USER_PASSWORD)
     }
 
@@ -107,6 +112,6 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
     }
 
     private fun getEditor(): SharedPreferences.Editor {
-        return sharedPreferences!!.edit()
+        return sharedPreferences.edit()
     }
 }
