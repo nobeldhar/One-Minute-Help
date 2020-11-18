@@ -1,20 +1,14 @@
 package com.decimalab.minutehelp.di.module
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.annotation.NonNull
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.jetbrains.annotations.Nullable
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -70,6 +64,12 @@ class AppModule {
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
 */
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreference(application: Application): SharedPreferences? {
+        return application.getSharedPreferences("one_minute_help_shared_pref", Context.MODE_PRIVATE)
     }
 
    /* @Provides
