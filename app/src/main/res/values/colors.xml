@@ -16,5 +16,47 @@
     <color name="btn_login_color">#0B255E</color>
     <color name="hint_color">#2E4983</color>
 
+    <color name="colorPrimary">#039EFF</color>
+    <color name="colorPrimaryDark">#039EFF</color>
+    <color name="colorAccent">#039EFF</color>
+
+    <color name="colorSecondary">#F05C26</color>
+    <color name="colorSecondaryBlue">#011A39</color>
+    <color name="colorNavigationDrawer">#E60B255E</color>
+
+    <color name="tabTextColor">#99FFFFFF</color>
+    <color name="tabSelectedTextColor">#FFFFFF</color>
+    <color name="tabIndicatorColor">#FE4F60</color>
+
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorOverlay">#99181818</color>
+    <color name="colorWhiteAlpha">#E6FFFFFF</color>
+    <color name="hintColorBlue">#2E4983</color>
+
+    <color name="colorRippleWhite">#40FFFFFF</color>
+    <color name="colorRippleOrange">#40F5941E</color>
+    <color name="colorRippleBlue">#400E2543</color>
+
+    <color name="colorButtonBlueNormal">#0B255E</color>
+    <color name="colorButtonBlueDark">#011A39</color>
+
+    <color name="colorButtonOrangeNormal">#F05C26</color>
+    <color name="colorButtonOrangeDark">#CC4717</color>
+
+    <color name="textColorBlue">#0E2543</color>
+    <color name="textColorGreen">#48A91F</color>
+
+    <color name="colorGold">#D3A63F</color>
+    <color name="colorSilver">#929292</color>
+    <color name="colorBronze">#CE7436</color>
+
+    <color name="messageColorMine">#FFDDD0</color>
+    <color name="messageColorOthers">#F0F0F0</color>
+
+    <color name="colorListItemNormal">#FFFFFF</color>
+    <color name="colorListItemDark">#F9F6BE</color>
+
+    <color name="placeholder_bg">#dddddd</color>
+
 
 </resources>
