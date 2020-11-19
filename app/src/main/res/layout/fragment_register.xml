@@ -1,13 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.register.RegisterFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.decimalab.minutehelp.ui.register.RegisterFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:background="@drawable/bg"
+        tools:context=".ui.register.RegisterFragment">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/register"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login" />
+
+        <LinearLayout
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:padding="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo">
+
+            <com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/hintColorBlue"
+                app:font_type="Roboto-Medium"
+                app:hintTextAppearance="@style/HintStyleBlue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="USER NAME"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhiteAlpha"
+                    app:drawableLeftCompat="@drawable/selector_user" />
+            </com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout>
+
+            <com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/hintColorBlue"
+                app:font_type="Roboto-Medium"
+                app:hintTextAppearance="@style/HintStyleBlue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="EMAIL"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhiteAlpha"
+                    app:drawableLeftCompat="@drawable/selector_email" />
+            </com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout>
+
+            <com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/hintColorBlue"
+                app:font_type="Roboto-Medium"
+                app:hintTextAppearance="@style/HintStyleBlue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="PHONE"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhiteAlpha"
+                    app:drawableLeftCompat="@drawable/selector_phone" />
+            </com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout>
+
+            <com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/hintColorBlue"
+                app:font_type="Roboto-Medium"
+                app:hintTextAppearance="@style/HintStyleBlue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="PASSWORD"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhiteAlpha"
+                    app:drawableLeftCompat="@drawable/selector_password" />
+            </com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout>
+
+            <com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/hintColorBlue"
+                app:font_type="Roboto-Medium"
+                app:hintTextAppearance="@style/HintStyleBlue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="CONFIRM PASSWORD"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhiteAlpha"
+                    app:drawableLeftCompat="@drawable/selector_password" />
+            </com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout>
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="10dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="15dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_register_now"
+                android:layout_width="200dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="-4dp"
+                android:layout_marginRight="-4dp"
+                android:background="@drawable/btn_rounded_accent"
+                android:text="@string/register_now"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="5dp" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
