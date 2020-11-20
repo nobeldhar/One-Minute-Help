@@ -15,6 +15,9 @@
             app:destination="@id/nav_register"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_login_to_nav_home"
+            app:destination="@id/nav_home" />
     </fragment>
  
     <fragment
@@ -50,4 +53,8 @@
         android:name="com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordFragment"
         android:label="Forgot Password"
         tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.decimalab.minutehelp.ui.home.HomeFragment"
+        android:label="Home" />
 </navigation>

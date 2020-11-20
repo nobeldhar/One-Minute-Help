@@ -1,9 +1,9 @@
 package com.decimalab.minutehelp.utils
 
-import LoginResponse
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import com.decimalab.minutehelp.data.remote.responses.AuthResponse
 import kotlinx.coroutines.Dispatchers
 
 fun <T, A> performGetOperation(
@@ -26,9 +26,9 @@ fun <T, A> performGetOperation(
     }
 
 fun performAuthOperation(
-        networkCall: suspend () -> Resource<LoginResponse>,
-        saveAuthInfo: (LoginResponse) -> Unit
-): LiveData<Resource<LoginResponse>> =
+        networkCall: suspend () -> Resource<AuthResponse>,
+        saveAuthInfo: (AuthResponse) -> Unit
+): LiveData<Resource<AuthResponse>> =
         liveData(Dispatchers.IO) {
             emit(Resource.loading())
 

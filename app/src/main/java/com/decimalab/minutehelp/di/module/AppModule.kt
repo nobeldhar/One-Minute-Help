@@ -82,7 +82,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideSharedPreference(application: Application): SharedPreferences? {
+    fun provideSharedPreference(@NonNull application: Application): SharedPreferences {
         return application.getSharedPreferences("one_minute_help_shared_pref", Context.MODE_PRIVATE)
     }
 

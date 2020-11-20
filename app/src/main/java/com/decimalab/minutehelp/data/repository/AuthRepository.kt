@@ -1,7 +1,5 @@
 package com.decimalab.minutehelp.data.repository
 
-import LoginResponse
-import User
 import com.decimalab.minutehelp.data.remote.services.AuthService
 import com.decimalab.minutehelp.data.remote.sources.AuthRemoteDataSource
 import com.decimalab.minutehelp.utils.*

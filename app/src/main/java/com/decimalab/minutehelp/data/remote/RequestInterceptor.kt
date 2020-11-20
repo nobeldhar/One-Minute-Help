@@ -27,13 +27,6 @@ RequestInterceptor @Inject constructor(
             newRequest.header("Authorization", "Bearer $it")
         }
 
-        Log.d(
-            "OkHttp", String.format(
-                "--> Sending request %s on %s%n%s",
-                newRequest,
-                chain.connection()
-            )
-        );
         return chain.proceed(newRequest.build())
 
     }

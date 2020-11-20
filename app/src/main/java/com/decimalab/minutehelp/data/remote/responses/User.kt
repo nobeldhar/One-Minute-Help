@@ -1,3 +1,4 @@
+package com.decimalab.minutehelp.data.remote.responses
 import com.google.gson.annotations.SerializedName
 
 /*

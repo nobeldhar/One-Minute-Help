@@ -1,10 +1,12 @@
 package com.decimalab.minutehelp.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -13,8 +15,10 @@ import androidx.navigation.fragment.findNavController
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.FragmentLoginBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
+import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
 class LoginFragment : DaggerFragment() {
@@ -32,7 +36,42 @@ class LoginFragment : DaggerFragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         binding.fragment = this
+        binding.viewModel = loginViewModel
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loginViewModel.getLoginResult.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Resource.Status.SUCCESS -> {
+                    progresVisibility(View.GONE)
+                    val response = it.data
+                    if (response != null) {
+                        if (response.data.code == 200 and response.data.status){
+                            Toast.makeText(requireContext(), response.data.email, Toast.LENGTH_SHORT).show()
+                        } else if(response.data.code == 400){
+                            val message = response.messages.toString()
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    progresVisibility(View.GONE)
+                    Log.d(Companion.TAG, "onActivityCreated: " + it.message)
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+
+                Resource.Status.LOADING ->
+                    progresVisibility(View.VISIBLE)
+
+            }
+        })
+    }
+
+    private fun progresVisibility(visible: Int) {
+        binding.loginProgressBar.visibility = visible
     }
 
     fun onRegisterClicked(){
@@ -44,5 +83,9 @@ class LoginFragment : DaggerFragment() {
         super.onResume()
         ViewUtils.hideToolbar(requireActivity())
         ViewUtils.hideStatusBar(requireActivity())
+    }
+
+    companion object {
+        private const val TAG = "LoginFragment"
     }
 }
