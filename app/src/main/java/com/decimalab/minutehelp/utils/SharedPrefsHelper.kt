@@ -1,5 +1,7 @@
 package com.decimalab.minutehelp.utils
 
+import LoginResponse
+import User
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
@@ -11,10 +13,10 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
 
     private val SHARED_PREFS_NAME = "one_minute_help_shared_pref"
     private val USER_ID = "qb_user_id"
-    private val USER_LOGIN = "qb_user_login"
-    private val USER_PASSWORD = "qb_user_password"
-    private val USER_FULL_NAME = "qb_user_full_name"
-    private val USER_TAGS = "qb_user_tags"
+    private val USER_NAME = "qb_user_name"
+    private val USER_EMAIL = "qb_user_email"
+    private val USER_PHONE = "qb_user_phone"
+    private val USER_IS_VERIFIED = "qb_is_versified"
     private val USER_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
 
 
@@ -69,14 +71,18 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
 
     fun removeQbUser() {
         delete(USER_ID)
-        delete(USER_LOGIN)
-        delete(USER_PASSWORD)
-        delete(USER_FULL_NAME)
-        delete(USER_TAGS)
+        delete(USER_NAME)
+        delete(USER_EMAIL)
+        delete(USER_PHONE)
+        delete(USER_IS_VERIFIED)
         delete(USER_KEY_ACCESS_TOKEN)
     }
 
-    fun getAccessTokenFromPreference(): String? {
+
+    /**
+     * Function to fetch auth token
+     */
+    fun fetchAuthToken(): String? {
         return sharedPreferences.getString(USER_KEY_ACCESS_TOKEN, null)
     }
 
@@ -103,7 +109,7 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
     }*/
 
     fun hasUser(): Boolean {
-        return has(USER_LOGIN) && has(USER_PASSWORD)
+        return has(USER_ID) && has(USER_NAME)
     }
 
     fun clearAllData() {
@@ -113,5 +119,19 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
 
     private fun getEditor(): SharedPreferences.Editor {
         return sharedPreferences.edit()
+    }
+
+    fun saveUser(loginResponse: LoginResponse) {
+        val user = loginResponse.data
+        save(USER_ID, user.id)
+        save(USER_NAME, user.name)
+        save(USER_EMAIL, user.email)
+        save(USER_PHONE, user.phone)
+        save(USER_IS_VERIFIED, user.isVerified)
+        save(USER_KEY_ACCESS_TOKEN, loginResponse.access_token)
+    }
+
+    fun saveAuthToken(token: String) {
+        save(USER_KEY_ACCESS_TOKEN, token)
     }
 }
