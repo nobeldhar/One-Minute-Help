@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.NonNull
 import com.decimalab.minutehelp.data.remote.RequestInterceptor
+import com.decimalab.minutehelp.data.remote.services.AuthService
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -58,9 +59,9 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideHttpClient(sharedPrefsHelper: SharedPrefsHelper): OkHttpClient {
+    fun provideHttpClient(requestInterceptor: RequestInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(RequestInterceptor(sharedPrefsHelper))
+            .addInterceptor(requestInterceptor)
             /*.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .addNetworkInterceptor(StethoInterceptor())*/
             .build()
@@ -70,11 +71,10 @@ class AppModule {
     @Singleton
     fun provideRetrofit(@NonNull gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.jsonbin.io/b/")
+            .baseUrl("https://oneminutehelp.com/api/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
 /*
-            .client(okHttpClient)
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
 */
             .build()
@@ -86,12 +86,12 @@ class AppModule {
         return application.getSharedPreferences("one_minute_help_shared_pref", Context.MODE_PRIVATE)
     }
 
-   /* @Provides
+    @Provides
     @Singleton
-    fun provideOfferService(retrofit: Retrofit): OfferService {
-        return retrofit.create(OfferService::class.java)
+    fun provideOfferService(retrofit: Retrofit): AuthService {
+        return retrofit.create(AuthService::class.java)
     }
-
+/*
     @Provides
     @Singleton
     fun provideOfferRemoteDataSource(offerService: OfferService) = OfferRemoteDataSource(offerService)

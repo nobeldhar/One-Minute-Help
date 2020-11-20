@@ -2,6 +2,7 @@ package com.decimalab.minutehelp.data.remote
 
 import android.util.Log
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
+import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -17,25 +18,24 @@ RequestInterceptor @Inject constructor(
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-        var newRequest: Request = chain.request()
+        var newRequest: Request.Builder = chain.request().newBuilder()
 
-        newRequest = newRequest.newBuilder()
-            .addHeader(
-                "Authorization",
-                preferencesHelper.getAccessTokenFromPreference()
-            )
-            .build()
 
+
+        newRequest.header("Accept", "application/json")
+        preferencesHelper.fetchAuthToken()?.let {
+            newRequest.header("Authorization", "Bearer $it")
+        }
 
         Log.d(
             "OkHttp", String.format(
                 "--> Sending request %s on %s%n%s",
-                newRequest.url(),
-                chain.connection(),
-                newRequest.headers()
+                newRequest,
+                chain.connection()
             )
         );
-        return chain.proceed(newRequest)
+        return chain.proceed(newRequest.build())
 
     }
+
 }

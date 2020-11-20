@@ -1,14 +1,34 @@
 package com.decimalab.minutehelp.ui.login
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import LoginResponse
+import User
+import androidx.lifecycle.*
+import com.decimalab.minutehelp.data.repository.AuthRepository
+import com.decimalab.minutehelp.utils.Resource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor() : ViewModel() {
+class
+LoginViewModel
+@Inject constructor(
+        val authRepository: AuthRepository)
+    : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+
+    val _loginInfo = MutableLiveData<List<String>>()
+
+    val getProfileResult = Transformations.switchMap(_loginInfo) {
+        if (it.isNotEmpty()) {
+            authRepository.loginUser(it[0], it[1])
+        } else {
+            MutableLiveData()
+        }
     }
-    val text: LiveData<String> = _text
+
+
+
+
+
 }

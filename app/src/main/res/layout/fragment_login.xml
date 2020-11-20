@@ -6,6 +6,9 @@
         <variable
             name="fragment"
             type="com.decimalab.minutehelp.ui.login.LoginFragment" />
+        <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
