@@ -1,34 +1,51 @@
 package com.decimalab.minutehelp.ui.login
 
-import LoginResponse
-import User
+
+import android.util.Log
 import androidx.lifecycle.*
+import com.decimalab.minutehelp.data.remote.requests.AuthRequest
 import com.decimalab.minutehelp.data.repository.AuthRepository
-import com.decimalab.minutehelp.utils.Resource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
+import com.decimalab.minutehelp.utils.Validator
+
 import javax.inject.Inject
 
 class
 LoginViewModel
 @Inject constructor(
-        val authRepository: AuthRepository)
-    : ViewModel() {
+    private val authRepository: AuthRepository
+) : ViewModel() {
+
+    var phone: String = ""
+    var pass: String = ""
 
 
-    val _loginInfo = MutableLiveData<List<String>>()
+    private val _loginInfo = MutableLiveData<AuthRequest>()
+    var _errorUiLogin = MutableLiveData<String>()
 
-    val getProfileResult = Transformations.switchMap(_loginInfo) {
-        if (it.isNotEmpty()) {
-            authRepository.loginUser(it[0], it[1])
+    var getLoginResult = Transformations.switchMap(_loginInfo) {
+        authRepository.loginUser(it)
+    }
+
+    fun onLoginClicked() {
+        Log.d(TAG, "onLoginClicked: $phone ")
+        if (phone.isBlank()) {
+            _errorUiLogin.value = "Empty Phone Number!"
+        } else if (pass.isBlank()) {
+            _errorUiLogin.value = "Empty Password!"
+
+        } else if ((pass.length < 4)) {
+            _errorUiLogin.value = "Minimum Password Length is 4 ! "
+
+        } else if (!Validator.validatePhone(phone)) {
+            _errorUiLogin.value = "Not a Valid Phone Number! "
         } else {
-            MutableLiveData()
+            _loginInfo.value = AuthRequest(phone.trim(), pass.trim())
         }
     }
 
-
-
+    companion object {
+        private const val TAG = "LoginViewModel"
+    }
 
 
 }

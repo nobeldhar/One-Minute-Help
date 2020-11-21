@@ -1,8 +1,6 @@
 package com.decimalab.minutehelp.data.repository
 
-import LoginResponse
-import User
-import com.decimalab.minutehelp.data.remote.services.AuthService
+import com.decimalab.minutehelp.data.remote.requests.AuthRequest
 import com.decimalab.minutehelp.data.remote.sources.AuthRemoteDataSource
 import com.decimalab.minutehelp.utils.*
 import javax.inject.Inject
@@ -15,9 +13,14 @@ class AuthRepository @Inject constructor(
     private val prefsHelper: SharedPrefsHelper
 ) {
 
-    fun loginUser(phone: String, password: String) = performAuthOperation(
-            networkCall = { remoteDataSource.loginUser(phone, password) },
+    fun loginUser(authRequest: AuthRequest) = performAuthOperation(
+            networkCall = { remoteDataSource.loginUser(authRequest) },
             saveAuthInfo = { prefsHelper.saveUser(it)}
+    )
+
+    fun registerUser(authRequest: AuthRequest) = performAuthOperation(
+            networkCall = { remoteDataSource.registerUser(authRequest) },
+            saveAuthInfo = { }
     )
 
 

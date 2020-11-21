@@ -1,23 +1,19 @@
 package com.decimalab.minutehelp.utils
 
-import LoginResponse
-import User
-import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
+import com.decimalab.minutehelp.data.remote.responses.AuthResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class SharedPrefsHelper @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
     private val SHARED_PREFS_NAME = "one_minute_help_shared_pref"
-    private val USER_ID = "qb_user_id"
-    private val USER_NAME = "qb_user_name"
-    private val USER_EMAIL = "qb_user_email"
-    private val USER_PHONE = "qb_user_phone"
-    private val USER_IS_VERIFIED = "qb_is_versified"
-    private val USER_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
+    private val USER_ID = "one_minute_help_user_id"
+    private val USER_NAME = "one_minute_help_user_name"
+    private val USER_EMAIL = "one_minute_help_user_email"
+    private val USER_PHONE = "one_minute_help_user_phone"
+    private val USER_IS_VERIFIED = "one_minute_help_is_versified"
+    private val USER_KEY_ACCESS_TOKEN = "one_minute_help_access_token"
 
 
     private fun delete(key: String?) {
@@ -121,14 +117,17 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         return sharedPreferences.edit()
     }
 
-    fun saveUser(loginResponse: LoginResponse) {
-        val user = loginResponse.data
+    fun saveUser(authResponse: AuthResponse) {
+        val user = authResponse.data
         save(USER_ID, user.id)
         save(USER_NAME, user.name)
         save(USER_EMAIL, user.email)
         save(USER_PHONE, user.phone)
         save(USER_IS_VERIFIED, user.isVerified)
-        save(USER_KEY_ACCESS_TOKEN, loginResponse.access_token)
+        authResponse.access_token?.let {
+            save(USER_KEY_ACCESS_TOKEN, it)
+        }
+
     }
 
     fun saveAuthToken(token: String) {

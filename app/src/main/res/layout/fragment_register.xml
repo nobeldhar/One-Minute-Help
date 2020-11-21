@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.register.RegisterViewModel" />
+
+        <variable
             name="fragment"
             type="com.decimalab.minutehelp.ui.register.RegisterFragment" />
     </data>
@@ -41,6 +45,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_login" />
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -67,6 +72,7 @@
                     android:hint="USER NAME"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:text="@={viewModel.name}"
                     android:singleLine="true"
                     android:textColor="@color/colorWhiteAlpha"
                     app:drawableLeftCompat="@drawable/selector_user" />
@@ -86,6 +92,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/roboto_regular"
                     android:hint="EMAIL"
+                    android:text="@={viewModel.email}"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -103,13 +110,14 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="62dp"
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/roboto_regular"
                     android:hint="PHONE"
-                    android:inputType="textEmailAddress"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:singleLine="true"
+                    android:text="@={viewModel.phone}"
                     android:textColor="@color/colorWhiteAlpha"
                     app:drawableLeftCompat="@drawable/selector_phone" />
             </com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout>
@@ -128,6 +136,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/roboto_regular"
                     android:hint="PASSWORD"
+                    android:text="@={viewModel.pass}"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -149,6 +158,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/roboto_regular"
                     android:hint="CONFIRM PASSWORD"
+                    android:text="@={viewModel.confirm_pass}"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -172,6 +182,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="-4dp"
                 android:layout_marginRight="-4dp"
+                android:onClick="@{() -> viewModel.onRegisterClicked()}"
                 android:background="@drawable/btn_rounded_accent"
                 android:text="@string/register_now"
                 android:textAllCaps="false"
@@ -183,6 +194,17 @@
                 android:layout_height="5dp" />
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pb_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+            tools:visibility="visible" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

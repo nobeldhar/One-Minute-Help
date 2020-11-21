@@ -4,17 +4,19 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.NonNull
+import com.decimalab.minutehelp.BuildConfig
 import com.decimalab.minutehelp.data.remote.RequestInterceptor
 import com.decimalab.minutehelp.data.remote.services.AuthService
-import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
@@ -57,21 +59,42 @@ class AppModule {
         return gsonBuilder.create()
     }
 
+
     @Provides
     @Singleton
-    fun provideHttpClient(requestInterceptor: RequestInterceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(requestInterceptor)
-            /*.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .addNetworkInterceptor(StethoInterceptor())*/
-            .build()
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        if (BuildConfig.DEBUG) {
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
+        }
+        return loggingInterceptor
     }
+
+    @Provides
+    @Singleton
+    fun provideHttpClient(
+        requestInterceptor: RequestInterceptor,
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        val builder = OkHttpClient.Builder()
+        with(builder) {
+            addInterceptor(requestInterceptor)
+            addInterceptor(loggingInterceptor)
+            connectTimeout(30, TimeUnit.SECONDS)
+            readTimeout(30, TimeUnit.SECONDS)
+            writeTimeout(30, TimeUnit.SECONDS)
+        }
+        return builder.build()
+    }
+
 
     @Provides
     @Singleton
     fun provideRetrofit(@NonNull gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://oneminutehelp.com/api/")
+            .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
 /*
@@ -80,10 +103,11 @@ class AppModule {
             .build()
     }
 
+
     @Provides
     @Singleton
-    fun provideSharedPreference(application: Application): SharedPreferences? {
-        return application.getSharedPreferences("one_minute_help_shared_pref", Context.MODE_PRIVATE)
+    fun provideSharedPreference(@NonNull application: Application): SharedPreferences {
+        return application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
     }
 
     @Provides
