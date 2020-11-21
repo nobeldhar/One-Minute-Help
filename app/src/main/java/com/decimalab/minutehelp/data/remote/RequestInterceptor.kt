@@ -20,8 +20,6 @@ RequestInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         var newRequest: Request.Builder = chain.request().newBuilder()
 
-
-
         newRequest.header("Accept", "application/json")
         preferencesHelper.fetchAuthToken()?.let {
             newRequest.header("Authorization", "Bearer $it")

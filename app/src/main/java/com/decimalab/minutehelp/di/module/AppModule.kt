@@ -63,19 +63,33 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideHttpClient(requestInterceptor: RequestInterceptor): OkHttpClient {
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        if (BuildConfig.DEBUG) {
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
+        }
+        return loggingInterceptor
+    }
+
+    @Provides
+    @Singleton
+    fun provideHttpClient(
+        requestInterceptor: RequestInterceptor,
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         val builder = OkHttpClient.Builder()
         with(builder) {
             addInterceptor(requestInterceptor)
-            if (BuildConfig.DEBUG) {
-                addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            }
+            addInterceptor(loggingInterceptor)
             connectTimeout(30, TimeUnit.SECONDS)
             readTimeout(30, TimeUnit.SECONDS)
             writeTimeout(30, TimeUnit.SECONDS)
         }
         return builder.build()
     }
+
 
     @Provides
     @Singleton
