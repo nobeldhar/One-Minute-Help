@@ -19,6 +19,22 @@ object Validator {
                 ")+"
     )
 
+    private val PHONE_NUMBER = Pattern.compile(
+        "^(?:\\+?88|0088)?01[15-9]\\d{8}\$"
+    )
+
+    fun validatePhone(phone: String): Boolean {
+        return when {
+            phone.isBlank() ->
+                false
+            !PHONE_NUMBER.matcher(phone).matches() ->
+                false
+            else ->
+                true
+        }
+
+    }
+
     fun validateEmail(email: String): Boolean {
         return  when {
             email.isBlank() ->
@@ -30,6 +46,8 @@ object Validator {
         }
 
     }
+
+
 
     fun validatePassword(password: String): Boolean {
         return when {

@@ -2,46 +2,45 @@ package com.decimalab.minutehelp.ui.login
 
 
 import android.util.Log
-import androidx.databinding.Bindable
 import androidx.lifecycle.*
 import com.decimalab.minutehelp.data.remote.requests.AuthRequest
-import com.decimalab.minutehelp.data.remote.responses.AuthResponse
 import com.decimalab.minutehelp.data.repository.AuthRepository
-import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.Validator
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
+
 import javax.inject.Inject
 
 class
 LoginViewModel
 @Inject constructor(
-        val authRepository: AuthRepository)
-    : ViewModel() {
+    private val authRepository: AuthRepository
+) : ViewModel() {
 
     var phone: String = ""
     var pass: String = ""
 
 
-    val _loginInfo = MutableLiveData<AuthRequest>()
+    private val _loginInfo = MutableLiveData<AuthRequest>()
+    var _errorUi = MutableLiveData<String>()
 
     var getLoginResult = Transformations.switchMap(_loginInfo) {
-            authRepository.loginUser(it)
+        authRepository.loginUser(it)
     }
 
-    fun onLoginClicked(){
-        Log.d(Companion.TAG, "onLoginClicked: $phone ")
-        if(!phone.isBlank() and !pass.isBlank() and (pass!!.length >= 4)){
-            _loginInfo.value = AuthRequest(phone.trim(), pass.trim())
+    fun onLoginClicked() {
+        Log.d(TAG, "onLoginClicked: $phone ")
+        if (phone.isBlank()) {
+            _errorUi.value = "Empty Phone Number!"
+        } else if (pass.isBlank()) {
+            _errorUi.value = "Empty Password!"
+
+        } else if ((pass!!.length < 4)) {
+            _errorUi.value = "Minimum Password Length is 4 ! "
+
+        } else if (!Validator.validatePhone(phone)) {
+            _errorUi.value = "Not a Valid Phone Number! "
         } else {
-            setError()
+            _loginInfo.value = AuthRequest(phone.trim(), pass.trim())
         }
-    }
-
-    private fun setError() {
-
-
     }
 
     companion object {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -16,6 +17,7 @@ import com.decimalab.minutehelp.factory.AppViewModelFactory
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
+import www.sanju.motiontoast.MotionToast
 import javax.inject.Inject
 
 class LoginFragment : DaggerFragment() {
@@ -39,39 +41,79 @@ class LoginFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel.getLoginResult.observe(viewLifecycleOwner, Observer {
+        loginViewModel.getLoginResult.observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    progresVisibility(View.GONE)
+                    progressVisibility(View.GONE)
                     val response = it.data
                     if (response != null) {
                         if (response.code == 200 && response.status) {
-                            Toast.makeText(requireContext(), response.data.email, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                response.data.email,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         } else {
                             val message = response.messages.toString()
                             Log.d(TAG, "onViewCreated: failed $message")
-                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+
+                            MotionToast.darkToast(
+                                requireActivity(),
+                                "Failed ☹️",
+                                message,
+                                MotionToast.TOAST_ERROR,
+                                MotionToast.GRAVITY_BOTTOM,
+                                MotionToast.LONG_DURATION,
+                                ResourcesCompat.getFont(requireContext(), R.font.helvetica_regular)
+                            )
                         }
                     }
                 }
                 Resource.Status.ERROR -> {
-                    progresVisibility(View.GONE)
+                    progressVisibility(View.GONE)
                     Log.d(Companion.TAG, "onActivityCreated: error " + it.isNetworkError)
-                    Toast.makeText(requireContext(), it.isNetworkError.toString(), Toast.LENGTH_SHORT).show()
+
+                    if (it.isNetworkError!!)
+                    {
+                        MotionToast.darkToast(
+                            requireActivity(),
+                            "Failed ☹️",
+                            "No Internet!",
+                            MotionToast.TOAST_ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(requireContext(), R.font.helvetica_regular)
+                        )
+                    }
+
+
                 }
 
                 Resource.Status.LOADING ->
-                    progresVisibility(View.VISIBLE)
+                    progressVisibility(View.VISIBLE)
 
             }
         })
+
+        loginViewModel._errorUi.observe(viewLifecycleOwner, {
+
+            MotionToast.darkToast(
+                requireActivity(),
+                "Failed ☹️",
+                it,
+                MotionToast.TOAST_WARNING,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(requireContext(), R.font.helvetica_regular)
+            )
+        })
     }
 
-    private fun progresVisibility(visible: Int) {
+    private fun progressVisibility(visible: Int) {
         binding.pbLogin.visibility = visible
     }
 
-    fun onRegisterClicked(){
+    fun onRegisterClicked() {
         val action = LoginFragmentDirections.actionNavLoginToNavRegister()
         findNavController().navigate(action)
     }

@@ -75,7 +75,7 @@
                     android:singleLine="true"
                     android:text="@={viewModel.phone}"
                     android:textColor="@color/colorWhiteAlpha"
-                    app:drawableLeftCompat="@drawable/selector_email" />
+                    app:drawableLeftCompat="@drawable/selector_phone" />
             </com.decimalab.minutehelp.ui.widget.CustomTextViewInputLayout>
 
 
@@ -137,8 +137,10 @@
                 android:onClick="@{() -> viewModel.onLoginClicked()}"
                 android:text="@string/login"
                 android:textAllCaps="false"
+                android:clickable="true"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:focusable="true" />
 
             <View
                 android:layout_width="0dp"
@@ -160,7 +162,8 @@
                     android:onClick="@{()-> fragment.onRegisterClicked()}"
                     android:text="@string/register_now_underlined"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    />
 
             </LinearLayout>
 
