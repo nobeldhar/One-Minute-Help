@@ -5,9 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -18,7 +16,6 @@ import com.decimalab.minutehelp.factory.AppViewModelFactory
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
 class LoginFragment : DaggerFragment() {
@@ -45,7 +42,7 @@ class LoginFragment : DaggerFragment() {
         loginViewModel.getLoginResult.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    progresVisibility(View.GONE)
+                    progressVisibility(View.GONE)
                     val response = it.data
                     if (response != null) {
                         if (response.data.code == 200 and response.data.status){
@@ -58,20 +55,20 @@ class LoginFragment : DaggerFragment() {
                     }
                 }
                 Resource.Status.ERROR -> {
-                    progresVisibility(View.GONE)
-                    Log.d(Companion.TAG, "onActivityCreated: " + it.message)
+                    progressVisibility(View.GONE)
+                    Log.d(Companion.TAG, "onViewCreated: " + it.message)
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
 
                 Resource.Status.LOADING ->
-                    progresVisibility(View.VISIBLE)
+                    progressVisibility(View.VISIBLE)
 
             }
         })
     }
 
-    private fun progresVisibility(visible: Int) {
-        binding.loginProgressBar.visibility = visible
+    private fun progressVisibility(visible: Int) {
+        binding.pbLogin.visibility = visible
     }
 
     fun onRegisterClicked(){
