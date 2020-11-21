@@ -1,7 +1,6 @@
 package com.decimalab.minutehelp.data.repository
 
 import com.decimalab.minutehelp.data.remote.requests.AuthRequest
-import com.decimalab.minutehelp.data.remote.services.AuthService
 import com.decimalab.minutehelp.data.remote.sources.AuthRemoteDataSource
 import com.decimalab.minutehelp.utils.*
 import javax.inject.Inject

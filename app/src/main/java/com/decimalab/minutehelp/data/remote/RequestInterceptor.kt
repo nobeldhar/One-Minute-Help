@@ -1,8 +1,6 @@
 package com.decimalab.minutehelp.data.remote
 
-import android.util.Log
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
-import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

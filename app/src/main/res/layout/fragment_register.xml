@@ -114,7 +114,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/roboto_regular"
                     android:hint="PHONE"
-                    android:inputType="textEmailAddress"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:text="@={viewModel.phone}"

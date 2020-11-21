@@ -7,7 +7,6 @@ import androidx.annotation.NonNull
 import com.decimalab.minutehelp.BuildConfig
 import com.decimalab.minutehelp.data.remote.RequestInterceptor
 import com.decimalab.minutehelp.data.remote.services.AuthService
-import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

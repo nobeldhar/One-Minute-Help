@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.FragmentLoginBinding
@@ -24,7 +23,7 @@ class LoginFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: AppViewModelFactory
-    private val loginViewModel by viewModels<LoginViewModel> { viewModelFactory }
+    private val viewModel by viewModels<LoginViewModel> { viewModelFactory }
     private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
@@ -35,13 +34,13 @@ class LoginFragment : DaggerFragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         binding.fragment = this
-        binding.viewModel = loginViewModel
+        binding.viewModel = viewModel
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel.getLoginResult.observe(viewLifecycleOwner, {
+        viewModel.getLoginResult.observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     progressVisibility(View.GONE)
@@ -95,7 +94,7 @@ class LoginFragment : DaggerFragment() {
             }
         })
 
-        loginViewModel._errorUi.observe(viewLifecycleOwner, {
+        viewModel._errorUiLogin.observe(viewLifecycleOwner, {
 
             MotionToast.darkToast(
                 requireActivity(),
