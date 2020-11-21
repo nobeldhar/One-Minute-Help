@@ -33,11 +33,11 @@ fun performAuthOperation(
         liveData(Dispatchers.IO) {
             emit(Resource.loading())
 
-            val responseStatus = networkCall.invoke()
+            val responseStatus  = networkCall.invoke()
             if (responseStatus.status == Resource.Status.SUCCESS) {
                 emit(responseStatus)
-                if (responseStatus.data!!.status) {
-                    saveAuthInfo(responseStatus.data!!)
+                if (responseStatus.data?.status!!) {
+                    saveAuthInfo(responseStatus.data)
                 }
             } else if (responseStatus.status == Resource.Status.ERROR) {
                 emit(responseStatus)

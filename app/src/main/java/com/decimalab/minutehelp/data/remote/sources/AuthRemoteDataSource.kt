@@ -11,5 +11,8 @@ class AuthRemoteDataSource @Inject constructor(
     private val authService: AuthService
 ): BaseDataSource() {
     suspend fun loginUser(authRequest: AuthRequest)
-            = getResult { authService.loginUser(authRequest.phone, authRequest.pass) }
+            = getResult { authService.loginUser(authRequest) }
+
+    suspend fun registerUser(authRequest: AuthRequest)
+            = getResult { authService.registerUser(authRequest) }
 }

@@ -5,7 +5,6 @@ import com.decimalab.minutehelp.data.remote.responses.AuthResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class SharedPrefsHelper @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
     private val SHARED_PREFS_NAME = "one_minute_help_shared_pref"
@@ -125,7 +124,10 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         save(USER_EMAIL, user.email)
         save(USER_PHONE, user.phone)
         save(USER_IS_VERIFIED, user.isVerified)
-        save(USER_KEY_ACCESS_TOKEN, authResponse.access_token)
+        authResponse.access_token?.let {
+            save(USER_KEY_ACCESS_TOKEN, it)
+        }
+
     }
 
     fun saveAuthToken(token: String) {

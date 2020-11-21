@@ -10,10 +10,11 @@ import retrofit2.http.POST
 
 interface AuthService {
 
-    @FormUrlEncoded
     @POST("auth/login")
-    suspend fun loginUser(
-            @Field("phone") phone: String,
-            @Field("password") pass: String
+    suspend fun loginUser(@Body authRequest: AuthRequest
+    ): Response<AuthResponse>
+
+    @POST("auth/signup")
+    suspend fun registerUser(@Body authRequest: AuthRequest
     ): Response<AuthResponse>
 }

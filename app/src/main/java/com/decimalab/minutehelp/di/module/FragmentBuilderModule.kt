@@ -6,6 +6,7 @@ import com.decimalab.minutehelp.ui.home.HomeFragment
 import com.decimalab.minutehelp.ui.login.LoginFragment
 import com.decimalab.minutehelp.ui.register.RegisterFragment
 import com.decimalab.minutehelp.ui.slideshow.SlideshowFragment
+import com.decimalab.minutehelp.ui.verifycode.VerifyCodeFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -30,6 +31,9 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeHOmeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeVerifyFragment(): VerifyCodeFragment
 
 
 }
