@@ -4,6 +4,8 @@ package com.decimalab.minutehelp.ui.login
 import android.util.Log
 import androidx.databinding.Bindable
 import androidx.lifecycle.*
+import com.decimalab.minutehelp.data.remote.requests.AuthRequest
+import com.decimalab.minutehelp.data.remote.responses.AuthResponse
 import com.decimalab.minutehelp.data.repository.AuthRepository
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.Validator
@@ -22,23 +24,23 @@ LoginViewModel
     var pass: String = ""
 
 
-    val _loginInfo = MutableLiveData<List<String>>()
+    val _loginInfo = MutableLiveData<AuthRequest>()
 
-    val getLoginResult = Transformations.switchMap(_loginInfo) {
-        if (it.isNotEmpty()) {
-            Log.d(TAG, "getLoginResult: ")
-            authRepository.loginUser(it[0], it[1])
-        } else {
-            MutableLiveData()
-        }
+    var getLoginResult = Transformations.switchMap(_loginInfo) {
+            authRepository.loginUser(it)
     }
-
 
     fun onLoginClicked(){
         Log.d(Companion.TAG, "onLoginClicked: $phone ")
-        if(!phone.isNullOrBlank() and !pass.isNullOrBlank() and (pass!!.length >= 4)){
-            _loginInfo.value = listOf(phone, pass)
+        if(!phone.isBlank() and !pass.isBlank() and (pass!!.length >= 4)){
+            _loginInfo.value = AuthRequest(phone.trim(), pass.trim())
+        } else {
+            setError()
         }
+    }
+
+    private fun setError() {
+
 
     }
 

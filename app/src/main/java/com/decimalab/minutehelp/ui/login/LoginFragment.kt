@@ -42,32 +42,32 @@ class LoginFragment : DaggerFragment() {
         loginViewModel.getLoginResult.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    progressVisibility(View.GONE)
+                    progresVisibility(View.GONE)
                     val response = it.data
                     if (response != null) {
-                        if (response.data.code == 200 and response.data.status){
+                        if (response.code == 200 && response.status) {
                             Toast.makeText(requireContext(), response.data.email, Toast.LENGTH_SHORT).show()
-                        } else if(response.data.code == 400){
+                        } else {
                             val message = response.messages.toString()
-                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                            Log.d(TAG, "onViewCreated: failed $message")
+                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                         }
-
                     }
                 }
                 Resource.Status.ERROR -> {
-                    progressVisibility(View.GONE)
-                    Log.d(Companion.TAG, "onViewCreated: " + it.message)
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    progresVisibility(View.GONE)
+                    Log.d(Companion.TAG, "onActivityCreated: error " + it.isNetworkError)
+                    Toast.makeText(requireContext(), it.isNetworkError.toString(), Toast.LENGTH_SHORT).show()
                 }
 
                 Resource.Status.LOADING ->
-                    progressVisibility(View.VISIBLE)
+                    progresVisibility(View.VISIBLE)
 
             }
         })
     }
 
-    private fun progressVisibility(visible: Int) {
+    private fun progresVisibility(visible: Int) {
         binding.pbLogin.visibility = visible
     }
 
