@@ -30,7 +30,6 @@ abstract class ViewModelModule {
     @ViewModelKey(ForgotPasswordViewModel::class)
     abstract fun bindForgotPassViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
 
-
     @Binds
     abstract fun bindViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory
 
