@@ -7,8 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.decimalab.minutehelp.R
+import dagger.android.support.DaggerFragment
 
-class InformationFragment : Fragment() {
+class InformationFragment : DaggerFragment() {
 
     companion object {
         fun newInstance() = InformationFragment()

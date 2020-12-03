@@ -1,7 +1,13 @@
 package com.decimalab.minutehelp.ui.settings.address
 
 import androidx.lifecycle.ViewModel
+import com.decimalab.minutehelp.data.repository.AuthRepository
+import javax.inject.Inject
 
-class AddressViewModel : ViewModel() {
+class
+AddressViewModel
+@Inject constructor(
+
+) : ViewModel() {
     // TODO: Implement the ViewModel
 }

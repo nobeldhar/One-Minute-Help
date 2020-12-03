@@ -1,7 +1,12 @@
 package com.decimalab.minutehelp.ui.settings.information
 
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class InformationViewModel : ViewModel() {
+class
+InformationViewModel
+@Inject constructor(
+
+) : ViewModel() {
     // TODO: Implement the ViewModel
 }

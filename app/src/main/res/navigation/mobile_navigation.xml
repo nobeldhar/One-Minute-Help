@@ -68,4 +68,24 @@
         android:name="com.decimalab.minutehelp.ui.verifycode.VerifyCodeFragment"
         android:label="Verify Code"
         tools:layout="@layout/fragment_verfy_code" />
+    <fragment
+        android:id="@+id/nav_basic_settings"
+        android:name="com.decimalab.minutehelp.ui.settings.basic.BasicFragment"
+        android:label="fragment_basic"
+        tools:layout="@layout/fragment_basic" />
+    <fragment
+        android:id="@+id/nav_info_settings"
+        android:name="com.decimalab.minutehelp.ui.settings.information.InformationFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_information" />
+    <fragment
+        android:id="@+id/nav_address_setting"
+        android:name="com.decimalab.minutehelp.ui.settings.address.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address" />
+    <fragment
+        android:id="@+id/nav_pass_setting"
+        android:name="com.decimalab.minutehelp.ui.settings.password.PasswordFragment"
+        android:label="Password"
+        tools:layout="@layout/fragment_password" />
 </navigation>

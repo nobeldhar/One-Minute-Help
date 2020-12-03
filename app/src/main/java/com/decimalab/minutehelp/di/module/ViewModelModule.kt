@@ -7,6 +7,11 @@ import com.decimalab.minutehelp.ui.login.LoginViewModel
 import com.decimalab.minutehelp.ui.register.RegisterViewModel
 import com.decimalab.minutehelp.di.util.ViewModelKey
 import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordViewModel
+import com.decimalab.minutehelp.ui.settings.address.AddressViewModel
+import com.decimalab.minutehelp.ui.settings.basic.BasicViewModel
+import com.decimalab.minutehelp.ui.settings.information.InformationViewModel
+import com.decimalab.minutehelp.ui.settings.password.PasswordFragment
+import com.decimalab.minutehelp.ui.settings.password.PasswordViewModel
 
 import dagger.Binds
 import dagger.Module
@@ -29,6 +34,27 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ForgotPasswordViewModel::class)
     abstract fun bindForgotPassViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BasicViewModel::class)
+    abstract fun bindBasicViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InformationViewModel::class)
+    abstract fun bindInformationViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddressViewModel::class)
+    abstract fun bindAddressViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PasswordViewModel::class)
+    abstract fun bindPasswordViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
+
 
     @Binds
     abstract fun bindViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory
