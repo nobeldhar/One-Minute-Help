@@ -20,7 +20,11 @@ class AuthRepository @Inject constructor(
 
     fun registerUser(authRequest: AuthRequest) = performAuthOperation(
             networkCall = { remoteDataSource.registerUser(authRequest) },
-            saveAuthInfo = { }
+            saveAuthInfo = { prefsHelper.saveUser(it) }
+    )
+
+    fun verifyOTPCode(authRequest: AuthRequest) = performAuthOperation (
+            networkCall = {remoteDataSource.verifyOTPCode(authRequest)}
     )
 
 

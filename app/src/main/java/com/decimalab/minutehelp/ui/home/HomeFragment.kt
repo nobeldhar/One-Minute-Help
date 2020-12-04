@@ -28,7 +28,6 @@ class HomeFragment : DaggerFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        binding.name.text = sharedPrefsHelper.fetchAuthToken()
         return binding.root
     }
 

@@ -47,11 +47,13 @@ class LoginFragment : DaggerFragment() {
                     val response = it.data
                     if (response != null) {
                         if (response.code == 200 && response.status) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.data.email,
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            if(response.data.isVerified == 0){
+                                val action = LoginFragmentDirections.actionNavLoginToNavVerifyCode()
+                                findNavController().navigate(action)
+                            }else{
+                                val action = LoginFragmentDirections.actionNavLoginToNavHome()
+                                findNavController().navigate(action)
+                            }
                         } else {
                             val message = response.messages.toString()
                             Log.d(TAG, "onViewCreated: failed $message")

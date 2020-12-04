@@ -2,6 +2,7 @@ package com.decimalab.minutehelp.utils
 
 import android.content.SharedPreferences
 import com.decimalab.minutehelp.data.remote.responses.AuthResponse
+import com.decimalab.minutehelp.data.remote.responses.User
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -82,13 +83,13 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         return sharedPreferences.getString(USER_KEY_ACCESS_TOKEN, null)
     }
 
-    /*fun getQbUser(): QBUser? {
-        return if (hasQbUser()) {
+    /*fun getQbUser(): User? {
+        return if (hasUser()) {
             val id = get<Int>(USER_ID)!!
-            val login = get<String>(USER_LOGIN)!!
-            val password = get<String>(USER_PASSWORD)!!
-            val fullName = get<String>(USER_FULL_NAME)!!
-            val tagsInString = get<String>(USER_TAGS)
+            val name = get<String>(USER_NAME)!!
+            val email = get<String>(USER_EMAIL)!!
+            val phone = get<String>(USER_PHONE)!!
+            val tagsInString = get<String>(USER_IS_VERIFIED)
             var tags: StringifyArrayList<String?>? = null
             if (tagsInString != null) {
                 tags = StringifyArrayList()

@@ -45,3 +45,18 @@ fun performAuthOperation(
 
 
         }
+
+fun performAuthOperation(
+    networkCall: suspend () -> Resource<AuthResponse>
+): LiveData<Resource<AuthResponse>> =
+    liveData(Dispatchers.IO) {
+        emit(Resource.loading())
+
+        val responseStatus  = networkCall.invoke()
+        if (responseStatus.status == Resource.Status.SUCCESS) {
+            emit(responseStatus)
+
+        } else if (responseStatus.status == Resource.Status.ERROR) {
+            emit(responseStatus)
+        }
+    }

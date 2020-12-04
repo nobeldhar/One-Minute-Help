@@ -7,4 +7,4 @@ import kotlin.reflect.KClass
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 @MapKey
-annotation class ViewModelKey(val value: KClass<out ViewModel>)
+annotation class ViewModelKey (val value: KClass<out ViewModel>)
