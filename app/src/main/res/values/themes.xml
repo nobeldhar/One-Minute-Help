@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Minutehelp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Minutehelp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -54,4 +54,17 @@
     <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>`
+
+    <style name="Base.Widget.Design.TabLayout" parent="android:Widget">
+        <item name="tabIndicatorColor">@color/colorAccent</item>
+        <item name="tabIndicatorGravity">bottom</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+        <item name="tabSelectedTextColor">@android:color/black</item>
+    </style>
 </resources>

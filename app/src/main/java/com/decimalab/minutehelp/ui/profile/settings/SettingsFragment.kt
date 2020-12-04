@@ -1,4 +1,4 @@
-package com.decimalab.minutehelp.ui.settings.basic
+package com.decimalab.minutehelp.ui.profile.settings
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,24 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.decimalab.minutehelp.R
-import dagger.android.support.DaggerFragment
 
-class BasicFragment : DaggerFragment() {
+class SettingsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = BasicFragment()
+        fun newInstance() = SettingsFragment()
     }
 
-    private lateinit var viewModel: BasicViewModel
+    private lateinit var viewModel: SettingsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_basic, container, false)
+        return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BasicViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

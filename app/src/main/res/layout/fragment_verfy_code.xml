@@ -1,101 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.verifycode.VerifyCodeFragment">
-
-
-    <ScrollView
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.verifycode.VerifyCodeViewModel" />
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:scrollbars="none"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:background="@drawable/bg"
+        android:fitsSystemWindows="true"
+        tools:context=".ui.verifycode.VerifyCodeFragment">
 
-        <LinearLayout
+
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="32dp">
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="22dp"
-                android:fontFamily="@font/roboto_medium"
-                android:gravity="center"
-                android:padding="6dp"
-                android:text="Verification Code"
-                android:textColor="@color/md_white_1000"
-                android:textSize="22sp" />
+                android:orientation="vertical"
+                android:padding="32dp">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:fontFamily="@font/roboto_regular"
-                android:gravity="center"
-                android:padding="6dp"
-                android:text="@string/txt_code_sent"
-                android:textColor="@color/md_white_1000" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="22dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="Verification Code"
+                    android:textColor="@color/md_white_1000"
+                    android:textSize="22sp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_resend_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:fontFamily="@font/roboto_regular"
-                android:padding="6dp"
-                android:text="Resend Code"
-                android:textAllCaps="true"
-                android:textColor="@color/md_white_1000" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="@string/txt_code_sent"
+                    android:textColor="@color/md_white_1000" />
 
-            <com.alimuzaffar.lib.pin.PinEntryEditText
-                android:id="@+id/et_pin_entry"
-                android:layout_width="wrap_content"
-                android:layout_height="46dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="32dp"
-                android:background="@null"
-                android:cursorVisible="false"
-                android:digits="1234567890"
-                android:inputType="number"
-                android:maxLength="6"
-                android:textIsSelectable="false"
-                android:textSize="20sp"
-                app:pinBackgroundDrawable="@drawable/bg_pin_round"
-                app:pinBackgroundIsSquare="true"
-                app:pinCharacterSpacing="5dp"
-                app:pinTextBottomPadding="16dp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_resend_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()-> viewModel.onResendClicked()}"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:fontFamily="@font/roboto_regular"
+                    android:padding="6dp"
+                    android:text="Resend Code"
+                    android:textAllCaps="true"
+                    android:textColor="@color/md_white_1000" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_continue"
-                style="@style/MyWidgetButton"
-                android:layout_width="140dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="46dp"
-                android:background="@drawable/button_style_round"
-                android:text="Continue" />
+                <com.alimuzaffar.lib.pin.PinEntryEditText
+                    android:id="@+id/et_pin_entry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="32dp"
+                    android:background="@null"
+                    android:cursorVisible="false"
+                    android:digits="1234567890"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:text="@={viewModel.code}"
+                    android:textIsSelectable="false"
+                    android:textSize="20sp"
+                    app:pinBackgroundDrawable="@drawable/bg_pin_round"
+                    app:pinBackgroundIsSquare="true"
+                    app:pinCharacterSpacing="5dp"
+                    app:pinTextBottomPadding="16dp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
-                android:fontFamily="@font/roboto_regular"
-                android:gravity="center"
-                android:padding="6dp"
-                android:text="@string/txt_resend_code"
-                android:textColor="@color/md_white_1000" />
+                <ProgressBar
+                    tools:visibility="visible"
+                    android:visibility="gone"
+                    android:id="@+id/pb_verify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-        </LinearLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_continue"
+                    style="@style/MyWidgetButton"
+                    android:layout_width="140dp"
+                    android:onClick="@{() -> viewModel.onVerifyClicked()}"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="46dp"
+                    android:background="@drawable/button_style_round"
+                    android:text="Continue" />
 
-    </ScrollView>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="@string/txt_resend_code"
+                    android:textColor="@color/md_white_1000" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

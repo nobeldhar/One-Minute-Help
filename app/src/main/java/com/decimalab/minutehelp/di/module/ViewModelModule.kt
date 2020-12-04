@@ -12,6 +12,7 @@ import com.decimalab.minutehelp.ui.settings.basic.BasicViewModel
 import com.decimalab.minutehelp.ui.settings.information.InformationViewModel
 import com.decimalab.minutehelp.ui.settings.password.PasswordFragment
 import com.decimalab.minutehelp.ui.settings.password.PasswordViewModel
+import com.decimalab.minutehelp.ui.verifycode.VerifyCodeViewModel
 
 import dagger.Binds
 import dagger.Module
@@ -38,22 +39,27 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(BasicViewModel::class)
-    abstract fun bindBasicViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
+    abstract fun bindBasicViewModel(forgotPasswordViewModel: BasicViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(InformationViewModel::class)
-    abstract fun bindInformationViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
+    abstract fun bindInformationViewModel(forgotPasswordViewModel: InformationViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(AddressViewModel::class)
-    abstract fun bindAddressViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
+    abstract fun bindAddressViewModel(forgotPasswordViewModel: AddressViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(PasswordViewModel::class)
-    abstract fun bindPasswordViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
+    abstract fun bindPasswordViewModel(forgotPasswordViewModel: PasswordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(VerifyCodeViewModel::class)
+    abstract fun bindVerifyCodeViewModel(forgotPasswordViewModel: VerifyCodeViewModel): ViewModel
 
 
     @Binds

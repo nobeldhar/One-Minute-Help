@@ -59,6 +59,4 @@ fun performAuthOperation(
         } else if (responseStatus.status == Resource.Status.ERROR) {
             emit(responseStatus)
         }
-
-
     }

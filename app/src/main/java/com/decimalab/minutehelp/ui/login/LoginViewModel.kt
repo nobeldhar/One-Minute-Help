@@ -33,7 +33,7 @@ LoginViewModel
         } else if (pass.isBlank()) {
             _errorUi.value = "Empty Password!"
 
-        } else if ((pass!!.length < 4)) {
+        } else if ((pass.length < 4)) {
             _errorUi.value = "Minimum Password Length is 4 ! "
 
         } else if (!Validator.validatePhone(phone)) {
