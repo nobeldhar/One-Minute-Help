@@ -104,5 +104,23 @@
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.decimalab.minutehelp.ui.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_nav_profile_to_nav_address_setting"
+            app:destination="@id/nav_address_setting"
+            app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_nav_profile_to_nav_info_settings"
+            app:destination="@id/nav_info_settings"
+            app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_nav_profile_to_nav_basic_settings"
+            app:destination="@id/nav_basic_settings"
+            app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_nav_profile_to_nav_pass_setting"
+            app:destination="@id/nav_pass_setting"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+
 </navigation>

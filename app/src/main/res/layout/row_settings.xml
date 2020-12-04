@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="settingsOption"
+            type="String" />
+        <variable
+            name="listener"
+            type="com.decimalab.minutehelp.utils.CustomOnClickListener" />
+    </data>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
+        android:onClick="@{()-> listener.onSettingsOptionClicked(settingsOption)}"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:padding="10dp"
+            android:background="@color/app_lighter_grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/setting_option"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:text="@{settingsOption}"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/app_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/left_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

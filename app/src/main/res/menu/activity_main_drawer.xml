@@ -19,26 +19,6 @@
             android:title="Forgot Password" />
 
         <item
-            android:id="@+id/nav_basic_settings"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Basic Settings" />
-
-        <item
-            android:id="@+id/nav_info_settings"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Info Settings" />
-
-        <item
-            android:id="@+id/nav_address_setting"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Address Settings" />
-
-        <item
-            android:id="@+id/nav_pass_setting"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Password Settings" />
-
-        <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Profile" />
