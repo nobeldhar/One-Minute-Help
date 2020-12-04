@@ -20,7 +20,7 @@ LoginViewModel
 
 
     private val _loginInfo = MutableLiveData<AuthRequest>()
-    var _errorUi = MutableLiveData<String>()
+    var _errorUiLogin = MutableLiveData<String>()
 
     var getLoginResult = Transformations.switchMap(_loginInfo) {
         authRepository.loginUser(it)
@@ -29,15 +29,18 @@ LoginViewModel
     fun onLoginClicked() {
         Log.d(TAG, "onLoginClicked: $phone ")
         if (phone.isBlank()) {
-            _errorUi.value = "Empty Phone Number!"
+            _errorUiLogin.value = "Empty Phone Number!"
         } else if (pass.isBlank()) {
-            _errorUi.value = "Empty Password!"
+            _errorUiLogin.value = "Empty Password!"
 
         } else if ((pass.length < 4)) {
+
             _errorUi.value = "Minimum Password Length is 4 ! "
+            _errorUiLogin.value = "Minimum Password Length is 4 ! "
+
 
         } else if (!Validator.validatePhone(phone)) {
-            _errorUi.value = "Not a Valid Phone Number! "
+            _errorUiLogin.value = "Not a Valid Phone Number! "
         } else {
             _loginInfo.value = AuthRequest(phone.trim(), pass.trim())
         }

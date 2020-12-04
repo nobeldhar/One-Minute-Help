@@ -41,15 +41,8 @@
                     android:textColor="@color/md_white_1000"
                     android:textSize="22sp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:gravity="center"
-                    android:padding="6dp"
-                    android:text="@string/txt_code_sent"
-                    android:textColor="@color/md_white_1000" />
+               
+
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_resend_code"
@@ -64,25 +57,23 @@
                     android:text="Resend Code"
                     android:textAllCaps="true"
                     android:textColor="@color/md_white_1000" />
-
-                <com.alimuzaffar.lib.pin.PinEntryEditText
-                    android:id="@+id/et_pin_entry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="46dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="32dp"
-                    android:background="@null"
-                    android:cursorVisible="false"
-                    android:digits="1234567890"
-                    android:inputType="number"
-                    android:maxLength="4"
-                    android:text="@={viewModel.code}"
-                    android:textIsSelectable="false"
-                    android:textSize="20sp"
-                    app:pinBackgroundDrawable="@drawable/bg_pin_round"
-                    app:pinBackgroundIsSquare="true"
-                    app:pinCharacterSpacing="5dp"
-                    app:pinTextBottomPadding="16dp" />
+            <com.alimuzaffar.lib.pin.PinEntryEditText
+                android:id="@+id/et_pin_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="32dp"
+                android:background="@null"
+                android:cursorVisible="false"
+                android:digits="1234567890"
+                android:inputType="number"
+                android:maxLength="4"
+                android:textIsSelectable="false"
+                android:textSize="20sp"
+                app:pinBackgroundDrawable="@drawable/bg_pin_round"
+                app:pinBackgroundIsSquare="true"
+                app:pinCharacterSpacing="5dp"
+                app:pinTextBottomPadding="16dp" />
 
                 <ProgressBar
                     tools:visibility="visible"
