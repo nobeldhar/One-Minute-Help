@@ -16,28 +16,26 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.Receiver.OTPReceiveListener
 import com.decimalab.minutehelp.Receiver.SMSReceiver
 import com.decimalab.minutehelp.Receiver.SMSReceiver.Companion.SMS_CONSENT_REQUEST
 import com.decimalab.minutehelp.databinding.FragmentVerfyCodeBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
-import com.decimalab.minutehelp.ui.login.LoginFragment
-import com.decimalab.minutehelp.ui.login.LoginViewModel
 import com.decimalab.minutehelp.utils.Resource
+import com.decimalab.minutehelp.utils.ViewUtils
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import dagger.android.support.DaggerFragment
-import org.jetbrains.anko.support.v4.longToast
 import www.sanju.motiontoast.MotionToast
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import javax.inject.Inject
 
 
-class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener {
+class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener, View.OnClickListener {
 
     @Inject
     lateinit var viewModelFactory: AppViewModelFactory
@@ -51,6 +49,8 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener {
             savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_verfy_code, container, false)
+        binding.viewModel = viewModel
+        binding.tvResendCode.setOnClickListener(this)
         startSMSListener()
         return binding.root
     }
@@ -85,19 +85,11 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener {
                         if (response.code == 200 && response.status) {
                             val message = response.messages.toString()
                             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(VerifyCodeFragmentDirections.actionNavVerifyCodeToNavHome())
                         } else {
                             val message = response.messages.toString()
                             Log.d(TAG, "onViewCreated: failed $message")
-
-                            MotionToast.darkToast(
-                                    requireActivity(),
-                                    "Failed ☹️",
-                                    message,
-                                    MotionToast.TOAST_ERROR,
-                                    MotionToast.GRAVITY_BOTTOM,
-                                    MotionToast.LONG_DURATION,
-                                    ResourcesCompat.getFont(requireContext(), R.font.helvetica_regular)
-                            )
+                            ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), message)
                         }
                     }
 
@@ -107,18 +99,43 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener {
                     Log.d(TAG, "onActivityCreated: error " + it.isNetworkError)
 
                     if (it.isNetworkError!!) {
-                        MotionToast.darkToast(
-                                requireActivity(),
-                                "Failed ☹️",
-                                "No Internet!",
-                                MotionToast.TOAST_ERROR,
-                                MotionToast.GRAVITY_BOTTOM,
-                                MotionToast.LONG_DURATION,
-                                ResourcesCompat.getFont(requireContext(), R.font.helvetica_regular)
-                        )
+                        ViewUtils.toastNoInternet(requireActivity(), requireContext())
                     }
 
 
+                }
+
+                Resource.Status.LOADING ->
+                    progressVisibility(View.VISIBLE)
+
+            }
+        })
+
+        viewModel.getResendOTPResult.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Resource.Status.SUCCESS -> {
+                    progressVisibility(View.GONE)
+                    val response = it.data
+                    if (response != null) {
+                        if (response.code == 201 && response.status) {
+                            val message = response.messages.toString()
+                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        } else {
+                            val message = response.messages.toString()
+                            Log.d(TAG, "onViewCreated: failed $message")
+
+                            ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), message)
+                        }
+                    }
+
+                }
+                Resource.Status.ERROR -> {
+                    progressVisibility(View.GONE)
+                    Log.d(TAG, "onActivityCreated: error " + it.isNetworkError)
+
+                    if (it.isNetworkError!!) {
+                        ViewUtils.toastNoInternet(requireActivity(), requireContext())
+                    }
                 }
 
                 Resource.Status.LOADING ->
@@ -176,8 +193,12 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener {
             binding.etPinEntry.text = Editable.Factory.getInstance().newEditable(matcher.group(0))
             Log.d(TAG, "parseOneTimeCode: ${matcher.group(0)}")
             viewModel.onVerifyClicked(matcher.group(0))
-            requireActivity().unregisterReceiver(smsReceiver)
         }
+    }
+
+    private fun onRendCodeClicked(){
+        startSMSListener()
+        viewModel.onResendOTPClicked()
     }
 
     companion object {
@@ -188,6 +209,12 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener {
         super.onDestroy()
         smsReceiver.let {
             requireActivity().unregisterReceiver(smsReceiver)
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v){
+            binding.tvResendCode->onRendCodeClicked()
         }
     }
 

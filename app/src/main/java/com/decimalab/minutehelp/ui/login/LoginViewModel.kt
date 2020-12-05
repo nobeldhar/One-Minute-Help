@@ -35,7 +35,6 @@ LoginViewModel
 
         } else if ((pass.length < 4)) {
 
-            _errorUi.value = "Minimum Password Length is 4 ! "
             _errorUiLogin.value = "Minimum Password Length is 4 ! "
 
 

@@ -18,10 +18,15 @@ VerifyCodeViewModel
 
     var code: String = ""
     private val _verifyCode = MutableLiveData<AuthRequest>()
+    private val _resendCode = MutableLiveData<String>()
     var _errorUi = MutableLiveData<String>()
 
     var getVerifyResult = Transformations.switchMap(_verifyCode) {
         authRepository.verifyOTPCode(it)
+    }
+    var getResendOTPResult =  Transformations.switchMap(_resendCode) {
+        Log.d(TAG, "resendOTP Called")
+        authRepository.resendOTPCode()
     }
 
     fun onVerifyClicked(){
@@ -37,8 +42,9 @@ VerifyCodeViewModel
         }
     }
 
-    fun onResendClicked(){
-
+    fun onResendOTPClicked(){
+        Log.d(TAG, "onResendOTPClicked: ")
+        _resendCode.value = "Resend"
     }
 
     companion object {

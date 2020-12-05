@@ -1,10 +1,15 @@
 package com.decimalab.minutehelp.utils
 
 import android.app.Activity
+import android.content.Context
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.FragmentActivity
+import com.decimalab.minutehelp.R
 import com.google.android.material.snackbar.Snackbar
+import www.sanju.motiontoast.MotionToast
 
 object ViewUtils {
 
@@ -25,6 +30,30 @@ object ViewUtils {
     fun View.enable(enabled: Boolean) {
         isEnabled = enabled
         alpha = if (enabled) 1f else 0.5f
+    }
+
+    fun toastNoInternet(requireActivity: FragmentActivity, requireContext: Context) {
+        MotionToast.darkToast(
+                requireActivity,
+                "Failed ☹️",
+                "No Internet!",
+                MotionToast.TOAST_ERROR,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(requireContext, R.font.helvetica_regular)
+        )
+    }
+
+    fun toastFailedWithMessage(requireActivity: FragmentActivity, requireContext: Context, message: String) {
+        MotionToast.darkToast(
+                requireActivity,
+                "Failed ☹️",
+                message,
+                MotionToast.TOAST_ERROR,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(requireContext, R.font.helvetica_regular)
+        )
     }
 
 

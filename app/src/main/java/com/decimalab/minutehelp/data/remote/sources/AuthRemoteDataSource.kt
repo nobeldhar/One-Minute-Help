@@ -17,4 +17,7 @@ class AuthRemoteDataSource @Inject constructor(
 
     suspend fun verifyOTPCode(authRequest: AuthRequest)
             = getResult { authService.verifyCode(authRequest) }
+
+    suspend fun resendOTPCode()
+            = getResult { authService.resendCode() }
 }
