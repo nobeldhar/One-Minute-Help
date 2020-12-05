@@ -120,10 +120,10 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener, View.OnClickLis
                         if (response.code == 201 && response.status) {
                             val message = response.messages.toString()
                             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Wait for the code", Toast.LENGTH_SHORT).show()
                         } else {
                             val message = response.messages.toString()
                             Log.d(TAG, "onViewCreated: failed $message")
-
                             ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), message)
                         }
                     }
