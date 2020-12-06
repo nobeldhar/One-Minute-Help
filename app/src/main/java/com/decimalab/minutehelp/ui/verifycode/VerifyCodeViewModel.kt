@@ -30,7 +30,9 @@ VerifyCodeViewModel
     }
 
     fun onVerifyClicked(){
+        Log.d(TAG, "onVerifyClicked: outside")
         if (!code.isBlank()){
+            Log.d(TAG, "onVerifyClicked: inside")
             _verifyCode.value = AuthRequest(code = code)
         }
     }

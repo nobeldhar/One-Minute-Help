@@ -23,8 +23,6 @@ interface AuthService {
     suspend fun verifyCode(@Body authRequest: AuthRequest
     ): Response<AuthResponse>
 
-    @FormUrlEncoded
-    @GET("auth/resend-code/{id}")
-    suspend fun resendCode(@Path("id") id: Int
-    ): Response<AuthResponse>
+    @POST("auth/resend-code/")
+    suspend fun resendCode(): Response<AuthResponse>
 }
