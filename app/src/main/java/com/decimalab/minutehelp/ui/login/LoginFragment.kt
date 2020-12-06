@@ -57,16 +57,7 @@ class LoginFragment : DaggerFragment() {
                         } else {
                             val message = response.messages.toString()
                             Log.d(TAG, "onViewCreated: failed $message")
-
-                            MotionToast.darkToast(
-                                requireActivity(),
-                                "Failed ☹️",
-                                message,
-                                MotionToast.TOAST_ERROR,
-                                MotionToast.GRAVITY_BOTTOM,
-                                MotionToast.LONG_DURATION,
-                                ResourcesCompat.getFont(requireContext(), R.font.helvetica_regular)
-                            )
+                            ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), message)
                         }
                     }
                 }
@@ -74,20 +65,11 @@ class LoginFragment : DaggerFragment() {
                     progressVisibility(View.GONE)
                     Log.d(Companion.TAG, "onActivityCreated: error " + it.isNetworkError)
 
-                    if (it.isNetworkError!!)
-                    {
-                        MotionToast.darkToast(
-                            requireActivity(),
-                            "Failed ☹️",
-                            "No Internet!",
-                            MotionToast.TOAST_ERROR,
-                            MotionToast.GRAVITY_BOTTOM,
-                            MotionToast.LONG_DURATION,
-                            ResourcesCompat.getFont(requireContext(), R.font.helvetica_regular)
-                        )
+                    it.isNetworkError?.let { it ->
+                        if (it) {
+                            ViewUtils.toastNoInternet(requireActivity(), requireContext())
+                        }
                     }
-
-
                 }
 
                 Resource.Status.LOADING ->
@@ -98,15 +80,7 @@ class LoginFragment : DaggerFragment() {
 
         viewModel._errorUiLogin.observe(viewLifecycleOwner, {
 
-            MotionToast.darkToast(
-                requireActivity(),
-                "Failed ☹️",
-                it,
-                MotionToast.TOAST_WARNING,
-                MotionToast.GRAVITY_BOTTOM,
-                MotionToast.LONG_DURATION,
-                ResourcesCompat.getFont(requireContext(), R.font.helvetica_regular)
-            )
+            ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), it)
         })
     }
 
