@@ -92,7 +92,6 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener, View.OnClickLis
                             ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), message)
                         }
                     }
-
                 }
                 Resource.Status.ERROR -> {
                     progressVisibility(View.GONE)
@@ -101,13 +100,9 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener, View.OnClickLis
                     if (it.isNetworkError!!) {
                         ViewUtils.toastNoInternet(requireActivity(), requireContext())
                     }
-
-
                 }
-
                 Resource.Status.LOADING ->
                     progressVisibility(View.VISIBLE)
-
             }
         })
 
@@ -137,7 +132,6 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener, View.OnClickLis
                         ViewUtils.toastNoInternet(requireActivity(), requireContext())
                     }
                 }
-
                 Resource.Status.LOADING ->
                     progressVisibility(View.VISIBLE)
 

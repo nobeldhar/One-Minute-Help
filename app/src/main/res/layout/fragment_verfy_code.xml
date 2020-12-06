@@ -67,6 +67,7 @@
                 android:digits="1234567890"
                 android:inputType="number"
                 android:maxLength="4"
+                android:text="@={viewModel.code}"
                 android:textIsSelectable="false"
                 android:textSize="20sp"
                 app:pinBackgroundDrawable="@drawable/bg_pin_round"
