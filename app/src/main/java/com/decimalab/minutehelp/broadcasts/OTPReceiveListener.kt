@@ -1,4 +1,4 @@
-package com.decimalab.minutehelp.Receiver
+package com.decimalab.minutehelp.broadcasts
 
 interface OTPReceiveListener {
 

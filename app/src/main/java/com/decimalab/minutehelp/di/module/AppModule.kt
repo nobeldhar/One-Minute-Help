@@ -7,6 +7,7 @@ import androidx.annotation.NonNull
 import com.decimalab.minutehelp.BuildConfig
 import com.decimalab.minutehelp.data.remote.RequestInterceptor
 import com.decimalab.minutehelp.data.remote.services.AuthService
+import com.decimalab.minutehelp.data.remote.services.DashboardService
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -112,79 +113,14 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideOfferService(retrofit: Retrofit): AuthService {
+    fun provideAuthService(retrofit: Retrofit): AuthService {
         return retrofit.create(AuthService::class.java)
     }
-/*
-    @Provides
-    @Singleton
-    fun provideOfferRemoteDataSource(offerService: OfferService) = OfferRemoteDataSource(offerService)
 
     @Provides
     @Singleton
-    fun provideFoodRepository(localDataSource: FoodDao, remoteDataSource: OfferRemoteDataSource) = FoodRepository(localDataSource,remoteDataSource)
-*/
-    /*@Provides
-    @Singleton
-    fun provideHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(RequestInterceptor())
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .addNetworkInterceptor(StethoInterceptor())
-            .build()
-    }*/
-
-    private suspend fun prePopulateDatabase() {
-        /*var foodDao = database.foodDao()
-
-        // Delete all content here.
-        foodDao.deleteAllFoods()
-
-        // Add sample words.
-        var food1 = Food(
-            1,
-            "FREE RM 50.00 KFC Dinner Set in Hari Raya Puasa",
-            "339 Deals",
-            "kfc_dinner_6",
-            "37",
-            "4.83(32)",
-            "While stock last",
-            "Beyan Lepas, Penang, Malayasia",
-            "Dine In Voucher"
-        )
-
-        foodDao.insertFood(food1)
-
-        var item1 = Item(
-            "Spicy Chicken",
-            "15", 1
-        )
-        var item2 = Item(
-            "Mash Potatoes",
-            "3", 1
-        )
-        var item3 = Item(
-            "Bread",
-            "4", 1
-        )
-        var item4 = Item(
-            "Bottled Drink",
-            "1.5L", 1
-        )
-        var item5 = Item(
-            "Large Fries",
-            "1", 1
-        )
-        var item6 = Item(
-            "Coleslaws",
-            "3", 1
-        )
-        var item7 = Item(
-            "Cookies",
-            "4", 1
-        )
-        foodDao.insertItem(item1, item2, item3, item4, item5, item6, item7)*/
-
-
+    fun provideDashboardService(retrofit: Retrofit): DashboardService {
+        return retrofit.create(DashboardService::class.java)
     }
+
 }

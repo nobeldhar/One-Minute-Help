@@ -12,15 +12,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.decimalab.minutehelp.R
-import com.decimalab.minutehelp.Receiver.OTPReceiveListener
-import com.decimalab.minutehelp.Receiver.SMSReceiver
-import com.decimalab.minutehelp.Receiver.SMSReceiver.Companion.SMS_CONSENT_REQUEST
+import com.decimalab.minutehelp.broadcasts.OTPReceiveListener
+import com.decimalab.minutehelp.broadcasts.SMSReceiver
+import com.decimalab.minutehelp.broadcasts.SMSReceiver.Companion.SMS_CONSENT_REQUEST
 import com.decimalab.minutehelp.databinding.FragmentVerfyCodeBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
 import com.decimalab.minutehelp.utils.Resource
@@ -29,7 +28,6 @@ import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import dagger.android.support.DaggerFragment
-import www.sanju.motiontoast.MotionToast
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import javax.inject.Inject
