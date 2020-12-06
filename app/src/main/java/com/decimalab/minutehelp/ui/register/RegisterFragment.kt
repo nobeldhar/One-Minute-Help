@@ -21,6 +21,7 @@ import com.decimalab.minutehelp.ui.login.LoginFragment
 import com.decimalab.minutehelp.ui.login.LoginFragmentDirections
 import com.decimalab.minutehelp.ui.login.LoginViewModel
 import com.decimalab.minutehelp.utils.Resource
+import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
 import www.sanju.motiontoast.MotionToast
 import javax.inject.Inject
@@ -60,19 +61,19 @@ class RegisterFragment : DaggerFragment() {
                             findNavController().navigate(action)
                         } else {
                             val message = response.messages.toString()
-                            Log.d(TAG, "onViewCreated: failed $message")
-                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                            Log.d(RegisterFragment.TAG, "onViewCreated: failed $message")
+                            ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), message)
                         }
                     }
                 }
                 Resource.Status.ERROR -> {
                     progressVisibility(View.GONE)
                     Log.d(TAG, "onActivityCreated: error " + it.isNetworkError)
-                    Toast.makeText(
-                        requireContext(),
-                        it.isNetworkError.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    it.isNetworkError?.let { it ->
+                        if (it) {
+                            ViewUtils.toastNoInternet(requireActivity(), requireContext())
+                        }
+                    }
                 }
 
                 Resource.Status.LOADING ->

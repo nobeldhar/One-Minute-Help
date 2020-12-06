@@ -11,12 +11,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.decimalab.minutehelp.R
+import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.decimalab.minutehelp.utils.ViewUtils
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class SplashFragment : Fragment() {
+class SplashFragment : DaggerFragment() {
 
 
+    @Inject
+    lateinit var prefsHelper: SharedPrefsHelper
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -25,9 +31,11 @@ class SplashFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_splash, container, false)
 
         Handler(Looper.myLooper()!!).postDelayed({
-            val navDirections: NavDirections =
-                    SplashFragmentDirections.actionNavSplashToNavLogin()
-            Navigation.findNavController(root).navigate(navDirections)
+            val navDirections: NavDirections = if (prefsHelper.hasUser())
+                SplashFragmentDirections.actionNavSplashToNavHome()
+            else
+                SplashFragmentDirections.actionNavSplashToNavLogin()
+            findNavController().navigate(navDirections)
         }, 2000)
 
         return root

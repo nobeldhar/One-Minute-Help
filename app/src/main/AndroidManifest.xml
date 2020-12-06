@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Minutehelp">
 
         <activity
-            android:name=".OneMinuteHelpActivity"
+            android:name=".ui.OneMinuteHelpActivity"
             android:label="@string/title_activity_one_minute_help"
             android:theme="@style/Theme.Minutehelp.NoActionBar">
             <intent-filter>

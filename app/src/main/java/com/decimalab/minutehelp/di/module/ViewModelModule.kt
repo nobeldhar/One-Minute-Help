@@ -6,6 +6,7 @@ import com.decimalab.minutehelp.factory.AppViewModelFactory
 import com.decimalab.minutehelp.ui.login.LoginViewModel
 import com.decimalab.minutehelp.ui.register.RegisterViewModel
 import com.decimalab.minutehelp.di.util.ViewModelKey
+import com.decimalab.minutehelp.ui.OneMinuteHelpViewModel
 import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordViewModel
 import com.decimalab.minutehelp.ui.settings.address.AddressViewModel
 import com.decimalab.minutehelp.ui.settings.basic.BasicViewModel
@@ -60,6 +61,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(VerifyCodeViewModel::class)
     abstract fun bindVerifyCodeViewModel(forgotPasswordViewModel: VerifyCodeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OneMinuteHelpViewModel::class)
+    abstract fun bindOneMinuteHelpViewModel(oneMinuteHelpViewModel: OneMinuteHelpViewModel): ViewModel
 
 
     @Binds

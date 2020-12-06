@@ -42,9 +42,17 @@
         android:name="com.decimalab.minutehelp.ui.splash.SplashFragment"
         android:label="Splash" >
         <action
-            app:exitAnim="@animator/nav_default_exit_anim"
             android:id="@+id/action_nav_splash_to_nav_login"
             app:destination="@id/nav_login"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/nav_splash"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_splash_to_nav_home"
+            app:destination="@id/nav_home"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
             app:popUpTo="@id/nav_splash"
             app:popUpToInclusive="true" />
     </fragment>
@@ -122,5 +130,10 @@
             app:destination="@id/nav_pass_setting"
             app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
+    <action
+        android:id="@+id/action_global_nav_login"
+        app:destination="@id/nav_login"
+        app:popUpTo="@id/mobile_navigation"
+        app:popUpToInclusive="true" />
 
 </navigation>

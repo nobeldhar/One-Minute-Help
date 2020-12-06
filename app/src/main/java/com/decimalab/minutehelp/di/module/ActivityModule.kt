@@ -1,6 +1,6 @@
 package com.decimalab.minutehelp.di.module
 
-import com.decimalab.minutehelp.OneMinuteHelpActivity
+import com.decimalab.minutehelp.ui.OneMinuteHelpActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 @Suppress("unused")

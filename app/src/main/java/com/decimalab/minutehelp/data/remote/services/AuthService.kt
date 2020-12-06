@@ -15,6 +15,9 @@ interface AuthService {
     suspend fun loginUser(@Body authRequest: AuthRequest
     ): Response<AuthResponse>
 
+    @GET("auth/logout")
+    suspend fun logoutUser(): Response<AuthResponse>
+
     @POST("auth/signup")
     suspend fun registerUser(@Body authRequest: AuthRequest
     ): Response<AuthResponse>

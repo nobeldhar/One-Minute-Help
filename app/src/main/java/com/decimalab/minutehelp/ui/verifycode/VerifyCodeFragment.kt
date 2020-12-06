@@ -96,9 +96,10 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener, View.OnClickLis
                 Resource.Status.ERROR -> {
                     progressVisibility(View.GONE)
                     Log.d(TAG, "onActivityCreated: error " + it.isNetworkError)
-
-                    if (it.isNetworkError!!) {
-                        ViewUtils.toastNoInternet(requireActivity(), requireContext())
+                    it.isNetworkError?.let { it ->
+                        if (it) {
+                            ViewUtils.toastNoInternet(requireActivity(), requireContext())
+                        }
                     }
                 }
                 Resource.Status.LOADING ->
@@ -127,9 +128,10 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener, View.OnClickLis
                 Resource.Status.ERROR -> {
                     progressVisibility(View.GONE)
                     Log.d(TAG, "onActivityCreated: error " + it.isNetworkError)
-
-                    if (it.isNetworkError!!) {
-                        ViewUtils.toastNoInternet(requireActivity(), requireContext())
+                    it.isNetworkError?.let { it ->
+                        if (it) {
+                            ViewUtils.toastNoInternet(requireActivity(), requireContext())
+                        }
                     }
                 }
                 Resource.Status.LOADING ->

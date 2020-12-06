@@ -12,6 +12,9 @@ class AuthRemoteDataSource @Inject constructor(
     suspend fun loginUser(authRequest: AuthRequest)
             = getResult { authService.loginUser(authRequest) }
 
+    suspend fun logoutUser()
+            = getResult { authService.logoutUser() }
+
     suspend fun registerUser(authRequest: AuthRequest)
             = getResult { authService.registerUser(authRequest) }
 

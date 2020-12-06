@@ -64,22 +64,18 @@ class LoginFragment : DaggerFragment() {
                 Resource.Status.ERROR -> {
                     progressVisibility(View.GONE)
                     Log.d(Companion.TAG, "onActivityCreated: error " + it.isNetworkError)
-
                     it.isNetworkError?.let { it ->
                         if (it) {
                             ViewUtils.toastNoInternet(requireActivity(), requireContext())
                         }
                     }
                 }
-
                 Resource.Status.LOADING ->
                     progressVisibility(View.VISIBLE)
-
             }
         })
 
         viewModel._errorUiLogin.observe(viewLifecycleOwner, {
-
             ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), it)
         })
     }

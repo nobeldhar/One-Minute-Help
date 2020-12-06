@@ -19,6 +19,10 @@ class AuthRepository @Inject constructor(
             saveAuthInfo = { prefsHelper.saveUser(it)}
     )
 
+    fun logoutUser() = performAuthOperation(
+            networkCall = { remoteDataSource.logoutUser() }
+    )
+
     fun registerUser(authRequest: AuthRequest) = performAuthOperation(
             networkCall = { remoteDataSource.registerUser(authRequest) },
             saveAuthInfo = { prefsHelper.saveUser(it) }
