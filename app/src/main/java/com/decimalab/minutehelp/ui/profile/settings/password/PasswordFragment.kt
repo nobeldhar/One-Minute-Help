@@ -1,8 +1,7 @@
-package com.decimalab.minutehelp.ui.settings.password
+package com.decimalab.minutehelp.ui.profile.settings.password
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

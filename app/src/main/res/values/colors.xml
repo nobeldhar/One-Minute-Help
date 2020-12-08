@@ -61,5 +61,14 @@
     <color name="app_black">#1E1E1E</color>
     <color name="app_lighter_grey">#EBE9E9</color>
 
+    <color name="grey_40">#999999</color>
+    <color name="grey_90">#263238</color>
+    <color name="yellow_700">#FBC02D</color>
+
+    <color name="overlay_light_40">#66FFFFFF</color>
+    <color name="overlay_light_50">#DBDBDB</color>
+
+    <color name="grey_20">#cccccc</color>
+
 
 </resources>

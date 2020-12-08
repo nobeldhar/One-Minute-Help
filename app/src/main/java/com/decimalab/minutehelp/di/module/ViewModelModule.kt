@@ -9,11 +9,10 @@ import com.decimalab.minutehelp.di.util.ViewModelKey
 import com.decimalab.minutehelp.ui.OneMinuteHelpViewModel
 import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordViewModel
 import com.decimalab.minutehelp.ui.home.HomeViewModel
-import com.decimalab.minutehelp.ui.settings.address.AddressViewModel
-import com.decimalab.minutehelp.ui.settings.basic.BasicViewModel
-import com.decimalab.minutehelp.ui.settings.information.InformationViewModel
-import com.decimalab.minutehelp.ui.settings.password.PasswordFragment
-import com.decimalab.minutehelp.ui.settings.password.PasswordViewModel
+import com.decimalab.minutehelp.ui.profile.settings.address.AddressViewModel
+import com.decimalab.minutehelp.ui.profile.settings.basic.BasicViewModel
+import com.decimalab.minutehelp.ui.profile.settings.information.InformationViewModel
+import com.decimalab.minutehelp.ui.profile.settings.password.PasswordViewModel
 import com.decimalab.minutehelp.ui.verifycode.VerifyCodeViewModel
 
 import dagger.Binds

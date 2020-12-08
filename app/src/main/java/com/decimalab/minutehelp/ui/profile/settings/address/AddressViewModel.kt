@@ -1,4 +1,4 @@
-package com.decimalab.minutehelp.ui.settings.address
+package com.decimalab.minutehelp.ui.profile.settings.address
 
 import androidx.lifecycle.ViewModel
 import com.decimalab.minutehelp.data.repository.AuthRepository

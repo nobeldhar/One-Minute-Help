@@ -5,10 +5,10 @@ import com.decimalab.minutehelp.ui.gallery.GalleryFragment
 import com.decimalab.minutehelp.ui.home.HomeFragment
 import com.decimalab.minutehelp.ui.login.LoginFragment
 import com.decimalab.minutehelp.ui.register.RegisterFragment
-import com.decimalab.minutehelp.ui.settings.address.AddressFragment
-import com.decimalab.minutehelp.ui.settings.basic.BasicFragment
-import com.decimalab.minutehelp.ui.settings.information.InformationFragment
-import com.decimalab.minutehelp.ui.settings.password.PasswordFragment
+import com.decimalab.minutehelp.ui.profile.settings.address.AddressFragment
+import com.decimalab.minutehelp.ui.profile.settings.basic.BasicFragment
+import com.decimalab.minutehelp.ui.profile.settings.information.InformationFragment
+import com.decimalab.minutehelp.ui.profile.settings.password.PasswordFragment
 import com.decimalab.minutehelp.ui.slideshow.SlideshowFragment
 import com.decimalab.minutehelp.ui.splash.SplashFragment
 import com.decimalab.minutehelp.ui.verifycode.VerifyCodeFragment

@@ -1,4 +1,4 @@
-package com.decimalab.minutehelp.ui.settings.basic
+package com.decimalab.minutehelp.ui.profile.settings.basic
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
