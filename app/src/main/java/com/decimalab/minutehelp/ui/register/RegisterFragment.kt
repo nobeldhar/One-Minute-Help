@@ -39,6 +39,7 @@ class RegisterFragment : DaggerFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
         binding.viewModel = viewModel
+        binding.fragment = this
         return binding.root
     }
 
@@ -102,6 +103,10 @@ class RegisterFragment : DaggerFragment() {
 
     companion object {
         private const val TAG = "RegisterFragment"
+    }
+
+    fun onCreateGroupClicked(){
+        findNavController().navigate(RegisterFragmentDirections.actionNavRegisterToNavCreateGroup())
     }
 
 }

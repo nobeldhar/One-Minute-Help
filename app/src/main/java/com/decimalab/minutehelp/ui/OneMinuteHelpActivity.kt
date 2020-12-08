@@ -127,6 +127,7 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
         return true
     }
 
+
     private fun logout() {
         Log.d(TAG, "logout: inside")
         viewModel.logoutUser()

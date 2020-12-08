@@ -73,6 +73,11 @@
             app:exitAnim="@anim/fragment_fade_exit"
             app:popUpTo="@id/nav_register"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_register_to_nav_create_group"
+            app:destination="@id/nav_create_group"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/nav_forgot_password"
@@ -148,5 +153,10 @@
         app:destination="@id/nav_login"
         app:popUpTo="@id/mobile_navigation"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/nav_create_group"
+        android:name="com.decimalab.minutehelp.ui.creategroup.CreateGroupFragment"
+        android:label="fragment_create_group"
+        tools:layout="@layout/fragment_create_group" />
 
 </navigation>
