@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import com.decimalab.minutehelp.data.remote.responses.AuthResponse
 import com.decimalab.minutehelp.data.remote.responses.User
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class SharedPrefsHelper @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
@@ -83,27 +82,20 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         return sharedPreferences.getString(USER_KEY_ACCESS_TOKEN, null)
     }
 
-    /*fun getQbUser(): User? {
+    fun getUser(): User? {
         return if (hasUser()) {
             val id = get<Int>(USER_ID)!!
             val name = get<String>(USER_NAME)!!
             val email = get<String>(USER_EMAIL)!!
-            val phone = get<String>(USER_PHONE)!!
-            val tagsInString = get<String>(USER_IS_VERIFIED)
-            var tags: StringifyArrayList<String?>? = null
-            if (tagsInString != null) {
-                tags = StringifyArrayList()
-                tags.add(tagsInString.split(",").toTypedArray())
-            }
-            val user = QBUser(login, password)
-            user.setId(id)
-            user.setFullName(fullName)
-            user.setTags(tags)
+            val phone = get<Int>(USER_PHONE)!!
+            val isVerified = get<Int>(USER_IS_VERIFIED)!!
+
+            val user = User(id, name, email, phone, isVerified)
             user
         } else {
             null
         }
-    }*/
+    }
 
     fun hasUser(): Boolean {
         return has(USER_ID) && has(USER_NAME)

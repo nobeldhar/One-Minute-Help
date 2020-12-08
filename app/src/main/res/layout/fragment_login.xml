@@ -112,9 +112,10 @@
                 android:layout_height="10dp" />
 
             <TextView
+                android:onClick="@{()-> fragment.onForgotPassClicked()}"
                 android:id="@+id/tv_forgot_password"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="23dp"
                 android:layout_gravity="end"
                 android:clickable="true"
                 android:focusable="true"

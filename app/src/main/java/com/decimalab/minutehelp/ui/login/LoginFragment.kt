@@ -89,6 +89,10 @@ class LoginFragment : DaggerFragment() {
         findNavController().navigate(action)
     }
 
+    fun onForgotPassClicked(){
+        findNavController().navigate(LoginFragmentDirections.actionNavLoginToNavForgotPassword())
+    }
+
     override fun onResume() {
         super.onResume()
         ViewUtils.hideToolbar(requireActivity())
