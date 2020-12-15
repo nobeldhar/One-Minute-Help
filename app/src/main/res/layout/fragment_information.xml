@@ -1,142 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.profile.settings.information.InformationFragment">
+<layout>
+    <data>
 
-    <androidx.core.widget.NestedScrollView
+        <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.profile.settings.information.InformationViewModel" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="20dp"
-        android:scrollbars="none"
-        android:scrollingCache="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        tools:context=".ui.profile.settings.information.InformationFragment">
 
-        <LinearLayout
-            android:layout_marginTop="20dp"
+        <!--<com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Blood"
-                android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="#6C6B6B"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/et_blood_group"
-                style="@style/EditText.Flat.Grey"
+            android:id="@+id/info_appbar"
+            android:theme="@style/Theme.Minutehelp.AppBarOverlay">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/info_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edit_text_round_bg_outline"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:minHeight="40dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="B+"
-                android:textColor="#1E1E1E" />
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/Theme.Minutehelp.PopupOverlay" />
+        </com.google.android.material.appbar.AppBarLayout>-->
 
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date of Birth"
-                android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="#6C6B6B"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/et_date_of_birth"
-                style="@style/EditText.Flat.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edit_text_round_bg_outline"
-                android:drawableEnd="@drawable/ic_calender"
-                android:minHeight="40dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="26/03/1996"
-                android:textColor="#1E1E1E" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gender"
-                android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="#6C6B6B"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/et_gender"
-                style="@style/EditText.Flat.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edit_text_round_bg_outline"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:minHeight="40dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Male"
-                android:textColor="#1E1E1E" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="35dp" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="20dp"
+            android:scrollbars="none"
+            android:scrollingCache="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_cancel"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_rect_white_overlay"
-                    android:text="Cancel"
-                    android:textColor="@android:color/black" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blood"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="#6C6B6B"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sp_blood_group"
+                    style="@style/EditText.Flat.Grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edit_text_round_bg_outline"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:minHeight="40dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="#1E1E1E" />
+
 
                 <View
-                    android:layout_width="50dp"
-                    android:layout_height="0dp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_update"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_rect_white_overlay_color"
-                    android:text="Update"
-                    android:textColor="@android:color/black" />
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date of Birth"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="#6C6B6B"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:cursorVisible="false"
+                    android:id="@+id/et_date_of_birth"
+                    style="@style/EditText.Flat.Grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edit_text_round_bg_outline"
+                    android:drawableEnd="@drawable/ic_calender"
+                    android:minHeight="40dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@={viewModel.dateOfBirth}"
+                    android:textColor="#1E1E1E" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="#6C6B6B"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sp_gender"
+                    style="@style/EditText.Flat.Grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edit_text_round_bg_outline"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:minHeight="40dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Male"
+                    android:textColor="#1E1E1E" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="35dp" />
+
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_rect_white_overlay"
+                        android:text="Cancel"
+                        android:textColor="@android:color/black" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="0dp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_update"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> viewModel.onUpdateClicked()}"
+                        android:background="@drawable/btn_rect_white_overlay_color"
+                        android:text="Update"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
 
-        </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-</FrameLayout>
+        <ProgressBar
+            android:id="@+id/pb_info"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</layout>

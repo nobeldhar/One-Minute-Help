@@ -4,8 +4,10 @@ import android.content.SharedPreferences
 import com.decimalab.minutehelp.data.remote.responses.AuthResponse
 import com.decimalab.minutehelp.data.remote.responses.User
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class SharedPrefsHelper @Inject constructor(private val sharedPreferences: SharedPreferences) {
+@Singleton
+class SharedPrefsHelper @Inject constructor( private val sharedPreferences: SharedPreferences) {
 
     private val SHARED_PREFS_NAME = "one_minute_help_shared_pref"
     private val USER_ID = "one_minute_help_user_id"

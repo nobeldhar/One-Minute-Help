@@ -4,28 +4,28 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.FragmentHomeBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
-import com.decimalab.minutehelp.ui.login.LoginFragment
-import com.decimalab.minutehelp.ui.login.LoginFragmentDirections
-import com.decimalab.minutehelp.ui.login.LoginViewModel
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
-import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+
 
 class HomeFragment : DaggerFragment(){
 
@@ -62,7 +62,15 @@ class HomeFragment : DaggerFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getVerifyTokenResult.observe(viewLifecycleOwner, Observer {
+
+        /*val appBarConfiguration = AppBarConfiguration(
+                setOf(
+                        R.id.nav_home
+                )
+        )
+        binding.homeToolbar.setupWithNavController(findNavController(), appBarConfiguration)*/
+
+        viewModel.getVerifyTokenResult.observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     val response = it.data

@@ -93,11 +93,7 @@ class LoginFragment : DaggerFragment() {
         findNavController().navigate(LoginFragmentDirections.actionNavLoginToNavForgotPassword())
     }
 
-    override fun onResume() {
-        super.onResume()
-        ViewUtils.hideToolbar(requireActivity())
-        ViewUtils.hideStatusBar(requireActivity())
-    }
+
 
     companion object {
         private const val TAG = "LoginFragment"

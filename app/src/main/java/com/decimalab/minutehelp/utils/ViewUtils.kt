@@ -13,15 +13,7 @@ import www.sanju.motiontoast.MotionToast
 
 object ViewUtils {
 
-    fun hideStatusBar(activity: Activity) {
-        activity.window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-    }
-    fun hideToolbar(activity: Activity) {
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
+
 
     fun View.visible(isVisible: Boolean) {
         visibility = if (isVisible) View.VISIBLE else View.GONE

@@ -8,6 +8,7 @@ import com.decimalab.minutehelp.BuildConfig
 import com.decimalab.minutehelp.data.remote.RequestInterceptor
 import com.decimalab.minutehelp.data.remote.services.AuthService
 import com.decimalab.minutehelp.data.remote.services.DashboardService
+import com.decimalab.minutehelp.data.remote.services.SettingsService
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -121,6 +122,12 @@ class AppModule {
     @Singleton
     fun provideDashboardService(retrofit: Retrofit): DashboardService {
         return retrofit.create(DashboardService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSettingsService(retrofit: Retrofit): SettingsService {
+        return retrofit.create(SettingsService::class.java)
     }
 
 }

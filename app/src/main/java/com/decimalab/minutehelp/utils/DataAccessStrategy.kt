@@ -46,9 +46,9 @@ fun performAuthOperation(
 
         }
 
-fun performAuthOperation(
-    networkCall: suspend () -> Resource<AuthResponse>
-): LiveData<Resource<AuthResponse>> =
+fun <T> performAuthOperation(
+    networkCall: suspend () -> Resource<T>
+): LiveData<Resource<T>> =
     liveData(Dispatchers.IO) {
         emit(Resource.loading())
 

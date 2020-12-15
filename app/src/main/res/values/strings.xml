@@ -27,6 +27,8 @@
 
     <string name="txt_code_sent"><![CDATA[We have sent you a code via sms. please enter it below & press continue]]></string>
     <string name="txt_resend_code">If you have not received the SMS, Please press Resend Code</string>
+    <string name="open">Drawer Opend</string>
+    <string name="close">Drawer Closed</string>
 
 
 </resources>

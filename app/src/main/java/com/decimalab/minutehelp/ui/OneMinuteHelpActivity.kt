@@ -7,14 +7,18 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -33,13 +37,15 @@ import org.jetbrains.anko.textColor
 import javax.inject.Inject
 
 class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-    NavController.OnDestinationChangedListener {
+    NavController.OnDestinationChangedListener, DrawerListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var progressBar: ProgressBar
     private lateinit var navView: NavigationView
+    private lateinit var toolbar: Toolbar
+
     @Inject
     lateinit var viewModelFactory: AppViewModelFactory
     @Inject
@@ -49,20 +55,19 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_minute_help)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.main_toolbar)
         setSupportActionBar(toolbar)
-
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         drawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout.addDrawerListener(this)
+
         navView = findViewById(R.id.nav_view)
         navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home,
-                    R.id.nav_gallery,
-                    R.id.nav_slideshow
-            ), drawerLayout
+            setOf(R.id.nav_home), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -70,7 +75,6 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
         progressBar = findViewById(R.id.pb_main)
 
         navController.addOnDestinationChangedListener(this)
-        setNavViewHeader()
         observe()
     }
 
@@ -83,11 +87,6 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
 
         navView.addHeaderView(headerMainBinding.root)
 
-        prefsHelper.getUser()?.let {
-            headerMainBinding.headerUserName.text = it.name
-            headerMainBinding.headerUserName.setTextColor(Color.WHITE)
-            Log.d(TAG, "onCreate: profile name set")
-        }
 
         headerMainBinding.activity = this
     }
@@ -181,11 +180,47 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
         arguments: Bundle?
     ) {
         when(destination.id){
-            R.id.nav_splash->drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            R.id.nav_login->drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            R.id.nav_register->drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            R.id.nav_create_group->drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            else -> drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            R.id.nav_splash,
+            R.id.nav_login,
+            R.id.nav_register,
+            R.id.nav_create_group,
+            R.id.nav_forgot_password->{
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                toolbar.visibility = View.GONE
+            }
+            else -> {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                toolbar.visibility = View.VISIBLE
+            }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setNavViewHeader()
+    }
+
+    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+    }
+
+    override fun onDrawerOpened(drawerView: View) {
+        setHeaderElements()
+    }
+
+    private fun setHeaderElements() {
+
+        val nameText = navView.getHeaderView(0).findViewById<TextView>(R.id.header_user_name)
+
+        prefsHelper.getUser()?.let {
+            nameText.text = it.name
+            nameText.setTextColor(Color.WHITE)
+            Log.d(TAG, "onCreate: profile name set")
+        }
+    }
+
+    override fun onDrawerClosed(drawerView: View) {
+    }
+
+    override fun onDrawerStateChanged(newState: Int) {
     }
 }

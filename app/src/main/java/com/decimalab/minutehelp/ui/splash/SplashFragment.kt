@@ -30,7 +30,7 @@ class SplashFragment : DaggerFragment() {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_splash, container, false)
 
-        Handler(Looper.myLooper()!!).postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             val navDirections: NavDirections = if (prefsHelper.hasUser())
                 SplashFragmentDirections.actionNavSplashToNavHome()
             else
@@ -44,8 +44,6 @@ class SplashFragment : DaggerFragment() {
     override fun onResume() {
         super.onResume()
 
-        ViewUtils.hideToolbar(requireActivity())
-        ViewUtils.hideStatusBar(requireActivity())
     }
 
 }
