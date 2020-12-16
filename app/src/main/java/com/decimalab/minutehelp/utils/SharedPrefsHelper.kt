@@ -1,13 +1,16 @@
 package com.decimalab.minutehelp.utils
 
 import android.content.SharedPreferences
+import com.decimalab.minutehelp.data.remote.requests.SettingsRequest
 import com.decimalab.minutehelp.data.remote.responses.AuthResponse
 import com.decimalab.minutehelp.data.remote.responses.User
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SharedPrefsHelper @Inject constructor( private val sharedPreferences: SharedPreferences) {
+class SharedPrefsHelper @Inject constructor(private val sharedPreferences: SharedPreferences) {
+
+
 
     private val SHARED_PREFS_NAME = "one_minute_help_shared_pref"
     private val USER_ID = "one_minute_help_user_id"
@@ -16,7 +19,13 @@ class SharedPrefsHelper @Inject constructor( private val sharedPreferences: Shar
     private val USER_PHONE = "one_minute_help_user_phone"
     private val USER_IS_VERIFIED = "one_minute_help_is_versified"
     private val USER_KEY_ACCESS_TOKEN = "one_minute_help_access_token"
-
+    private val USER_POSTCODE = "one_minute_help_postcode"
+    private val USER_CITY_ID = "one_minute_help_city_id"
+    private val USER_THANA_ID = "one_minute_help_thana_id"
+    private val USER_DISTRICT_ID = "one_minute_help_district_id"
+    private val USER_GENDER_ID = "one_minute_help_gender_id"
+    private val USER_BLOOD_ID = "one_minute_help_blood_id"
+    private val USER_DATEOFBIRTH = "one_minute_help_date_of_birth"
 
     private fun delete(key: String?) {
         if (sharedPreferences.contains(key)) {
@@ -89,7 +98,7 @@ class SharedPrefsHelper @Inject constructor( private val sharedPreferences: Shar
             val id = get<Int>(USER_ID)!!
             val name = get<String>(USER_NAME)!!
             val email = get<String>(USER_EMAIL)!!
-            val phone = get<Int>(USER_PHONE)!!
+            val phone = get<String>(USER_PHONE)!!
             val isVerified = get<Int>(USER_IS_VERIFIED)!!
 
             val user = User(id, name, email, phone, isVerified)
@@ -119,13 +128,49 @@ class SharedPrefsHelper @Inject constructor( private val sharedPreferences: Shar
         save(USER_EMAIL, user.email)
         save(USER_PHONE, user.phone)
         save(USER_IS_VERIFIED, user.isVerified)
-        authResponse.access_token?.let {
+        authResponse.accessToken?.let {
             save(USER_KEY_ACCESS_TOKEN, it)
         }
+        save(USER_DISTRICT_ID, authResponse.data.info.districtId)
+        save(USER_THANA_ID, authResponse.data.info.thanaId)
+        save(USER_CITY_ID, authResponse.data.info.cityId)
+        save(USER_POSTCODE, authResponse.data.info.postcode)
+        save(USER_DATEOFBIRTH, authResponse.data.info.postcode)
+        save(USER_BLOOD_ID, authResponse.data.info.postcode)
+        save(USER_GENDER_ID, authResponse.data.info.postcode)
+
 
     }
 
     fun saveAuthToken(token: String) {
         save(USER_KEY_ACCESS_TOKEN, token)
+    }
+
+    fun updateAddress(settingsRequest: SettingsRequest) {
+        save(USER_DISTRICT_ID, settingsRequest.district_id)
+        save(USER_THANA_ID, settingsRequest.thana_id)
+        save(USER_CITY_ID, settingsRequest.city_id)
+        save(USER_POSTCODE, settingsRequest.postcode)
+    }
+
+    fun hasAddress(): Boolean {
+        return has(USER_DISTRICT_ID) && has(USER_THANA_ID)
+    }
+
+    fun getAddress(): SettingsRequest? {
+        return if (hasAddress()) {
+            val district_id = get<Int>(USER_DISTRICT_ID)!!
+            val thana_id = get<Int>(USER_THANA_ID)!!
+            val city_id = get<Int>(USER_CITY_ID)!!
+            val postcode = get<String>(USER_POSTCODE)!!
+
+            val settingsRequest = SettingsRequest(district_id = district_id,
+                    thana_id = thana_id,
+                    city_id = city_id,
+                    postcode = postcode)
+            settingsRequest
+        } else {
+            null
+        }
     }
 }

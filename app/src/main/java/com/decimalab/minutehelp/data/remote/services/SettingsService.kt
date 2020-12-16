@@ -1,9 +1,7 @@
 package com.decimalab.minutehelp.data.remote.services
 
 import com.decimalab.minutehelp.data.remote.requests.SettingsRequest
-import com.decimalab.minutehelp.data.remote.responses.AuthResponse
-import com.decimalab.minutehelp.data.remote.responses.BloodResponse
-import com.decimalab.minutehelp.data.remote.responses.DistrictResponse
+import com.decimalab.minutehelp.data.remote.responses.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -38,9 +36,9 @@ interface SettingsService {
 
     @GET("auth/get-thana-list/{id}")
     suspend fun getThanas(@Path("id") i: Int)
-            : Response<DistrictResponse>
+            : Response<UpaZillaResponse>
 
     @GET("auth/get-city-list/{id}")
     suspend fun getCities(@Path("id") i: Int)
-            : Response<DistrictResponse>
+            : Response<CityResponse>
 }

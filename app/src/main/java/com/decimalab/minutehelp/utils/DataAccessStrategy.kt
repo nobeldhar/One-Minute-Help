@@ -21,7 +21,7 @@ fun <T, A> performGetOperation(
             if (responseStatus.status == Resource.Status.SUCCESS) {
                 saveCallResult(responseStatus.data!!)
             } else if (responseStatus.status == Resource.Status.ERROR) {
-                emit(Resource.error(responseStatus.message!!))
+                emit(Resource.error(responseStatus.message!!, isNetworkError = responseStatus.isNetworkError))
                 emitSource(source)
             }
         }

@@ -76,6 +76,7 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
         progressBar = findViewById(R.id.pb_main)
 
         navController.addOnDestinationChangedListener(this)
+        setNavViewHeader()
         observe()
     }
 
@@ -87,8 +88,6 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
                 false)
 
         navView.addHeaderView(headerMainBinding.root)
-
-
         headerMainBinding.activity = this
     }
 
@@ -198,7 +197,7 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
 
     override fun onResume() {
         super.onResume()
-        setNavViewHeader()
+
     }
 
     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {

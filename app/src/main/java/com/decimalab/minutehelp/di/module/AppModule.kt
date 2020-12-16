@@ -4,7 +4,10 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.NonNull
+import androidx.room.Room
 import com.decimalab.minutehelp.BuildConfig
+import com.decimalab.minutehelp.data.local.OneMinuteHelpDatabase
+import com.decimalab.minutehelp.data.local.daos.AddressDao
 import com.decimalab.minutehelp.data.remote.RequestInterceptor
 import com.decimalab.minutehelp.data.remote.services.AuthService
 import com.decimalab.minutehelp.data.remote.services.DashboardService
@@ -34,24 +37,21 @@ class AppModule {
             }
         }
 
-    }
-
-    @Provides
-    @Singleton
-    fun provideDatabase(@NonNull application: Application): FoodDatabase {
-        database = Room
-            .databaseBuilder(application, FoodDatabase::class.java, "food_database")
-            .addCallback(databaseCallback)
-            .build()
-
-        return database
-    }
-
-    @Provides
-    @Singleton
-    fun provideFoodDao(@NonNull database: FoodDatabase): FoodDao {
-        return database.foodDao()
     }*/
+
+    @Provides
+    @Singleton
+    fun provideDatabase(@NonNull application: Application): OneMinuteHelpDatabase {
+        return Room
+            .databaseBuilder(application, OneMinuteHelpDatabase::class.java, "one_minute_help_database")
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAddressDao(@NonNull database: OneMinuteHelpDatabase): AddressDao {
+        return database.addressDao()
+    }
 
     @Provides
     @Singleton

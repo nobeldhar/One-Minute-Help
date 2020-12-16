@@ -13,10 +13,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.decimalab.minutehelp.R
+import com.decimalab.minutehelp.data.remote.requests.SettingsRequest
 import com.decimalab.minutehelp.databinding.FragmentAddressBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
-import com.decimalab.minutehelp.ui.profile.settings.information.InformationFragment
 import com.decimalab.minutehelp.utils.Resource
+import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -27,13 +28,16 @@ class AddressFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: AppViewModelFactory
     private val viewModel: AddressViewModel by viewModels { viewModelFactory }
+
+    @Inject
+    lateinit var prefsHelper: SharedPrefsHelper
     private lateinit var binding: FragmentAddressBinding
     private lateinit var builder: AlertDialog.Builder
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_address, container, false)
         binding.viewModel = viewModel
@@ -44,23 +48,19 @@ class AddressFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         viewModel.getDistricts().observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     progressVisibility(View.GONE)
                     val response = it.data
                     if (response != null) {
-                        if (response.code == 200 && response.status) {
-                            val districts = ArrayList<String>()
-                            for (item in response.data)
-                                districts.add(item.name)
-                             Companion.districts=districts
-                            initializeSpinners(Companion.districts as ArrayList<String>, binding.spDistrict)
-                        } else {
-                            val message = response.messages.toString()
-                            Log.d(TAG, "onViewCreated: failed $message")
-                            ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), message)
-                        }
+                        val districts = ArrayList<String>()
+                        for (item in response)
+                            districts.add(item.name)
+                        Companion.districts = districts
+                        initializeSpinners(Companion.districts as ArrayList<String>, binding.spDistrict, prefsHelper.getAddress()?.district_id?.minus(1))
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -78,23 +78,19 @@ class AddressFragment : DaggerFragment() {
             }
         })
 
+
         viewModel.getThanaResult.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     progressVisibility(View.GONE)
                     val response = it.data
                     if (response != null) {
-                        if (response.code == 200 && response.status) {
-                            val thanas = ArrayList<String>()
-                            for (item in response.data)
-                                thanas.add(item.name)
-                            Companion.thanas=thanas
-                            initializeSpinners(Companion.thanas as ArrayList<String>, binding.spUpzillaThana)
-                        } else {
-                            val message = response.messages.toString()
-                            Log.d(TAG, "onViewCreated: failed $message")
-                            ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), message)
-                        }
+                        val thanas = ArrayList<String>()
+                        for (item in response)
+                            thanas.add(item.name)
+                        Companion.thanas = thanas
+                        initializeSpinners(Companion.thanas as ArrayList<String>, binding.spUpzillaThana, prefsHelper.getAddress()?.thana_id?.minus(1))
+
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -118,17 +114,13 @@ class AddressFragment : DaggerFragment() {
                     progressVisibility(View.GONE)
                     val response = it.data
                     if (response != null) {
-                        if (response.code == 200 && response.status) {
-                            val cities = ArrayList<String>()
-                            for (item in response.data)
-                                cities.add(item.name)
-                            Companion.cities=cities
-                            initializeSpinners(Companion.cities as ArrayList<String>, binding.spVillageCity)
-                        } else {
-                            val message = response.messages.toString()
-                            Log.d(TAG, "onViewCreated: failed $message")
-                            ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), message)
-                        }
+
+                        val cities = ArrayList<String>()
+                        for (item in response)
+                            cities.add(item.name)
+                        Companion.cities = cities
+                        initializeSpinners(Companion.cities as ArrayList<String>, binding.spVillageCity, prefsHelper.getAddress()?.city_id?.minus(1))
+
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -146,20 +138,26 @@ class AddressFragment : DaggerFragment() {
             }
         })
 
+        prefsHelper.getAddress()?.let {
+            viewModel.district.value = it.district_id
+            viewModel.thana.value = it.thana_id
+            viewModel.postcode = it.postcode.toString()
+        }
+
         viewModel.showAlert.observe(viewLifecycleOwner, Observer {
             if (it)
                 showAlertDialog()
         })
     }
 
-    private fun initializeSpinners(bGroups: List<String>, sp: AppCompatSpinner) {
+    private fun initializeSpinners(bGroups: List<String>, sp: AppCompatSpinner, position: Int?) {
         val aa = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, bGroups)
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
 
-        with(sp){
+        with(sp) {
             adapter = aa
-            setSelection(0, false)
+            setSelection(position ?: 0, false)
             onItemSelectedListener = viewModel
             gravity = android.view.Gravity.CENTER
         }
@@ -168,9 +166,9 @@ class AddressFragment : DaggerFragment() {
     }
 
     companion object {
-        var districts : List<String>? = null
-        var thanas : List<String>? = null
-        var cities : List<String>? = null
+        var districts: List<String>? = null
+        var thanas: List<String>? = null
+        var cities: List<String>? = null
         private const val TAG = "AddressFragment"
     }
 
@@ -182,10 +180,13 @@ class AddressFragment : DaggerFragment() {
 
         builder.setTitle("Sure to update?")
 
-        val message = "District : ${viewModel.district.value?.minus(1)?.let { districts?.get(it) }}\n" +
-                "Upzilla/Thana : ${viewModel.thana.value?.minus(1)?.let { thanas?.get(it) }}\n" +
-                "Village/City : ${viewModel.city.minus(1)?.let { cities?.get(it) }}\n" +
-                "Postcode : ${viewModel.postcode}"
+        var message = ""
+        if (districts?.size != 0 && thanas?.size != 0 && cities?.size != 0){
+            message = "District : ${viewModel.district.value?.minus(1)?.let { districts?.get(it) }}\n" +
+                    "Upzilla/Thana : ${viewModel.thana.value?.minus(1)?.let { thanas?.get(it) }}\n" +
+                    "Village/City : ${viewModel.city.minus(1)?.let { cities?.get(it) }}\n" +
+                    "Postcode : ${viewModel.postcode}"
+        }
 
 
         builder.setMessage(message)
@@ -216,6 +217,14 @@ class AddressFragment : DaggerFragment() {
                                     response.messages[0],
                                     Toast.LENGTH_SHORT
                             ).show()
+
+                            prefsHelper.updateAddress(
+                                    SettingsRequest(
+                                            district_id = viewModel.district.value,
+                                            thana_id = viewModel.thana.value,
+                                            city_id = viewModel.city,
+                                            postcode = viewModel.postcode))
+
                         } else {
                             val message = response.messages.toString()
                             Log.d(TAG, "onViewCreated: failed $message")
