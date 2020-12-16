@@ -63,6 +63,7 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
         drawerLayout.addDrawerListener(this)
 
         navView = findViewById(R.id.nav_view)
+        //navView.background.alpha = 200
         navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
