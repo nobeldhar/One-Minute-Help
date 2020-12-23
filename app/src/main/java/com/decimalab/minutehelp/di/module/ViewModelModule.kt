@@ -9,6 +9,8 @@ import com.decimalab.minutehelp.di.util.ViewModelKey
 import com.decimalab.minutehelp.ui.OneMinuteHelpViewModel
 import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordViewModel
 import com.decimalab.minutehelp.ui.home.HomeViewModel
+import com.decimalab.minutehelp.ui.profile.addhistory.AddHistoryViewModel
+import com.decimalab.minutehelp.ui.profile.createpost.CreatePostViewModel
 import com.decimalab.minutehelp.ui.profile.settings.address.AddressViewModel
 import com.decimalab.minutehelp.ui.profile.settings.basic.BasicViewModel
 import com.decimalab.minutehelp.ui.profile.settings.information.InformationViewModel
@@ -71,6 +73,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OneMinuteHelpViewModel::class)
     abstract fun bindOneMinuteHelpViewModel(oneMinuteHelpViewModel: OneMinuteHelpViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreatePostViewModel::class)
+    abstract fun bindCreatePostViewModel(createPostViewModel: CreatePostViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddHistoryViewModel::class)
+    abstract fun bindAddHistoryViewModel(addHistoryViewModel: AddHistoryViewModel): ViewModel
 
 
     @Binds

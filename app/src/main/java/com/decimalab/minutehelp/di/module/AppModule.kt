@@ -11,6 +11,7 @@ import com.decimalab.minutehelp.data.local.daos.AddressDao
 import com.decimalab.minutehelp.data.remote.RequestInterceptor
 import com.decimalab.minutehelp.data.remote.services.AuthService
 import com.decimalab.minutehelp.data.remote.services.DashboardService
+import com.decimalab.minutehelp.data.remote.services.ProfileService
 import com.decimalab.minutehelp.data.remote.services.SettingsService
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -128,6 +129,12 @@ class AppModule {
     @Singleton
     fun provideSettingsService(retrofit: Retrofit): SettingsService {
         return retrofit.create(SettingsService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileService(retrofit: Retrofit): ProfileService {
+        return retrofit.create(ProfileService::class.java)
     }
 
 }
