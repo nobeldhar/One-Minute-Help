@@ -150,7 +150,7 @@ class InformationFragment : DaggerFragment(),  View.OnTouchListener {
                     progressVisibility(View.GONE)
                     val response = it.data
                     if (response != null) {
-                        if (response.code == 200 && response.status) {
+                        if (response.code == 201 && response.status) {
                             Toast.makeText(
                                     requireContext(),
                                     response.messages[0],

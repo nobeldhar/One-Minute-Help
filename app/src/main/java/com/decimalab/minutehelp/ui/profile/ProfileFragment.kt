@@ -8,18 +8,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.FragmentProfileBinding
+import com.decimalab.minutehelp.factory.AppViewModelFactory
+import com.decimalab.minutehelp.ui.createpost.CreatePostFragment
+import com.decimalab.minutehelp.ui.register.RegisterViewModel
+import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : DaggerFragment(), View.OnClickListener {
 
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
-
+    @Inject
+    lateinit var prefsHelper: SharedPrefsHelper
+    @Inject
+    lateinit var viewModelFactory: AppViewModelFactory
+    private val viewModel: ProfileViewModel by viewModels { viewModelFactory }
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var viewModel: ProfileViewModel
     private val configure = TabLayoutMediator.TabConfigurationStrategy { tab, position ->
         when(position){
             0->tab.text = "Timeline"
@@ -36,14 +45,28 @@ class ProfileFragment : Fragment() {
         val tabLayoutMediator = TabLayoutMediator(
             binding.profileTab, binding.profileViewPager, configure
         )
+        binding.profileName.text = prefsHelper.getUser()?.name
+        binding.profilePic.load(R.drawable.pro_pic_placeholder){
+            transformations(CircleCropTransformation())
+        }
+        binding.btCreatePost.setOnClickListener(this)
+        binding.btAddDonateHistory.setOnClickListener(this)
         tabLayoutMediator.attach()
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onClick(v: View?) {
+        when(v){
+            binding.btCreatePost->{
+                val bottomFragment = CreatePostFragment()
+                bottomFragment.show(parentFragmentManager, TAG )
+            }
+        }
     }
+
+    companion object {
+        private const val TAG = "ProfileFragment"
+    }
+
 
 }

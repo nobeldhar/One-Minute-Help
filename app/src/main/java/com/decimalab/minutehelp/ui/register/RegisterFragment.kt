@@ -30,7 +30,7 @@ class RegisterFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: AppViewModelFactory
-    private val viewModel: RegisterViewModel by viewModels<RegisterViewModel> { viewModelFactory }
+    private val viewModel: RegisterViewModel by viewModels { viewModelFactory }
     private lateinit var binding: FragmentRegisterBinding
 
     override fun onCreateView(

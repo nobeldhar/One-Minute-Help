@@ -80,7 +80,7 @@ class VerifyCodeFragment : DaggerFragment(), OTPReceiveListener, View.OnClickLis
                     progressVisibility(View.GONE)
                     val response = it.data
                     if (response != null) {
-                        if (response.code == 200 && response.status) {
+                        if (response.code == 201 && response.status) {
                             val message = response.messages.toString()
                             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                             findNavController().navigate(VerifyCodeFragmentDirections.actionNavVerifyCodeToNavHome())

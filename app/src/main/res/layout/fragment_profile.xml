@@ -1,18 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.profile.ProfileViewModel" />
     </data>
-
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp"
+        android:padding="20dp"
         tools:context=".ui.profile.ProfileFragment">
+        <FrameLayout
+            android:id="@+id/pro_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:scaleType="center"
+                android:src="@drawable/cover_icon"
+                android:id="@+id/cover_pic"
+                android:background="@drawable/round_corners"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"/>
+            <ImageView
+                android:src="@drawable/pro_pic_placeholder"
+                android:id="@+id/profile_pic"
+                android:layout_marginTop="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="130dp"
+                android:layout_height="130dp"/>
+        </FrameLayout>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/profile_name"
+            android:textSize="25sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold"
+            android:text="James Bond"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/pro_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:gravity="center_horizontal"
+            android:id="@+id/pro_btn"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/bt_create_post"
+                android:layout_width="130dp"
+                android:text="Create Post"
+                android:textSize="12sp"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:layout_marginStart="30dp"
+                android:layout_toEndOf="@+id/bt_create_post"
+                android:textSize="12sp"
+                android:id="@+id/bt_add_donate_history"
+                android:text="Add Donate History"
+                android:layout_width="130dp"
+                android:backgroundTint="#FE4F60"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
 
         <com.google.android.material.tabs.TabLayout
-            android:layout_centerVertical="true"
+            android:layout_below="@id/pro_btn"
+            android:layout_marginTop="10dp"
             android:id="@+id/profile_tab"
             app:tabMode="scrollable"
             app:tabGravity="fill"

@@ -66,16 +66,6 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         return sharedPreferences.contains(key)
     }
 
-
-    /*fun saveQbUser(qbUser: QBUser) {
-        save(USER_ID, qbUser.getId())
-        save(USER_LOGIN, qbUser.getLogin())
-        save(USER_PASSWORD, qbUser.getPassword())
-        save(USER_FULL_NAME, qbUser.getFullName())
-        save(USER_TAGS, qbUser.getTags().getItemsAsString())
-        save(USER_KEY_ACCESS_TOKEN)
-    }*/
-
     fun removeQbUser() {
         delete(USER_ID)
         delete(USER_NAME)
@@ -138,8 +128,6 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         save(USER_DATEOFBIRTH, authResponse.data.info.postcode)
         save(USER_BLOOD_ID, authResponse.data.info.postcode)
         save(USER_GENDER_ID, authResponse.data.info.postcode)
-
-
     }
 
     fun saveAuthToken(token: String) {
