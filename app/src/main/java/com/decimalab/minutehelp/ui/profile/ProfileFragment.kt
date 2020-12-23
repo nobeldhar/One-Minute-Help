@@ -1,9 +1,6 @@
 package com.decimalab.minutehelp.ui.profile
 
-import android.content.res.Configuration
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +11,7 @@ import coil.transform.CircleCropTransformation
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.FragmentProfileBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
-import com.decimalab.minutehelp.ui.createpost.CreatePostFragment
-import com.decimalab.minutehelp.ui.register.RegisterViewModel
+import com.decimalab.minutehelp.ui.profile.createpost.CreatePostFragment
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerFragment

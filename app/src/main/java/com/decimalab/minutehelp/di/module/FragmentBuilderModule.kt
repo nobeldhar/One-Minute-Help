@@ -1,6 +1,6 @@
 package com.decimalab.minutehelp.di.module
 
-import com.decimalab.minutehelp.ui.createpost.CreatePostFragment
+import com.decimalab.minutehelp.ui.profile.createpost.CreatePostFragment
 import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordFragment
 import com.decimalab.minutehelp.ui.gallery.GalleryFragment
 import com.decimalab.minutehelp.ui.home.HomeFragment

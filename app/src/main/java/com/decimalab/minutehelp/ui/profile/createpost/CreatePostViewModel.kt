@@ -1,4 +1,4 @@
-package com.decimalab.minutehelp.ui.createpost
+package com.decimalab.minutehelp.ui.profile.createpost
 
 import androidx.lifecycle.ViewModel
 
