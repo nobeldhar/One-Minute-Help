@@ -34,7 +34,7 @@ class CreatePostFragment : BottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_post, container, false)
-        binding.createName.text = prefsHelper.getUser()?.name
+        //binding.createName.text = prefsHelper.getUser()?.name
         return binding.root
     }
 
