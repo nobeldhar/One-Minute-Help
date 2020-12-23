@@ -11,6 +11,7 @@ import coil.transform.CircleCropTransformation
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.FragmentProfileBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
+import com.decimalab.minutehelp.ui.profile.addhistory.AddHistoryFragment
 import com.decimalab.minutehelp.ui.profile.createpost.CreatePostFragment
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.google.android.material.tabs.TabLayoutMediator
@@ -56,6 +57,10 @@ class ProfileFragment : DaggerFragment(), View.OnClickListener {
             binding.btCreatePost->{
                 val bottomFragment = CreatePostFragment()
                 bottomFragment.show(parentFragmentManager, TAG )
+            }
+            binding.btAddDonateHistory->{
+                val bottomFragment = AddHistoryFragment()
+                bottomFragment.show(parentFragmentManager, TAG)
             }
         }
     }
