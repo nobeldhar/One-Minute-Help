@@ -8,6 +8,7 @@ import androidx.room.Room
 import com.decimalab.minutehelp.BuildConfig
 import com.decimalab.minutehelp.data.local.OneMinuteHelpDatabase
 import com.decimalab.minutehelp.data.local.daos.AddressDao
+import com.decimalab.minutehelp.data.local.daos.ProfileDao
 import com.decimalab.minutehelp.data.remote.RequestInterceptor
 import com.decimalab.minutehelp.data.remote.services.AuthService
 import com.decimalab.minutehelp.data.remote.services.DashboardService
@@ -29,17 +30,6 @@ import javax.inject.Singleton
 @Module(includes = [ViewModelModule::class])
 class AppModule {
 
-    /*lateinit var database: FoodDatabase
-    private val databaseCallback = object : RoomDatabase.Callback() {
-        override fun onOpen(db: SupportSQLiteDatabase) {
-            super.onOpen(db)
-            CoroutineScope(Dispatchers.IO).launch {
-                prePopulateDatabase()
-            }
-        }
-
-    }*/
-
     @Provides
     @Singleton
     fun provideDatabase(@NonNull application: Application): OneMinuteHelpDatabase {
@@ -52,6 +42,12 @@ class AppModule {
     @Singleton
     fun provideAddressDao(@NonNull database: OneMinuteHelpDatabase): AddressDao {
         return database.addressDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileDao(@NonNull database: OneMinuteHelpDatabase): ProfileDao {
+        return database.profileDao()
     }
 
     @Provides

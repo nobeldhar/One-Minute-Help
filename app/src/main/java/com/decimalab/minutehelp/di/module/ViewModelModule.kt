@@ -11,10 +11,13 @@ import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordViewModel
 import com.decimalab.minutehelp.ui.home.HomeViewModel
 import com.decimalab.minutehelp.ui.profile.addhistory.AddHistoryViewModel
 import com.decimalab.minutehelp.ui.profile.createpost.CreatePostViewModel
+import com.decimalab.minutehelp.ui.profile.donatehistory.DonateHistoryViewModel
+import com.decimalab.minutehelp.ui.profile.group.GroupViewModel
 import com.decimalab.minutehelp.ui.profile.settings.address.AddressViewModel
 import com.decimalab.minutehelp.ui.profile.settings.basic.BasicViewModel
 import com.decimalab.minutehelp.ui.profile.settings.information.InformationViewModel
 import com.decimalab.minutehelp.ui.profile.settings.password.PasswordViewModel
+import com.decimalab.minutehelp.ui.profile.timeline.TimelineViewModel
 import com.decimalab.minutehelp.ui.verifycode.VerifyCodeViewModel
 
 import dagger.Binds
@@ -83,6 +86,21 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddHistoryViewModel::class)
     abstract fun bindAddHistoryViewModel(addHistoryViewModel: AddHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TimelineViewModel::class)
+    abstract fun bindTimelineViewModel(timelineViewModel: TimelineViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DonateHistoryViewModel::class)
+    abstract fun bindDonateHistoryViewModel(donateHistoryViewModel: DonateHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupViewModel::class)
+    abstract fun bindAddGroupViewModel(groupViewModel: GroupViewModel): ViewModel
 
 
     @Binds

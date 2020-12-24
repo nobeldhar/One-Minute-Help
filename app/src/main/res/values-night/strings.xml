@@ -2,4 +2,5 @@
 <resources>
     <string name="login">LOGIN</string>
     <string name="register_now">REGISTER NOW</string>
+
 </resources>

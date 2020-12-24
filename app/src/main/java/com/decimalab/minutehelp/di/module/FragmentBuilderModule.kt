@@ -7,11 +7,14 @@ import com.decimalab.minutehelp.ui.home.HomeFragment
 import com.decimalab.minutehelp.ui.login.LoginFragment
 import com.decimalab.minutehelp.ui.profile.ProfileFragment
 import com.decimalab.minutehelp.ui.profile.addhistory.AddHistoryFragment
+import com.decimalab.minutehelp.ui.profile.donatehistory.DonateHistoryFragment
+import com.decimalab.minutehelp.ui.profile.group.GroupFragment
 import com.decimalab.minutehelp.ui.register.RegisterFragment
 import com.decimalab.minutehelp.ui.profile.settings.address.AddressFragment
 import com.decimalab.minutehelp.ui.profile.settings.basic.BasicFragment
 import com.decimalab.minutehelp.ui.profile.settings.information.InformationFragment
 import com.decimalab.minutehelp.ui.profile.settings.password.PasswordFragment
+import com.decimalab.minutehelp.ui.profile.timeline.TimelineFragment
 import com.decimalab.minutehelp.ui.slideshow.SlideshowFragment
 import com.decimalab.minutehelp.ui.splash.SplashFragment
 import com.decimalab.minutehelp.ui.verifycode.VerifyCodeFragment
@@ -66,5 +69,14 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAddHistoryFragment(): AddHistoryFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTimelineFragment(): TimelineFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeDonateHistoryFragment(): DonateHistoryFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupFragment(): GroupFragment
 
 }

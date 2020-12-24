@@ -2,23 +2,19 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.profile.createpost.CreatePostViewModel" />
     </data>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.profile.createpost.CreatePostFragment">
 
-
-<!--        <TextView-->
-        <!--            android:id="@+id/create_name"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:text="Create Post" />-->
-
         <TextView
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
@@ -43,6 +39,8 @@
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/et_problem"
+                    android:text="@={viewModel.problem}"
                     style="@style/EditText.Flat.Grey"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -59,6 +57,8 @@
                     style="@style/EditText.Flat.Grey"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:id="@+id/et_hospital"
+                    android:text="@={viewModel.hospital}"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edit_text_round_bg_outline"
                     android:cursorVisible="false"
@@ -82,6 +82,7 @@
                             <androidx.appcompat.widget.AppCompatSpinner
                                 style="@style/EditText.Flat.Grey"
                                 android:layout_width="0dp"
+                                android:id="@+id/sp_blood_group_cp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:layout_weight="3"
@@ -96,7 +97,10 @@
                             <View android:layout_width="20dp" />
 
 
-                            <androidx.appcompat.widget.AppCompatSpinner
+                            <EditText
+                                android:id="@+id/et_date_picker"
+                                android:hint="Date"
+                                android:text="@={viewModel.date}"
                                 style="@style/EditText.Flat.Grey"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -116,6 +120,7 @@
                             <androidx.appcompat.widget.AppCompatSpinner
                                 style="@style/EditText.Flat.Grey"
                                 android:layout_width="0dp"
+                                android:id="@+id/sp_blood_volume_cp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:layout_weight="3"
@@ -130,7 +135,10 @@
                             <View android:layout_width="20dp" />
 
 
-                            <androidx.appcompat.widget.AppCompatSpinner
+                            <EditText
+                                android:text="@={viewModel.time}"
+                                android:id="@+id/et_time_picker"
+                                android:hint="Time"
                                 style="@style/EditText.Flat.Grey"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -156,8 +164,11 @@
                     android:background="@drawable/edit_text_round_bg_outline"
                     android:cursorVisible="false"
                     android:hint="Contact Number"
+                    android:id="@+id/et_phone"
+                    android:text="@={viewModel.phone}"
                     android:minHeight="40dp"
                     android:paddingLeft="10dp"
+                    android:inputType="number"
                     android:paddingRight="10dp"
                     android:textColor="#1E1E1E" />
 
@@ -165,6 +176,7 @@
                     style="@style/EditText.Flat.Grey"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:id="@+id/sp_district_cp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edit_text_round_bg_outline"
                     android:drawableEnd="@drawable/ic_arrow_down"
@@ -178,6 +190,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
+                    android:id="@+id/sp_upzilla_thana_cp"
                     android:background="@drawable/edit_text_round_bg_outline"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:minHeight="40dp"
@@ -187,7 +200,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/sp_gender"
+                    android:id="@+id/sp_village_city_cp"
                     style="@style/EditText.Flat.Grey"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -208,23 +221,22 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
+                    android:id="@+id/bt_publish"
                     android:background="@drawable/btn_rect_white_overlay_red"
                     android:text="Publish"
                     android:textColor="@android:color/white" />
-
-
             </LinearLayout>
 
 
         </androidx.core.widget.NestedScrollView>
 
         <ProgressBar
-            android:id="@+id/pb_info"
+            android:id="@+id/pb_cp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:visibility="gone" />
 
-    </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
