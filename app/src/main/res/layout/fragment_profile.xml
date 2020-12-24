@@ -1,98 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <variable
-            name="viewModel"
-            type="com.decimalab.minutehelp.ui.profile.ProfileViewModel" />
-    </data>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
         tools:context=".ui.profile.ProfileFragment">
-        <FrameLayout
-            android:id="@+id/pro_frame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:scaleType="center"
-                android:src="@drawable/cover_icon"
-                android:id="@+id/cover_pic"
-                android:background="@drawable/round_corners"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"/>
-            <ImageView
-                android:src="@drawable/pro_pic_placeholder"
-                android:id="@+id/profile_pic"
-                android:layout_marginTop="80dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="130dp"
-                android:layout_height="130dp"/>
-        </FrameLayout>
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/profile_name"
-            android:textSize="25sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textStyle="bold"
-            android:text="James Bond"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/pro_frame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RelativeLayout
-            android:gravity="center_horizontal"
-            android:id="@+id/pro_btn"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/profile_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/bt_create_post"
-                android:layout_width="130dp"
-                android:text="Create Post"
-                android:textSize="12sp"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:layout_marginStart="30dp"
-                android:layout_toEndOf="@+id/bt_create_post"
-                android:textSize="12sp"
-                android:id="@+id/bt_add_donate_history"
-                android:text="Add Donate History"
-                android:layout_width="130dp"
-                android:backgroundTint="#FE4F60"
-                android:layout_height="wrap_content"/>
-        </RelativeLayout>
-
-        <com.google.android.material.tabs.TabLayout
-            android:layout_below="@id/pro_btn"
-            android:layout_marginTop="10dp"
-            android:id="@+id/profile_tab"
-            app:tabMode="scrollable"
-            app:tabGravity="fill"
-            app:tabPaddingStart="6dp"
-            app:tabPaddingEnd="6dp"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorGravity="bottom"
-            app:tabIndicatorHeight="3dp"
-            app:tabTextColor="@color/app_grey"
-            app:tabSelectedTextColor="@color/app_black"
-            app:tabBackground="?attr/selectableItemBackground"
-            app:tabIndicator="@drawable/tab_indecator"
-            app:tabTextAppearance="@style/TabTextAppearance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/profile_view_pager"
-            android:layout_below="@+id/profile_tab"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_height="0dp"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </RelativeLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:id="@+id/pro_frame"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/cover_pic"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:background="@drawable/round_corners"
+                            android:scaleType="center"
+                            android:src="@drawable/cover_icon" />
+
+                        <ImageView
+                            android:id="@+id/profile_pic"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="80dp"
+                            android:src="@drawable/pro_pic_placeholder" />
+                    </FrameLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/pro_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/profile_name"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="center_horizontal">
+
+                        <Button
+                            android:id="@+id/bt_create_post"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:text="Create Post"
+                            android:textSize="12sp" />
+
+                        <Button
+                            android:id="@+id/bt_add_donate_history"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_toEndOf="@+id/bt_create_post"
+                            android:backgroundTint="#FE4F60"
+                            android:text="Add Donate History"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pro_frame"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="James Bond"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/profile_tab"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pro_btn"
+                        android:layout_marginTop="10dp"
+                        app:tabBackground="?attr/selectableItemBackground"
+                        app:tabGravity="fill"
+                        app:tabIndicator="@drawable/tab_indecator"
+                        app:tabIndicatorFullWidth="false"
+                        app:tabIndicatorGravity="bottom"
+                        app:tabIndicatorHeight="3dp"
+                        app:tabMode="scrollable"
+                        app:tabPaddingEnd="6dp"
+                        app:tabPaddingStart="6dp"
+                        app:tabSelectedTextColor="@color/app_black"
+                        app:tabTextAppearance="@style/TabTextAppearance"
+                        app:tabTextColor="@color/app_grey" />
+                </RelativeLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.profile.ProfileViewModel" />
+    </data>
 </layout>
