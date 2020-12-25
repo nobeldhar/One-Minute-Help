@@ -39,7 +39,7 @@ CreatePostViewModel
     val hour = cldr.get(Calendar.HOUR)
     val minute = cldr.get(Calendar.MINUTE)
     var date = "$year/${month + 1}/$day"
-    var time = "$hour : $minute"
+    var time = "$hour:$minute"
 
     val getThanaResult = Transformations.switchMap(district) {
         profileRepository.getThanas(it)

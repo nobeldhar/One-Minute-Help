@@ -119,7 +119,6 @@ class CreatePostFragment : BottomSheetDialogFragment(), View.OnClickListener, Vi
                         }
                     }
                 }
-
                 Resource.Status.LOADING ->
                     progressVisibility(View.VISIBLE)
             }
@@ -198,7 +197,6 @@ class CreatePostFragment : BottomSheetDialogFragment(), View.OnClickListener, Vi
 
         with(sp) {
             adapter = aa
-            setSelection(0, false)
             onItemSelectedListener = viewModel
             gravity = android.view.Gravity.CENTER
         }
