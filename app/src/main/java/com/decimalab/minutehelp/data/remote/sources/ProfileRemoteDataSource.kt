@@ -3,6 +3,7 @@ package com.decimalab.minutehelp.data.remote.sources
 import com.decimalab.minutehelp.data.remote.requests.CreatePostRequest
 import com.decimalab.minutehelp.data.remote.services.DashboardService
 import com.decimalab.minutehelp.data.remote.services.ProfileService
+import okhttp3.MultipartBody
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,5 +29,10 @@ class ProfileRemoteDataSource @Inject constructor(
 
     suspend fun createPost(createPostRequest: CreatePostRequest) =
         getResult { profileService.createPost(createPostRequest) }
+
+    suspend fun uploadProfileImage(part: MultipartBody.Part) =
+        getResult { profileService.uploadProfileImage(part) }
+
+    suspend fun getProfileImage() = getResult { profileService.getProfileImage() }
 
 }

@@ -147,16 +147,22 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
 
     fun getAddress(): SettingsRequest? {
         return if (hasAddress()) {
-            val district_id = get<Int>(USER_DISTRICT_ID)!!
-            val thana_id = get<Int>(USER_THANA_ID)!!
-            val city_id = get<Int>(USER_CITY_ID)!!
-            val postcode = get<String>(USER_POSTCODE)!!
+            get<Int>(USER_DISTRICT_ID)?.let {it1 ->
+                get<Int>(USER_THANA_ID)?.let { it2 ->
+                    get<Int>(USER_CITY_ID)?.let {it3 ->
+                        get<String>(USER_POSTCODE)?.let { it4 ->
+                            val settingsRequest = SettingsRequest(district_id = it1,
+                                    thana_id = it2,
+                                    city_id = it3,
+                                    postcode = it4)
+                            settingsRequest
+                        }
+                    }
 
-            val settingsRequest = SettingsRequest(district_id = district_id,
-                    thana_id = thana_id,
-                    city_id = city_id,
-                    postcode = postcode)
-            settingsRequest
+                }
+
+            }
+
         } else {
             null
         }

@@ -8,6 +8,7 @@ import com.decimalab.minutehelp.data.remote.sources.ProfileRemoteDataSource
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.decimalab.minutehelp.utils.performAuthOperation
 import com.decimalab.minutehelp.utils.performGetOperation
+import okhttp3.MultipartBody
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -41,6 +42,14 @@ class ProfileRepository @Inject constructor(
             databaseQuery = {localDataSource.getTimeLinePosts()},
             networkCall = { remoteDataSource.getTimeLinePosts()},
             saveCallResult = {localDataSource.insertTimeLinePost(it.data.posts)}
+    )
+
+    fun uploadProfileImage(part: MultipartBody.Part) = performAuthOperation(
+    networkCall = { remoteDataSource.uploadProfileImage(part) }
+    )
+
+    fun getProfileImage() = performAuthOperation(
+        networkCall = { remoteDataSource.getProfileImage() }
     )
 
 }

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.profile.ProfileViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
         tools:context=".ui.profile.ProfileFragment">
+
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/profile_view_pager"
@@ -42,13 +50,34 @@
                             android:scaleType="center"
                             android:src="@drawable/cover_icon" />
 
-                        <ImageView
-                            android:id="@+id/profile_pic"
-                            android:layout_width="130dp"
-                            android:layout_height="130dp"
+                        <RelativeLayout
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="80dp"
-                            android:src="@drawable/pro_pic_placeholder" />
+                            android:layout_width="130dp"
+                            android:layout_height="130dp">
+                            <ProgressBar
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:visibility="visible"
+                                android:id="@+id/pb_profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:id="@+id/profile_pic"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/pro_pic_placeholder" />
+                            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:layout_alignParentEnd="true"
+                                android:id="@+id/fab_update_image"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_upload_24"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:layout_alignParentBottom="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </RelativeLayout>
+
                     </FrameLayout>
 
                     <RelativeLayout
@@ -60,6 +89,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:gravity="center_horizontal">
+
 
                         <Button
                             android:id="@+id/bt_create_post"
@@ -114,12 +144,8 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <data>
 
-        <variable
-            name="viewModel"
-            type="com.decimalab.minutehelp.ui.profile.ProfileViewModel" />
-    </data>
 </layout>

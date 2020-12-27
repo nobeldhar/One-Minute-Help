@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.FragmentTimelineBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
@@ -22,7 +23,7 @@ import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class TimelineFragment : DaggerFragment() {
+class TimelineFragment : DaggerFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     lateinit var viewModelFactory: AppViewModelFactory
@@ -35,12 +36,18 @@ class TimelineFragment : DaggerFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_timeline, container, false)
+        binding.timelineSwipe.setOnRefreshListener(this)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getPosts()
+    }
+
+    private fun getPosts() {
         viewModel.getTimeLinePosts().observe(viewLifecycleOwner, Observer {
+            binding.timelineSwipe.isRefreshing = false
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     progressVisibility(View.GONE)
@@ -70,6 +77,11 @@ class TimelineFragment : DaggerFragment() {
 
     companion object {
         private const val TAG = "TimelineFragment"
+    }
+
+    override fun onRefresh() {
+        getPosts()
+        getPosts()
     }
 
 }

@@ -257,7 +257,7 @@ class CreatePostFragment : BottomSheetDialogFragment(), View.OnClickListener, Vi
                                     response.messages[0],
                                     Toast.LENGTH_SHORT
                             ).show()
-
+                            this.dismiss()
                         } else {
                             val message = response.messages.toString()
                             Log.d(TAG, "onViewCreated: failed $message")

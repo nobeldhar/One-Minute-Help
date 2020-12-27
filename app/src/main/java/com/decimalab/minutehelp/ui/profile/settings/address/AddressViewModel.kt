@@ -12,6 +12,7 @@ import com.decimalab.minutehelp.data.remote.requests.SettingsRequest
 import com.decimalab.minutehelp.data.remote.responses.AuthResponse
 import com.decimalab.minutehelp.data.remote.responses.DistrictResponse
 import com.decimalab.minutehelp.data.repository.SettingsRepository
+import com.decimalab.minutehelp.ui.profile.createpost.CreatePostFragment
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import javax.inject.Inject
@@ -25,7 +26,7 @@ AddressViewModel
 
     var district = MutableLiveData<Int>()
     var thana = MutableLiveData<Int>()
-    var city = 1
+    var city: Int? = null
     var postcode = ""
 
     var showAlert = MutableLiveData<Boolean>()
@@ -45,14 +46,20 @@ AddressViewModel
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when(parent?.id){
             R.id.sp_district->{
-                district.value = position + 1
+                district.value = AddressFragment.districts?.let {
+                    AddressFragment.districtsMap?.get(it.get(position))
+                }!!
 
             }
             R.id.sp_upzilla_thana->{
-                thana.value = position + 1
+                thana.value =  AddressFragment.thanas?.let {
+                    AddressFragment.thanasMap?.get(it.get(position))
+                }!!
             }
             R.id.sp_village_city->
-                city = position + 1
+                city =  AddressFragment.cities?.let {
+                    AddressFragment.citiesMap?.get(it.get(position))
+                }!!
         }
     }
 
