@@ -41,7 +41,7 @@ class ProfileRepository @Inject constructor(
     fun getTimeLinePosts() = performGetOperation(
             databaseQuery = {localDataSource.getTimeLinePosts()},
             networkCall = { remoteDataSource.getTimeLinePosts()},
-            saveCallResult = {localDataSource.insertTimeLinePost(it.data.posts)}
+            saveCallResult = {localDataSource.insertTimeLinePost(it.data)}
     )
 
     fun uploadProfileImage(part: MultipartBody.Part) = performAuthOperation(

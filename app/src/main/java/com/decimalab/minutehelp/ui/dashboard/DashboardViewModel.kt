@@ -1,19 +1,14 @@
-package com.decimalab.minutehelp.ui.home
+package com.decimalab.minutehelp.ui.dashboard
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.decimalab.minutehelp.data.remote.requests.AuthRequest
-import com.decimalab.minutehelp.data.remote.responses.AuthResponse
-import com.decimalab.minutehelp.data.repository.AuthRepository
 import com.decimalab.minutehelp.data.repository.DashboardRepository
-import com.decimalab.minutehelp.utils.Resource
 import javax.inject.Inject
 
 class
-HomeViewModel @Inject constructor(
+DashboardViewModel @Inject constructor(
         private val dashboardRepository: DashboardRepository
 ) : ViewModel() {
 

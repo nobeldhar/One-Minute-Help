@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:bind="http://schemas.android.com/tools">
     <data>
         <variable
             name="postModel"
@@ -20,6 +20,8 @@
                 android:id="@+id/tm_pro_image"
                 android:src="@drawable/pro_pic_placeholder"
                 android:layout_width="40dp"
+                bind:imageUrl="@{postModel.user.info.image}"
+                bind:name="@{postModel.user.name}"
                 android:layout_height="40dp"/>
             <LinearLayout
                 android:id="@+id/ps"
@@ -33,7 +35,7 @@
                     android:textSize="14sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textStyle="bold"
-                    android:text="James Bond"
+                    android:text="@{postModel.user.name}"
                     android:gravity="start"
                     android:layout_gravity="bottom"
                     android:layout_width="match_parent"
@@ -42,7 +44,7 @@
                     android:id="@+id/tm_date_time"
                     android:layout_gravity="bottom"
                     android:textSize="10sp"
-                    android:text="@{postModel.dateNTime}"
+                    android:text="@{postModel.createdAt}"
                     android:gravity="start"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

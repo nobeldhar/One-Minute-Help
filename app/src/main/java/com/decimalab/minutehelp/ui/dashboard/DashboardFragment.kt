@@ -1,4 +1,4 @@
-package com.decimalab.minutehelp.ui.home
+package com.decimalab.minutehelp.ui.dashboard
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -10,37 +10,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import com.decimalab.minutehelp.R
-import com.decimalab.minutehelp.databinding.FragmentHomeBinding
+import com.decimalab.minutehelp.databinding.FragmentDashbaordBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 
-class HomeFragment : DaggerFragment(){
+class DashboardFragment : DaggerFragment(){
 
     companion object {
-        fun newInstance() = HomeFragment()
+        fun newInstance() = DashboardFragment()
         private const val TAG = "HomeFragment"
     }
 
     @Inject
     lateinit var viewModelFactory: AppViewModelFactory
-    private val viewModel by viewModels<HomeViewModel> { viewModelFactory }
+    private val viewModel by viewModels<DashboardViewModel> { viewModelFactory }
 
     @Inject
     lateinit var sharedPrefsHelper: SharedPrefsHelper
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentDashbaordBinding
     private lateinit var connectivityManager: ConnectivityManager
     private val networkCallback = object : ConnectivityManager.NetworkCallback(){
         override fun onAvailable(network: Network) {
@@ -49,15 +45,34 @@ class HomeFragment : DaggerFragment(){
             viewModel._verifyAuthToken.postValue(true)
         }
     }
+    private val configure = TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+        when (position) {
+            0 -> tab.text = "All Posts"
+            1 -> tab.text = "Members"
+            2 -> tab.text = "Group"
+            3 -> tab.text = "Top Donors"
+        }
+    }
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashbaord, container, false)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            initConnectivity()
+        }
+        binding.dashboardViewPager.adapter = DashboardPagerAdapter(this)
+        val tabLayoutMediator = TabLayoutMediator(
+            binding.dashboardTab, binding.dashboardViewPager, configure
+        )
+
+        return binding.root
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun initConnectivity() {
         connectivityManager = requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,7 +92,7 @@ class HomeFragment : DaggerFragment(){
                     if (response != null) {
                         if (response.code == 201 && !response.status) {
                             Log.d(TAG, "onNetworkActive: Token Not Active, Response code: ${response.code}")
-                            findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavLogin())
+                            findNavController().navigate(DashboardFragmentDirections.actionNavHomeToNavLogin())
                         } else {
                             Log.d(TAG, "onNetworkActive: Token Active, Response code: ${response.code}")
                         }

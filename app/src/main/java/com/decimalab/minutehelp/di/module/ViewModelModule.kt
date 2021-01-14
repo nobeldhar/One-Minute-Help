@@ -8,7 +8,7 @@ import com.decimalab.minutehelp.ui.register.RegisterViewModel
 import com.decimalab.minutehelp.di.util.ViewModelKey
 import com.decimalab.minutehelp.ui.OneMinuteHelpViewModel
 import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordViewModel
-import com.decimalab.minutehelp.ui.home.HomeViewModel
+import com.decimalab.minutehelp.ui.dashboard.DashboardViewModel
 import com.decimalab.minutehelp.ui.profile.ProfileViewModel
 import com.decimalab.minutehelp.ui.profile.addhistory.AddHistoryViewModel
 import com.decimalab.minutehelp.ui.profile.createpost.CreatePostViewModel
@@ -70,8 +70,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(HomeViewModel::class)
-    abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+    @ViewModelKey(DashboardViewModel::class)
+    abstract fun bindHomeViewModel(homeViewModel: DashboardViewModel): ViewModel
 
     @Binds
     @IntoMap

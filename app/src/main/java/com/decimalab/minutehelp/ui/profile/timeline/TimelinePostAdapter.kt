@@ -22,12 +22,13 @@ class TimelinePostAdapter(val postList: List<TimeLinePost>) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val post = postList[position]
-        var dateNtime = post.date +"T"+ post.time
+
         val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
         val formatter = SimpleDateFormat("EEE, MMM d, 'at' hh:mm aaa")
-        val output = formatter.format(parser.parse(dateNtime))
+        val output = formatter.format(parser.parse(post.createdAt))
 
-        post.dateNTime = output
+
+        post.createdAt = output
 
         holder.bind(post)
     }

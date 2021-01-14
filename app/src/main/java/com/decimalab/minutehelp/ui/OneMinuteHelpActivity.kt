@@ -10,8 +10,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.drawerlayout.widget.DrawerLayout
@@ -19,7 +17,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -27,13 +24,10 @@ import androidx.navigation.ui.*
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.NavHeaderMainBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
-import com.decimalab.minutehelp.ui.login.LoginViewModel
-import com.decimalab.minutehelp.ui.verifycode.VerifyCodeFragment
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerAppCompatActivity
-import org.jetbrains.anko.textColor
 import javax.inject.Inject
 
 class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
@@ -68,7 +62,7 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home), drawerLayout
+            setOf(R.id.nav_dashboard), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

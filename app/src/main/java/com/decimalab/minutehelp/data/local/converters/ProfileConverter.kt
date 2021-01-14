@@ -1,10 +1,7 @@
 package com.decimalab.minutehelp.data.local.converters
 
 import androidx.room.TypeConverter
-import com.decimalab.minutehelp.data.local.entities.Blood
-import com.decimalab.minutehelp.data.local.entities.City
-import com.decimalab.minutehelp.data.local.entities.District
-import com.decimalab.minutehelp.data.local.entities.Upazilla
+import com.decimalab.minutehelp.data.local.entities.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -55,5 +52,29 @@ class ProfileConverter {
     fun fromCityToString(city: City?): String {
         val gson = Gson()
         return gson.toJson(city)
+    }
+
+    @TypeConverter
+    fun fromStringToUser(value: String): TimeLinePost.User? {
+        val listType = object : TypeToken<TimeLinePost.User>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromUserToString(user: TimeLinePost.User): String {
+        val gson = Gson()
+        return gson.toJson(user)
+    }
+
+    @TypeConverter
+    fun fromStringToUserInfo(value: String): TimeLinePost.User.Info? {
+        val listType = object : TypeToken<TimeLinePost.User.Info>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromUserInfoToString(info: TimeLinePost.User.Info): String {
+        val gson = Gson()
+        return gson.toJson(info)
     }
 }

@@ -87,7 +87,6 @@ class ProfileFragment : DaggerFragment(), View.OnClickListener {
                                     crossfade(300)
                                     placeholder(R.drawable.pro_pic_placeholder)
                                     transformations(CircleCropTransformation())
-
                                 }
                                 Log.d(TAG, "onViewCreated: image ${response.image}")
                             } else {

@@ -29,7 +29,7 @@ interface ProfileService {
     suspend fun createPost(@Body createPostRequest: CreatePostRequest)
             : Response<AuthResponse>
 
-    @GET("auth/user")
+    @GET("auth/posts")
     suspend fun getTimeLinePosts()
             : Response<TimeLineResponse>
 

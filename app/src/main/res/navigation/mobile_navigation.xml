@@ -17,7 +17,7 @@
             app:exitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_login_to_nav_home"
-            app:destination="@id/nav_home" />
+            app:destination="@id/nav_dashboard" />
         <action
             android:id="@+id/action_nav_login_to_nav_verify_code"
             app:destination="@id/nav_verify_code"
@@ -55,7 +55,7 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_nav_splash_to_nav_home"
-            app:destination="@id/nav_home"
+            app:destination="@id/nav_dashboard"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popUpTo="@id/nav_splash"
@@ -85,15 +85,15 @@
         android:label="Forgot Password"
         tools:layout="@layout/fragment_forgot_password" />
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.decimalab.minutehelp.ui.home.HomeFragment"
-        android:label="Home" >
+        android:id="@+id/nav_dashboard"
+        android:name="com.decimalab.minutehelp.ui.dashboard.DashboardFragment"
+        android:label="Dashboard">
         <action
             android:id="@+id/action_nav_home_to_nav_login"
             app:destination="@id/nav_login"
             app:enterAnim="@anim/fragment_close_enter"
             app:exitAnim="@anim/fragment_close_exit"
-            app:popUpTo="@id/nav_home"
+            app:popUpTo="@id/nav_dashboard"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -103,7 +103,7 @@
         tools:layout="@layout/fragment_verfy_code" >
         <action
             android:id="@+id/action_nav_verify_code_to_nav_home"
-            app:destination="@id/nav_home"
+            app:destination="@id/nav_dashboard"
             app:popUpTo="@id/nav_verify_code"
             app:popUpToInclusive="true" />
     </fragment>
