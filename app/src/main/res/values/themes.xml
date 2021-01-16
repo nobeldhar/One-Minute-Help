@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
         <!-- Customize your theme here. -->
         <item name="colorControlNormal">@color/colorWhiteAlpha</item>
-        <item name="colorControlActivated">@color/md_white_1000</item>
+        <item name="colorControlActivated">@color/black</item>
         <item name="colorControlHighlight">@color/md_white_1000</item>
 
     </style>

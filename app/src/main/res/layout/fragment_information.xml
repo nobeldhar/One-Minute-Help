@@ -78,7 +78,6 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:cursorVisible="false"
                     android:id="@+id/et_date_of_birth"
                     style="@style/EditText.Flat.Grey"
                     android:layout_width="match_parent"
