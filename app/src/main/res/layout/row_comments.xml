@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.decimalab.minutehelp.utils.CustomOnClickListener" />
+
+        <variable
+            name="comment"
+            type="com.decimalab.minutehelp.data.local.entities.Comment" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp">
+
+        <ImageView
+            android:id="@+id/comment_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            bind:imageUrl="@{comment.user.info.image}"
+            bind:name="@{comment.user.name}" />
+
+        <LinearLayout
+            android:id="@+id/ts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_toEndOf="@+id/comment_image"
+            android:background="@drawable/et_comment_bg"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/comment_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:paddingEnd="15dp"
+                android:text="@{comment.user.name}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:paddingEnd="15dp"
+                android:text="@{comment.comment}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/child_comment_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id_reply"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/comment_image"
+            android:visibility="gone"
+            bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <TextView
+            android:id="@+id/hide_replies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/child_comment_recycler"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="3dp"
+            android:layout_toEndOf="@id/comment_image"
+            android:text="See Replies..."
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/id_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ts"
+            android:layout_marginLeft="7dp"
+            android:layout_toEndOf="@id/comment_image"
+            android:onClick="@{() -> listener.onMainCommentReply(comment)}"
+            android:text="Reply"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/colorPrimary" />
+
+
+    </RelativeLayout>
+</layout>

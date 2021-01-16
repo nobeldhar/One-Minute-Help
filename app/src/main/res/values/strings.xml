@@ -32,6 +32,7 @@
 
     <string name="blood_group">%1$s, </string>
     <string name="blood_volume">%1$s bag(s) </string>
+    <string name="comment_count">%1$s comments </string>
 
 
 </resources>

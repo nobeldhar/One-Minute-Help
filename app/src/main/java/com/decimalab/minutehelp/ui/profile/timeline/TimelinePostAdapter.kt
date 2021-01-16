@@ -8,11 +8,12 @@ import com.decimalab.minutehelp.BR
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.data.local.entities.TimeLinePost
 import com.decimalab.minutehelp.databinding.PostRowBinding
+import com.decimalab.minutehelp.utils.CustomOnClickListener
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.*
 
-class TimelinePostAdapter(val postList: List<TimeLinePost>) : RecyclerView.Adapter<TimelinePostAdapter.MyViewHolder>() {
+class TimelinePostAdapter(val postList: List<TimeLinePost>, val customOnClickListener: CustomOnClickListener) : RecyclerView.Adapter<TimelinePostAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -30,7 +31,7 @@ class TimelinePostAdapter(val postList: List<TimeLinePost>) : RecyclerView.Adapt
 
         post.createdAt = output
 
-        holder.bind(post)
+        holder.bind(post, customOnClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -39,8 +40,9 @@ class TimelinePostAdapter(val postList: List<TimeLinePost>) : RecyclerView.Adapt
 
     inner class MyViewHolder(val binding: PostRowBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(any: Any){
-            binding.setVariable(BR.postModel, any)
+        fun bind(timeLinePost: TimeLinePost, customOnClickListener: CustomOnClickListener){
+            binding.setVariable(BR.postModel, timeLinePost)
+            binding.setVariable(BR.listener, customOnClickListener)
             binding.executePendingBindings();
         }
     }

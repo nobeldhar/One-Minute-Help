@@ -14,4 +14,12 @@ class DashboardRepository @Inject constructor(
     fun verifyAuthToken() = performAuthOperation(
             networkCall = { remoteDataSource.verifyAuthToken() }
     )
+
+    fun commentOnPost(comment: String, postId: Int, p_id:Int? = null, reply_id: Int? = null) = performAuthOperation(
+        networkCall = { remoteDataSource.commentOnPost(comment, postId, p_id, reply_id) }
+    )
+
+    fun getComments(postId: Int) = performAuthOperation(
+        networkCall = { remoteDataSource.getComments(postId) }
+    )
 }

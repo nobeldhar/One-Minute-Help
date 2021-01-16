@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.reply.ReplyViewModel" />
+    </data>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        tools:context=".ui.reply.ReplyFragment">
+
+        <ImageView
+            android:id="@+id/reply_image"
+            bind:imageUrl="@{viewModel.image}"
+            bind:name="@{viewModel.name}"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <LinearLayout
+
+            android:id="@+id/qs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_toEndOf="@+id/reply_image"
+            android:background="@drawable/et_comment_bg"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/comment_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:paddingEnd="15dp"
+                android:text="@{viewModel.name}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:paddingEnd="15dp"
+                android:text="@{viewModel.text}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <EditText
+            android:layout_alignParentBottom="true"
+            android:text="@={viewModel.reply}"
+            android:background="@drawable/background_sheet_round_white"
+            android:layout_marginTop="10dp"
+            android:id="@+id/et_comment"
+            android:hint="Write a reply..."
+            android:layout_toStartOf="@+id/bt_comment"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:padding="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:layout_height="50dp"
+            android:onClick="@{()-> viewModel.onReplyClicked()}"
+            android:layout_marginBottom="5dp"
+            android:drawableStart="@drawable/ic_arrow_right_24"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/bt_comment"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@android:color/white" />
+
+        <ProgressBar
+            android:id="@+id/pb_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+</layout>
+

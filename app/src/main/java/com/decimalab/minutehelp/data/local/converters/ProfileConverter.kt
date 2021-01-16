@@ -77,4 +77,16 @@ class ProfileConverter {
         val gson = Gson()
         return gson.toJson(info)
     }
+
+    @TypeConverter
+    fun fromStringToChild(value: String): Comment.Child? {
+        val listType = object : TypeToken<Comment.Child>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromChildInfoToString(child: Comment.Child): String {
+        val gson = Gson()
+        return gson.toJson(child)
+    }
 }

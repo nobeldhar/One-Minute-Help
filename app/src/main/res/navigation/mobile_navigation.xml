@@ -95,6 +95,9 @@
             app:exitAnim="@anim/fragment_close_exit"
             app:popUpTo="@id/nav_dashboard"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_dashboard_to_nav_comments"
+            app:destination="@id/nav_comments" />
     </fragment>
     <fragment
         android:id="@+id/nav_verify_code"
@@ -147,6 +150,10 @@
             android:id="@+id/action_nav_profile_to_nav_pass_setting"
             app:destination="@id/nav_pass_setting"
             app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_nav_profile_to_nav_comments"
+            app:destination="@id/nav_comments"
+            app:enterAnim="@anim/nav_default_pop_enter_anim" />
     </fragment>
     <action
         android:id="@+id/action_global_nav_login"
@@ -158,5 +165,46 @@
         android:name="com.decimalab.minutehelp.ui.creategroup.CreateGroupFragment"
         android:label="Create Group"
         tools:layout="@layout/fragment_create_group" />
+    <fragment
+        android:id="@+id/nav_comments"
+        android:name="com.decimalab.minutehelp.ui.comments.CommentsFragment"
+        android:label="Comments" >
+        <argument
+            android:name="postId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nav_comments_to_nav_reply"
+            app:destination="@id/nav_reply"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_comments_to_nav_update_com"
+            app:destination="@id/nav_update_com" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_reply"
+        android:name="com.decimalab.minutehelp.ui.reply.ReplyFragment"
+        android:label="Reply"
+        tools:layout="@layout/fragment_reply" >
+        <argument
+            android:name="isMain"
+            app:argType="boolean" />
+        <argument
+            android:name="myComment"
+            app:argType="com.decimalab.minutehelp.data.local.entities.Comment" />
+        <argument
+            android:name="myChild"
+            app:argType="com.decimalab.minutehelp.data.local.entities.Comment$Child"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="postId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_update_com"
+        android:name="com.decimalab.minutehelp.ui.updatecomment.UpdateComFragment"
+        android:label="Update"
+        tools:layout="@layout/fragment_update_com" />
 
 </navigation>

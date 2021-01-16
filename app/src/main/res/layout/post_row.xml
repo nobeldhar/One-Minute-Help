@@ -2,15 +2,18 @@
 <layout xmlns:bind="http://schemas.android.com/tools">
     <data>
         <variable
+            name="listener"
+            type="com.decimalab.minutehelp.utils.CustomOnClickListener" />
+
+        <variable
             name="postModel"
             type="com.decimalab.minutehelp.data.local.entities.TimeLinePost" />
     </data>
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardCornerRadius="5dp"
         app:cardElevation="5dp"
-        android:layout_margin="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_height="wrap_content">
         <RelativeLayout
             android:padding="10dp"
@@ -140,7 +143,78 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
+                <RelativeLayout
+                    android:layout_marginTop="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/interest_ic"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/ic_interested_colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"/>
+                    <TextView
+                        android:layout_toEndOf="@id/interest_ic"
+                        android:layout_marginStart="3dp"
+                        android:text="@{Integer.toString(postModel.like_count)}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_alignParentEnd="true"
+                        android:text="@{@string/comment_count(postModel.comments_count)}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+                <View
+                    android:layout_marginTop="5dp"
+                    android:background="#DFDFDF"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:weightSum="4"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:textSize="14sp"
+                        android:paddingStart="10dp"
+                        android:drawablePadding="12dp"
+                        android:drawableStart="@drawable/ic_interest_raw"
+                        android:id="@+id/interested"
+                        android:onClick="@{() -> listener.onInterestedClicked(postModel)}"
+                        android:text="Interested"
+                        android:layout_weight="1.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:textSize="14sp"
+                        android:id="@+id/comments"
+                        android:drawableStart="@drawable/ic_comments"
+                        android:paddingStart="10dp"
+                        android:text="Comments"
+                        android:drawablePadding="12dp"
+                        android:onClick="@{() -> listener.onCommentsClicked(postModel)}"
+                        android:layout_weight="1.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/share"
+                        android:drawableStart="@drawable/ic_share"
+                        android:textSize="14sp"
+                        android:drawablePadding="12dp"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> listener.onShareClicked(postModel)}"
+                        android:text="Share"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
             </LinearLayout>
+
 
         </RelativeLayout>
 

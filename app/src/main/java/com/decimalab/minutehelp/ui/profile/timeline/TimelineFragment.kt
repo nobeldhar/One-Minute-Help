@@ -11,19 +11,26 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.decimalab.minutehelp.R
+import com.decimalab.minutehelp.data.local.entities.TimeLinePost
 import com.decimalab.minutehelp.databinding.FragmentTimelineBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
+import com.decimalab.minutehelp.ui.profile.ProfileFragmentDirections
 import com.decimalab.minutehelp.ui.profile.settings.address.AddressViewModel
 import com.decimalab.minutehelp.ui.profile.settings.information.InformationFragment
+import com.decimalab.minutehelp.utils.CustomOnClickListener
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
+import org.jetbrains.anko.support.v4.longToast
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
-class TimelineFragment : DaggerFragment(), SwipeRefreshLayout.OnRefreshListener {
+class TimelineFragment : DaggerFragment(), SwipeRefreshLayout.OnRefreshListener,
+    CustomOnClickListener {
 
     @Inject
     lateinit var viewModelFactory: AppViewModelFactory
@@ -53,7 +60,7 @@ class TimelineFragment : DaggerFragment(), SwipeRefreshLayout.OnRefreshListener 
                     progressVisibility(View.GONE)
                     val list = it.data
                     Log.d(TAG, "onViewCreated: adapter set")
-                    binding.tmRecycler.adapter = list?.let { it1 -> TimelinePostAdapter(it1) }
+                    binding.tmRecycler.adapter = list?.let { it1 -> TimelinePostAdapter(it1, this) }
                 }
                 Resource.Status.ERROR -> {
                     progressVisibility(View.GONE)
@@ -82,6 +89,16 @@ class TimelineFragment : DaggerFragment(), SwipeRefreshLayout.OnRefreshListener 
     override fun onRefresh() {
         getPosts()
         getPosts()
+    }
+
+    override fun onCommentsClicked(timeLinePost: TimeLinePost) {
+        val action = ProfileFragmentDirections.actionNavProfileToNavComments(timeLinePost.id)
+        findNavController().navigate(action)
+    }
+
+    override fun onInterestedClicked(timeLinePost: TimeLinePost) {
+        Toast.makeText(requireContext(), "Liked : ${timeLinePost.id}", Toast.LENGTH_SHORT).show()
+
     }
 
 }

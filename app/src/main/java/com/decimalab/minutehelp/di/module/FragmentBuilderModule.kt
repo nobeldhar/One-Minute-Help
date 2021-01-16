@@ -1,5 +1,6 @@
 package com.decimalab.minutehelp.di.module
 
+import com.decimalab.minutehelp.ui.comments.CommentsFragment
 import com.decimalab.minutehelp.ui.profile.createpost.CreatePostFragment
 import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordFragment
 import com.decimalab.minutehelp.ui.gallery.GalleryFragment
@@ -15,8 +16,10 @@ import com.decimalab.minutehelp.ui.profile.settings.basic.BasicFragment
 import com.decimalab.minutehelp.ui.profile.settings.information.InformationFragment
 import com.decimalab.minutehelp.ui.profile.settings.password.PasswordFragment
 import com.decimalab.minutehelp.ui.profile.timeline.TimelineFragment
+import com.decimalab.minutehelp.ui.reply.ReplyFragment
 import com.decimalab.minutehelp.ui.slideshow.SlideshowFragment
 import com.decimalab.minutehelp.ui.splash.SplashFragment
+import com.decimalab.minutehelp.ui.updatecomment.UpdateComFragment
 import com.decimalab.minutehelp.ui.verifycode.VerifyCodeFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -78,5 +81,14 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeGroupFragment(): GroupFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCommentsFragment(): CommentsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeReplyFragment(): ReplyFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeUpdateComFragment(): UpdateComFragment
 
 }

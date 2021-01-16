@@ -7,6 +7,7 @@ import com.decimalab.minutehelp.ui.login.LoginViewModel
 import com.decimalab.minutehelp.ui.register.RegisterViewModel
 import com.decimalab.minutehelp.di.util.ViewModelKey
 import com.decimalab.minutehelp.ui.OneMinuteHelpViewModel
+import com.decimalab.minutehelp.ui.comments.CommentsViewModel
 import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordViewModel
 import com.decimalab.minutehelp.ui.dashboard.DashboardViewModel
 import com.decimalab.minutehelp.ui.profile.ProfileViewModel
@@ -19,6 +20,8 @@ import com.decimalab.minutehelp.ui.profile.settings.basic.BasicViewModel
 import com.decimalab.minutehelp.ui.profile.settings.information.InformationViewModel
 import com.decimalab.minutehelp.ui.profile.settings.password.PasswordViewModel
 import com.decimalab.minutehelp.ui.profile.timeline.TimelineViewModel
+import com.decimalab.minutehelp.ui.reply.ReplyViewModel
+import com.decimalab.minutehelp.ui.updatecomment.UpdateComViewModel
 import com.decimalab.minutehelp.ui.verifycode.VerifyCodeViewModel
 
 import dagger.Binds
@@ -107,6 +110,21 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(GroupViewModel::class)
     abstract fun bindAddGroupViewModel(groupViewModel: GroupViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CommentsViewModel::class)
+    abstract fun bindCommentsViewModel(commentsViewModel: CommentsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReplyViewModel::class)
+    abstract fun bindReplyViewModel(replyViewModel: ReplyViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UpdateComViewModel::class)
+    abstract fun bindUpdateComViewModel(updateComViewModel: UpdateComViewModel): ViewModel
 
 
     @Binds

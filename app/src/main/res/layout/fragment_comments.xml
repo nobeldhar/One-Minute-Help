@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.comments.CommentsViewModel" />
+    </data>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.comments.CommentsFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/comment_recycler"
+            tools:listitem="@layout/row_comments"
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/et_comment"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:layout_alignParentBottom="true"
+            android:text="@={viewModel.comment}"
+            android:background="@drawable/background_sheet_round_white"
+            android:layout_marginTop="10dp"
+            android:id="@+id/et_comment"
+            android:hint="Write a comment..."
+            android:layout_toStartOf="@+id/bt_comment"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:padding="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
+            android:drawableStart="@drawable/ic_arrow_right_24"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/bt_comment"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@android:color/white" />
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/pb_comment"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="comment"
+            type="com.decimalab.minutehelp.data.local.entities.Comment" />
+        <variable
+            name="listener"
+            type="com.decimalab.minutehelp.utils.CustomOnClickListener" />
+        <variable
+            name="child"
+            type="com.decimalab.minutehelp.data.local.entities.Comment.Child" />
+    </data>
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="0dp"
+        android:elevation="0dp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:paddingTop="5dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                bind:imageUrl="@{child.user.info.image}"
+                android:id="@+id/reply_image"
+                bind:name="@{child.user.name}"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <LinearLayout
+
+                android:background="@drawable/et_comment_bg"
+                android:id="@+id/qs"
+                android:padding="5dp"
+                android:layout_marginStart="7dp"
+                android:layout_toEndOf="@+id/reply_image"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:paddingEnd="15dp"
+                    android:paddingStart="5dp"
+                    android:text="@{child.user.name}"
+                    android:id="@+id/comment_name"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:paddingEnd="15dp"
+                    android:paddingStart="5dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:id="@+id/comment"
+                    android:layout_gravity="start"
+                    android:textSize="14sp"
+                    android:text="@{child.comment}"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <TextView
+
+                android:layout_marginStart="7dp"
+                android:layout_toEndOf="@id/reply_image"
+                android:onClick="@{() -> listener.onChildCommentReply(comment,child)}"
+                android:id="@+id/id_reply"
+                android:layout_marginLeft="40dp"
+                android:textColor="@color/colorPrimary"
+                android:text="Reply"
+                android:layout_below="@id/qs"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
