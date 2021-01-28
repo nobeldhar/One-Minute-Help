@@ -1,7 +1,6 @@
 package com.decimalab.minutehelp.data.local.entities
 
 
-import androidx.annotation.Nullable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -82,10 +81,14 @@ data class TimeLinePost(
     @SerializedName("comments_count")
     @ColumnInfo(name = "comments_count")
     val comments_count: Int,
+    @SerializedName("like")
+    @ColumnInfo(name = "likes")
+    val likes: List<Like>,
     @SerializedName("like_count")
     @ColumnInfo(name = "like_count")
     val like_count: Int,
 ) {
+    var isLiked:Boolean = false
     data class User(
         @SerializedName("code")
         val code: Any,
@@ -107,6 +110,8 @@ data class TimeLinePost(
         val name: String,
         @SerializedName("phone")
         val phone: String,
+        @SerializedName("role")
+        val role: Role,
         @SerializedName("role_id")
         val roleId: Any,
         @SerializedName("status")
@@ -124,7 +129,7 @@ data class TimeLinePost(
             @SerializedName("district_id")
             val districtId: Int,
             @SerializedName("gender")
-            val gender: Int,
+            val gender: Any,
             @SerializedName("id")
             val id: Int,
             @SerializedName("image")
@@ -136,5 +141,29 @@ data class TimeLinePost(
             @SerializedName("user_id")
             val userId: Int
         )
+        data class Role(
+            @SerializedName("created_at")
+            val createdAt: Any,
+            @SerializedName("id")
+            val id: Int,
+            @SerializedName("role")
+            val role: String,
+            @SerializedName("slug")
+            val slug: String,
+            @SerializedName("updated_at")
+            val updatedAt: Any
+        )
     }
+    data class Like(
+        @SerializedName("created_at")
+        val createdAt: String,
+        @SerializedName("id")
+        val id: Int,
+        @SerializedName("post_id")
+        val postId: Int,
+        @SerializedName("updated_at")
+        val updatedAt: String,
+        @SerializedName("user_id")
+        val userId: Int
+    )
 }

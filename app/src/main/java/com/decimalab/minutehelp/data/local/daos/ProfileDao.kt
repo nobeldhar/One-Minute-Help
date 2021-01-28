@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.decimalab.minutehelp.data.local.entities.District
+import com.decimalab.minutehelp.data.local.entities.Post
 import com.decimalab.minutehelp.data.local.entities.TimeLinePost
 
 @Dao
@@ -16,4 +17,8 @@ interface ProfileDao {
 
     @Query("SELECT * from timeline_post_table ORDER BY id DESC")
     fun getTimeLinePosts(): LiveData<List<TimeLinePost>>
+
+    @Query("DELETE from timeline_post_table")
+    fun deleteAllTimeLinePosts()
+
 }

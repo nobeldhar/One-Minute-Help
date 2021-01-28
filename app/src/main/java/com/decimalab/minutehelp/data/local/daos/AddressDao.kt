@@ -30,4 +30,6 @@ interface AddressDao {
 
     @Query("SELECT * from city_table WHERE thana_id = :id ORDER BY id ASC")
     fun getCites(id: Int): LiveData<List<City>>
+
+
 }

@@ -16,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.FragmentDashbaordBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
+import com.decimalab.minutehelp.ui.profile.ProfileFragment
+import com.decimalab.minutehelp.ui.profile.createpost.CreatePostFragment
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.google.android.material.tabs.TabLayoutMediator
@@ -23,7 +25,7 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 
-class DashboardFragment : DaggerFragment(){
+class DashboardFragment : DaggerFragment(), View.OnClickListener {
 
     companion object {
         fun newInstance() = DashboardFragment()
@@ -58,6 +60,7 @@ class DashboardFragment : DaggerFragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashbaord, container, false)
+        binding.tvCreatePost.setOnClickListener(this)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             initConnectivity()
         }
@@ -65,6 +68,7 @@ class DashboardFragment : DaggerFragment(){
         val tabLayoutMediator = TabLayoutMediator(
             binding.dashboardTab, binding.dashboardViewPager, configure
         )
+        tabLayoutMediator.attach()
 
         return binding.root
     }
@@ -105,6 +109,16 @@ class DashboardFragment : DaggerFragment(){
     override fun onDestroy() {
         super.onDestroy()
         connectivityManager.unregisterNetworkCallback(networkCallback)
+    }
+
+    override fun onClick(v: View?) {
+        when(v){
+            binding.tvCreatePost->{
+                val bottomFragment = CreatePostFragment()
+                bottomFragment.show(parentFragmentManager, TAG)
+            }
+
+        }
     }
 
 

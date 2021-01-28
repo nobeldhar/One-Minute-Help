@@ -21,7 +21,7 @@ import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class PasswordFragment : DaggerFragment() {
+class PasswordFragment : DaggerFragment(), View.OnClickListener {
 
     companion object {
         fun newInstance() = PasswordFragment()
@@ -41,6 +41,7 @@ class PasswordFragment : DaggerFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_password, container, false)
         binding.viewModel = viewModel
+        binding.btnCancel.setOnClickListener(this)
         builder = AlertDialog.Builder(requireActivity())
         return binding.root
     }
@@ -109,6 +110,14 @@ class PasswordFragment : DaggerFragment() {
 
     private fun progressVisibility(visibility: Int) {
         binding.pbPassword.visibility = visibility
+    }
+
+    override fun onClick(v: View?) {
+        when(v){
+            binding.btnCancel->{
+                requireActivity().onBackPressed()
+            }
+        }
     }
 
 

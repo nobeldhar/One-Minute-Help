@@ -5,11 +5,14 @@ import com.decimalab.minutehelp.ui.profile.createpost.CreatePostFragment
 import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordFragment
 import com.decimalab.minutehelp.ui.gallery.GalleryFragment
 import com.decimalab.minutehelp.ui.dashboard.DashboardFragment
+import com.decimalab.minutehelp.ui.dashboard.allposts.AllPostsFragment
+import com.decimalab.minutehelp.ui.dashboard.group.GroupFragment
+import com.decimalab.minutehelp.ui.dashboard.members.MembersFragment
+import com.decimalab.minutehelp.ui.dashboard.topdoner.TopDonorsFragment
 import com.decimalab.minutehelp.ui.login.LoginFragment
 import com.decimalab.minutehelp.ui.profile.ProfileFragment
 import com.decimalab.minutehelp.ui.profile.addhistory.AddHistoryFragment
 import com.decimalab.minutehelp.ui.profile.donatehistory.DonateHistoryFragment
-import com.decimalab.minutehelp.ui.profile.group.GroupFragment
 import com.decimalab.minutehelp.ui.register.RegisterFragment
 import com.decimalab.minutehelp.ui.profile.settings.address.AddressFragment
 import com.decimalab.minutehelp.ui.profile.settings.basic.BasicFragment
@@ -79,8 +82,6 @@ abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
     abstract fun contributeDonateHistoryFragment(): DonateHistoryFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributeGroupFragment(): GroupFragment
 
     @ContributesAndroidInjector
     abstract fun contributeCommentsFragment(): CommentsFragment
@@ -90,5 +91,18 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeUpdateComFragment(): UpdateComFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAllPostsFragment(): AllPostsFragment
+
+
+    @ContributesAndroidInjector
+    abstract fun contributeMembersFragment(): MembersFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTopDonorsFragment(): TopDonorsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupFragment(): GroupFragment
 
 }

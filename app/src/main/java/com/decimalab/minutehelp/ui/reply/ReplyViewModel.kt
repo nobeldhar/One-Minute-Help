@@ -25,7 +25,7 @@ ReplyViewModel
     var isMain: Boolean? = null
 
     val _reply = MutableLiveData<Boolean>()
-    val getRegisterResult = Transformations.switchMap(_reply) {
+    val getReplyResult = Transformations.switchMap(_reply) {
         postId?.let { it1 ->
             reply?.let { it2 ->
                 dashboardRepository.commentOnPost(

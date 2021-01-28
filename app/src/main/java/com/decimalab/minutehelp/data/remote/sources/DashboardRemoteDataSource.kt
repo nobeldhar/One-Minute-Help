@@ -16,4 +16,16 @@ class DashboardRemoteDataSource @Inject constructor(
 
     suspend fun getComments(postId: Int) =
         getResult { dashboardService.getComments(postId) }
+
+    suspend fun updateComment(commentId: Int, text: String)  =
+        getResult { dashboardService.updateComment(commentId, text) }
+
+    suspend fun deleteComment(commentId: Int)  =
+        getResult { dashboardService.deleteComment(commentId) }
+
+    suspend fun getTimeLinePosts()  =
+        getResult { dashboardService.getPosts() }
+
+    suspend fun likePost(id: Int)  =
+        getResult { dashboardService.likePost(id) }
 }

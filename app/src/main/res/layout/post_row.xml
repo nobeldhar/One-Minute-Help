@@ -1,221 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:bind="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="listener"
             type="com.decimalab.minutehelp.utils.CustomOnClickListener" />
 
         <variable
             name="postModel"
-            type="com.decimalab.minutehelp.data.local.entities.TimeLinePost" />
+            type="com.decimalab.minutehelp.data.local.entities.Post" />
     </data>
+
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardElevation="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:layout_height="wrap_content">
+        app:cardElevation="5dp">
+
         <RelativeLayout
-            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
             <ImageView
                 android:id="@+id/tm_pro_image"
-                android:src="@drawable/pro_pic_placeholder"
                 android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/pro_pic_placeholder"
                 bind:imageUrl="@{postModel.user.info.image}"
-                bind:name="@{postModel.user.name}"
-                android:layout_height="40dp"/>
+                bind:name="@{postModel.user.name}" />
+
             <LinearLayout
                 android:id="@+id/ps"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_marginStart="14dp"
                 android:layout_toEndOf="@+id/tm_pro_image"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tm_name"
-                    android:textSize="14sp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textStyle="bold"
-                    android:text="@{postModel.user.name}"
-                    android:gravity="start"
-                    android:layout_gravity="bottom"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:gravity="start"
+                    android:text="@{postModel.user.name}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tm_date_time"
-                    android:layout_gravity="bottom"
-                    android:textSize="10sp"
-                    android:text="@{postModel.createdAt}"
-                    android:gravity="start"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:gravity="start"
+                    android:text="@{postModel.createdAt}"
+                    android:textSize="10sp" />
 
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:layout_below="@id/ps"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ps"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
                     <TextView
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="12sp"
-                        android:text="Problem : "
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Problem : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tm_problem"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@{postModel.problem}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="12sp"
-                        android:text="Blood Group : "
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Blood Group : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tm_blood_group"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="12sp"
-                        android:text="@{@string/blood_group(postModel.blood.blood)}"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/blood_group(postModel.blood.blood)}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tm_blood_volume"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@{@string/blood_volume(postModel.volume)}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="12sp"
-                        android:text="Hospital : "
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Hospital : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tm_hospital"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@{postModel.location}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="12sp"
-                        android:text="Contact : "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="12sp"
-                        android:id="@+id/tm_contact"
-                        android:text="@{postModel.phone}"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Contact : "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tm_contact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{postModel.phone}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="12sp" />
                 </LinearLayout>
+
                 <RelativeLayout
-                    android:layout_marginTop="25dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp">
+
                     <ImageView
                         android:id="@+id/interest_ic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
                         android:layout_alignParentStart="true"
-                        android:src="@drawable/ic_interested_colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"/>
-                    <TextView
-                        android:layout_toEndOf="@id/interest_ic"
-                        android:layout_marginStart="3dp"
-                        android:text="@{Integer.toString(postModel.like_count)}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:layout_alignParentEnd="true"
-                        android:text="@{@string/comment_count(postModel.comments_count)}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </RelativeLayout>
-                <View
-                    android:layout_marginTop="5dp"
-                    android:background="#DFDFDF"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:weightSum="4"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp">
-                    <TextView
-                        android:layout_gravity="center_vertical"
-                        android:textSize="14sp"
-                        android:paddingStart="10dp"
-                        android:drawablePadding="12dp"
-                        android:drawableStart="@drawable/ic_interest_raw"
-                        android:id="@+id/interested"
-                        android:onClick="@{() -> listener.onInterestedClicked(postModel)}"
-                        android:text="Interested"
-                        android:layout_weight="1.5"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:layout_gravity="center_vertical"
-                        android:textSize="14sp"
-                        android:id="@+id/comments"
-                        android:drawableStart="@drawable/ic_comments"
-                        android:paddingStart="10dp"
-                        android:text="Comments"
-                        android:drawablePadding="12dp"
-                        android:onClick="@{() -> listener.onCommentsClicked(postModel)}"
-                        android:layout_weight="1.5"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/share"
-                        android:drawableStart="@drawable/ic_share"
-                        android:textSize="14sp"
-                        android:drawablePadding="12dp"
-                        android:layout_weight="1"
-                        android:onClick="@{() -> listener.onShareClicked(postModel)}"
-                        android:text="Share"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
+                        android:src="@drawable/ic_interested_colored" />
 
+                    <TextView
+                        android:id="@+id/tb_lk_ct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/interest_ic"
+                        android:text="@{Integer.toString(postModel.like_count)}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@{@string/comment_count(postModel.comments_count)}" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#DFDFDF" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5">
+                        <ImageView
+                            bind:isChecked="@{postModel.isLiked}"
+                            android:id="@+id/ic_interest"
+                            android:paddingStart="10dp"
+                            android:src="@drawable/ic_interest_raw"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                        <TextView
+                            android:gravity="center_vertical"
+                            android:id="@+id/interested"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:paddingStart="8dp"
+                            android:text="Interested"
+                            android:textSize="14sp"
+                            bind:isChecked="@{postModel.isLiked}" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:onClick="@{() -> listener.onCommentsClicked(postModel)}"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5">
+
+                        <TextView
+                            android:id="@+id/comments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:drawableStart="@drawable/ic_comments"
+                            android:drawablePadding="8dp"
+                            android:text="Comments"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:onClick="@{() -> listener.onShareClicked(postModel)}"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/share"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:drawableStart="@drawable/ic_share"
+                            android:drawablePadding="8dp"
+                            android:text="Share"
+                            android:textSize="14sp" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-
-
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

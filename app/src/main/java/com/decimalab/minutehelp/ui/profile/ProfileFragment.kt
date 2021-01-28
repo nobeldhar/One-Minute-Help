@@ -47,8 +47,7 @@ class ProfileFragment : DaggerFragment(), View.OnClickListener {
         when (position) {
             0 -> tab.text = "Timeline"
             1 -> tab.text = "Donate History"
-            2 -> tab.text = "Group"
-            3 -> tab.text = "Settings"
+            2 -> tab.text = "Settings"
         }
     }
 

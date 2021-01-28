@@ -8,6 +8,7 @@ import androidx.room.Room
 import com.decimalab.minutehelp.BuildConfig
 import com.decimalab.minutehelp.data.local.OneMinuteHelpDatabase
 import com.decimalab.minutehelp.data.local.daos.AddressDao
+import com.decimalab.minutehelp.data.local.daos.DashboardDao
 import com.decimalab.minutehelp.data.local.daos.ProfileDao
 import com.decimalab.minutehelp.data.remote.RequestInterceptor
 import com.decimalab.minutehelp.data.remote.services.AuthService
@@ -48,6 +49,12 @@ class AppModule {
     @Singleton
     fun provideProfileDao(@NonNull database: OneMinuteHelpDatabase): ProfileDao {
         return database.profileDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDashboardDao(@NonNull database: OneMinuteHelpDatabase): DashboardDao {
+        return database.dashboardDao()
     }
 
     @Provides

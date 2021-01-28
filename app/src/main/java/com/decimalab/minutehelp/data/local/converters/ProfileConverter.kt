@@ -67,6 +67,54 @@ class ProfileConverter {
     }
 
     @TypeConverter
+    fun fromStringToTimelinePost(value: String): TimeLinePost? {
+        val listType = object : TypeToken<TimeLinePost>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromTimelinePostToString(timeLinePost: TimeLinePost): String {
+        val gson = Gson()
+        return gson.toJson(timeLinePost)
+    }
+
+    @TypeConverter
+    fun fromStringToUserList(value: String): List<TimeLinePost.User>? {
+        val listType = object : TypeToken<List<TimeLinePost.User>>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromUserListToString(users: List<TimeLinePost.User>): String {
+        val gson = Gson()
+        return gson.toJson(users)
+    }
+
+    @TypeConverter
+    fun fromStringToLikeList(value: String): List<TimeLinePost.Like>? {
+        val listType = object : TypeToken<List<TimeLinePost.Like>>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromLikeListToString(likes: List<TimeLinePost.Like>): String {
+        val gson = Gson()
+        return gson.toJson(likes)
+    }
+
+    @TypeConverter
+    fun fromStringToTimelinePostList(value: String):List<TimeLinePost>? {
+        val listType = object : TypeToken<List<TimeLinePost>>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromTimelinePostListToString(timeLinePosts: List<TimeLinePost>): String {
+        val gson = Gson()
+        return gson.toJson(timeLinePosts)
+    }
+
+    @TypeConverter
     fun fromStringToUserInfo(value: String): TimeLinePost.User.Info? {
         val listType = object : TypeToken<TimeLinePost.User.Info>() {}.type
         return Gson().fromJson(value, listType)
@@ -88,5 +136,41 @@ class ProfileConverter {
     fun fromChildInfoToString(child: Comment.Child): String {
         val gson = Gson()
         return gson.toJson(child)
+    }
+
+    @TypeConverter
+    fun fromStringToRole(value: String): TimeLinePost.User.Role? {
+        val listType = object : TypeToken<TimeLinePost.User.Role>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromRoleToString(role: TimeLinePost.User.Role): String {
+        val gson = Gson()
+        return gson.toJson(role)
+    }
+
+    @TypeConverter
+    fun fromStringToHistory(value: String): History? {
+        val listType = object : TypeToken<History>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromHistoryToString(history: History): String {
+        val gson = Gson()
+        return gson.toJson(history)
+    }
+
+    @TypeConverter
+    fun fromStringToGroup(value: String): Group? {
+        val listType = object : TypeToken<Group>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun fromHistoryToString(group: Group): String {
+        val gson = Gson()
+        return gson.toJson(group)
     }
 }

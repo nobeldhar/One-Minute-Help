@@ -11,7 +11,6 @@ import javax.inject.Singleton
 class SharedPrefsHelper @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
 
-
     private val SHARED_PREFS_NAME = "one_minute_help_shared_pref"
     private val USER_ID = "one_minute_help_user_id"
     private val USER_NAME = "one_minute_help_user_name"
@@ -20,11 +19,11 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
     private val USER_IS_VERIFIED = "one_minute_help_is_versified"
     private val USER_KEY_ACCESS_TOKEN = "one_minute_help_access_token"
     private val USER_POSTCODE = "one_minute_help_postcode"
-    private val USER_CITY_ID = "one_minute_help_city_id"
-    private val USER_THANA_ID = "one_minute_help_thana_id"
-    private val USER_DISTRICT_ID = "one_minute_help_district_id"
-    private val USER_GENDER_ID = "one_minute_help_gender_id"
-    private val USER_BLOOD_ID = "one_minute_help_blood_id"
+    private val USER_CITY = "one_minute_help_city_id"
+    private val USER_THANA = "one_minute_help_thana_id"
+    private val USER_DISTRICT = "one_minute_help_district_id"
+    private val USER_GENDER = "one_minute_help_gender_id"
+    private val USER_BLOOD = "one_minute_help_blood_id"
     private val USER_DATEOFBIRTH = "one_minute_help_date_of_birth"
 
     private fun delete(key: String?) {
@@ -75,10 +74,10 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         delete(USER_KEY_ACCESS_TOKEN)
     }
 
-
     /**
      * Function to fetch auth token
      */
+
     fun fetchAuthToken(): String? {
         return sharedPreferences.getString(USER_KEY_ACCESS_TOKEN, null)
     }
@@ -90,7 +89,6 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
             val email = get<String>(USER_EMAIL)!!
             val phone = get<String>(USER_PHONE)!!
             val isVerified = get<Int>(USER_IS_VERIFIED)!!
-
             val user = User(id, name, email, phone, isVerified)
             user
         } else {
@@ -121,13 +119,13 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         authResponse.accessToken?.let {
             save(USER_KEY_ACCESS_TOKEN, it)
         }
-        save(USER_DISTRICT_ID, authResponse.data.info.districtId)
-        save(USER_THANA_ID, authResponse.data.info.thanaId)
-        save(USER_CITY_ID, authResponse.data.info.cityId)
-        save(USER_POSTCODE, authResponse.data.info.postcode)
-        save(USER_DATEOFBIRTH, authResponse.data.info.postcode)
-        save(USER_BLOOD_ID, authResponse.data.info.postcode)
-        save(USER_GENDER_ID, authResponse.data.info.postcode)
+        save(USER_DISTRICT, authResponse.data.info?.district?.name)
+        save(USER_THANA, authResponse.data.info?.thana?.name)
+        save(USER_CITY, authResponse.data.info?.city?.name)
+        save(USER_POSTCODE, authResponse.data.info?.postcode)
+        save(USER_DATEOFBIRTH, authResponse.data.info?.dateOfBirth)
+        save(USER_BLOOD, authResponse.data.info?.blood?.blood)
+        save(USER_GENDER, authResponse.data.info?.gender?.name)
     }
 
     fun saveAuthToken(token: String) {
@@ -135,34 +133,62 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
     }
 
     fun updateAddress(settingsRequest: SettingsRequest) {
-        save(USER_DISTRICT_ID, settingsRequest.district_id)
-        save(USER_THANA_ID, settingsRequest.thana_id)
-        save(USER_CITY_ID, settingsRequest.city_id)
+        save(USER_DISTRICT, settingsRequest.district)
+        save(USER_THANA, settingsRequest.thana)
+        save(USER_CITY, settingsRequest.city)
         save(USER_POSTCODE, settingsRequest.postcode)
     }
 
+    fun updateInfo(settingsRequest: SettingsRequest) {
+        save(USER_BLOOD, settingsRequest.blood)
+        save(USER_GENDER, settingsRequest.gender)
+        save(USER_DATEOFBIRTH, settingsRequest.date_of_birth)
+    }
+
     fun hasAddress(): Boolean {
-        return has(USER_DISTRICT_ID) && has(USER_THANA_ID)
+        return has(USER_DISTRICT) && has(USER_THANA)
+    }
+
+    fun hasInfo(): Boolean {
+        return has(USER_BLOOD) && has(USER_DATEOFBIRTH)
     }
 
     fun getAddress(): SettingsRequest? {
         return if (hasAddress()) {
-            get<Int>(USER_DISTRICT_ID)?.let {it1 ->
-                get<Int>(USER_THANA_ID)?.let { it2 ->
-                    get<Int>(USER_CITY_ID)?.let {it3 ->
+            get<String>(USER_DISTRICT)?.let { it1 ->
+                get<String>(USER_THANA)?.let { it2 ->
+                    get<String>(USER_CITY)?.let { it3 ->
                         get<String>(USER_POSTCODE)?.let { it4 ->
-                            val settingsRequest = SettingsRequest(district_id = it1,
-                                    thana_id = it2,
-                                    city_id = it3,
-                                    postcode = it4)
+                            val settingsRequest = SettingsRequest(
+                                district = it1,
+                                thana = it2,
+                                city = it3,
+                                postcode = it4
+                            )
                             settingsRequest
                         }
                     }
-
                 }
-
             }
+        } else {
+            null
+        }
+    }
 
+    fun getInfo(): SettingsRequest? {
+        return if (hasAddress()) {
+            get<String>(USER_BLOOD)?.let { it1 ->
+                get<String>(USER_DATEOFBIRTH)?.let { it2 ->
+                    get<String>(USER_GENDER)?.let { it3 ->
+                        val settingsRequest = SettingsRequest(
+                            blood = it1,
+                            date_of_birth = it2,
+                            gender = it3,
+                        )
+                        settingsRequest
+                    }
+                }
+            }
         } else {
             null
         }

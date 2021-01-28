@@ -33,7 +33,7 @@ data class AuthResponse(
         @SerializedName("id")
         val id: Int,
         @SerializedName("info")
-        val info: Info,
+        val info: Info?,
         @SerializedName("isVerified")
         val isVerified: Int,
         @SerializedName("name")

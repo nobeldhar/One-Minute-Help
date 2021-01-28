@@ -10,11 +10,14 @@ import com.decimalab.minutehelp.ui.OneMinuteHelpViewModel
 import com.decimalab.minutehelp.ui.comments.CommentsViewModel
 import com.decimalab.minutehelp.ui.forgotpassword.ForgotPasswordViewModel
 import com.decimalab.minutehelp.ui.dashboard.DashboardViewModel
+import com.decimalab.minutehelp.ui.dashboard.allposts.AllPostsViewModel
+import com.decimalab.minutehelp.ui.dashboard.group.GroupViewModel
 import com.decimalab.minutehelp.ui.profile.ProfileViewModel
 import com.decimalab.minutehelp.ui.profile.addhistory.AddHistoryViewModel
 import com.decimalab.minutehelp.ui.profile.createpost.CreatePostViewModel
 import com.decimalab.minutehelp.ui.profile.donatehistory.DonateHistoryViewModel
-import com.decimalab.minutehelp.ui.profile.group.GroupViewModel
+import com.decimalab.minutehelp.ui.dashboard.members.MembersViewModel
+import com.decimalab.minutehelp.ui.dashboard.topdoner.TopDonorsViewModel
 import com.decimalab.minutehelp.ui.profile.settings.address.AddressViewModel
 import com.decimalab.minutehelp.ui.profile.settings.basic.BasicViewModel
 import com.decimalab.minutehelp.ui.profile.settings.information.InformationViewModel
@@ -108,11 +111,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(GroupViewModel::class)
-    abstract fun bindAddGroupViewModel(groupViewModel: GroupViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(CommentsViewModel::class)
     abstract fun bindCommentsViewModel(commentsViewModel: CommentsViewModel): ViewModel
 
@@ -125,6 +123,26 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(UpdateComViewModel::class)
     abstract fun bindUpdateComViewModel(updateComViewModel: UpdateComViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MembersViewModel::class)
+    abstract fun bindMembersViewModel(membersViewModel: MembersViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AllPostsViewModel::class)
+    abstract fun bindAllPostsViewModel(allPostsViewModel: AllPostsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TopDonorsViewModel::class)
+    abstract fun bindTopDonorsViewModel(topDonorsViewModel: TopDonorsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupViewModel::class)
+    abstract fun bindGroupViewModel(groupViewModel: GroupViewModel): ViewModel
 
 
     @Binds

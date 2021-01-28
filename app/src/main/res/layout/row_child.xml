@@ -64,7 +64,6 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <TextView
-
                 android:layout_marginStart="7dp"
                 android:layout_toEndOf="@id/reply_image"
                 android:onClick="@{() -> listener.onChildCommentReply(comment,child)}"
@@ -72,6 +71,20 @@
                 android:layout_marginLeft="40dp"
                 android:textColor="@color/colorPrimary"
                 android:text="Reply"
+                android:layout_below="@id/qs"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:visibility="gone"
+                android:layout_marginStart="14dp"
+                android:layout_toEndOf="@id/id_reply"
+                android:onClick="@{() -> listener.onChildCommentUpdate(child)}"
+                android:id="@+id/id_update"
+                android:layout_marginLeft="40dp"
+                android:textColor="@color/colorPrimary"
+                android:text="Update"
                 android:layout_below="@id/qs"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="wrap_content"

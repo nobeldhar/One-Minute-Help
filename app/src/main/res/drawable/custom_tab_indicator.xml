@@ -2,12 +2,10 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:innerRadius="0dp"
     android:shape="ring"
-    android:thickness="5dp"
+    android:thickness="8dp"
     android:useLevel="false">
 
     <size
-        android:width="5dp"
-        android:height="5dp" />
-
-    <solid android:color="@color/tabIndicatorColor" />
+        android:width="8dp"
+        android:height="8dp" />
 </shape>

@@ -24,7 +24,7 @@ import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class BasicFragment : DaggerFragment() {
+class BasicFragment : DaggerFragment(), View.OnClickListener {
 
     companion object {
         fun newInstance() = BasicFragment()
@@ -44,6 +44,7 @@ class BasicFragment : DaggerFragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_basic, container, false)
         binding.viewModel = viewModel
+        binding.btnCancel.setOnClickListener(this)
         builder = AlertDialog.Builder(requireActivity())
 
         return binding.root
@@ -120,6 +121,13 @@ class BasicFragment : DaggerFragment() {
         binding.pbBasic.visibility = visibility
     }
 
+    override fun onClick(v: View?) {
+        when(v){
+            binding.btnCancel->{
+                requireActivity().onBackPressed()
+            }
+        }
+    }
 
 
 }

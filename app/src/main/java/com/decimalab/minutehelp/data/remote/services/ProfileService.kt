@@ -1,7 +1,6 @@
 package com.decimalab.minutehelp.data.remote.services
 
 import com.decimalab.minutehelp.data.remote.requests.CreatePostRequest
-import com.decimalab.minutehelp.data.remote.requests.SettingsRequest
 import com.decimalab.minutehelp.data.remote.responses.*
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -29,9 +28,9 @@ interface ProfileService {
     suspend fun createPost(@Body createPostRequest: CreatePostRequest)
             : Response<AuthResponse>
 
-    @GET("auth/posts")
+    @GET("auth/user")
     suspend fun getTimeLinePosts()
-            : Response<TimeLineResponse>
+            : Response<UserResponse2>
 
     @Multipart
     @POST("auth/update/image")
@@ -41,4 +40,8 @@ interface ProfileService {
     @GET("auth/user/avatar")
     suspend fun getProfileImage()
             : Response<ImageResponse>
+
+    @GET("auth/posts/like/{id}")
+    suspend fun likePost(@Path("id") postId: Int)
+            : Response<AuthResponse>
 }

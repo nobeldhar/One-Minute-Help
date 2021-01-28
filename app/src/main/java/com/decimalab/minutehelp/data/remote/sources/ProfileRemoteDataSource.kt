@@ -34,5 +34,6 @@ class ProfileRemoteDataSource @Inject constructor(
         getResult { profileService.uploadProfileImage(part) }
 
     suspend fun getProfileImage() = getResult { profileService.getProfileImage() }
+    suspend fun likePost(id: Int) = getResult { profileService.likePost(id) }
 
 }

@@ -5,10 +5,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.decimalab.minutehelp.ui.dashboard.allposts.AllPostsFragment
 import com.decimalab.minutehelp.ui.dashboard.members.MembersFragment
 import com.decimalab.minutehelp.ui.dashboard.topdoner.TopDonorsFragment
-import com.decimalab.minutehelp.ui.profile.donatehistory.DonateHistoryFragment
-import com.decimalab.minutehelp.ui.profile.group.GroupFragment
-import com.decimalab.minutehelp.ui.profile.settings.SettingsFragment
-import com.decimalab.minutehelp.ui.profile.timeline.TimelineFragment
+import com.decimalab.minutehelp.ui.dashboard.group.GroupFragment
 
 class DashboardPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {

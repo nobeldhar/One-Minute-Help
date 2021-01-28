@@ -1,13 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.updatecomment.UpdateComFragment">
-
-    <TextView
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.decimalab.minutehelp.ui.updatecomment.UpdateComViewModel" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:padding="10dp"
+        tools:context=".ui.updatecomment.UpdateComFragment">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/reply_image"
+            bind:imageUrl="@{viewModel.image}"
+            bind:name="@{viewModel.name}"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <LinearLayout
+
+            android:id="@+id/qs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_toEndOf="@+id/reply_image"
+            android:background="@drawable/et_comment_bg"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/comment_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:paddingEnd="15dp"
+                android:text="@{viewModel.name}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:background="@drawable/background_sheet_round_white"
+                android:id="@+id/comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:lines="2"
+                android:paddingEnd="15dp"
+                android:text="@={viewModel.text}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_update_com"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/qs"
+            android:text="update"
+            android:onClick="@{()-> viewModel.onUpdateClicked()}"
+            android:layout_marginEnd="15dp"
+            android:layout_toStartOf="@id/btn_delete_com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_delete_com"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/qs"
+            android:layout_alignParentEnd="true"
+            android:onClick="@{()-> viewModel.onDeleteClicked()}"
+            android:text="delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ProgressBar
+            android:id="@+id/pb_update_com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</layout>

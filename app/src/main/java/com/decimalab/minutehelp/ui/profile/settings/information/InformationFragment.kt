@@ -1,7 +1,7 @@
 package com.decimalab.minutehelp.ui.profile.settings.information
 
 import android.app.DatePickerDialog
-import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -11,27 +11,28 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import com.decimalab.minutehelp.R
+import com.decimalab.minutehelp.data.remote.requests.SettingsRequest
 import com.decimalab.minutehelp.databinding.FragmentInformationBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
-import com.decimalab.minutehelp.ui.register.RegisterFragment
-import com.decimalab.minutehelp.ui.register.RegisterFragmentDirections
+import com.decimalab.minutehelp.ui.profile.settings.address.AddressFragment
 import com.decimalab.minutehelp.utils.Resource
+import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.decimalab.minutehelp.utils.ViewUtils
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 
-class InformationFragment : DaggerFragment(),  View.OnTouchListener {
+class InformationFragment : DaggerFragment(),  View.OnTouchListener, View.OnClickListener {
 
     @Inject
     lateinit var viewModelFactory: AppViewModelFactory
     private val viewModel: InformationViewModel by viewModels { viewModelFactory }
+    @Inject
+    lateinit var prefsHelper: SharedPrefsHelper
     private lateinit var binding: FragmentInformationBinding
     private lateinit var picker: DatePickerDialog
     private lateinit var builder: AlertDialog.Builder
@@ -41,10 +42,23 @@ class InformationFragment : DaggerFragment(),  View.OnTouchListener {
             savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_information, container, false)
+        initialiseVM()
         binding.viewModel = viewModel
+        binding.btnCancel.setOnClickListener(this)
         binding.etDateOfBirth.setOnTouchListener(this)
         builder = AlertDialog.Builder(requireContext())
         return binding.root
+    }
+
+    private fun initialiseVM() {
+        prefsHelper.getInfo()?.let {
+            it.blood?.let {it1->
+                viewModel.bloodGroup = it1
+                viewModel.gender= it.gender.toString()
+                viewModel.pDoB = it.date_of_birth.toString()
+                Log.d(TAG, "onViewCreated: address not null")
+            }
+        }
     }
 
     private fun initializeSpinners(bGroups: List<String>) {
@@ -54,7 +68,6 @@ class InformationFragment : DaggerFragment(),  View.OnTouchListener {
 
         with(binding.spBloodGroup){
             adapter = aa
-            setSelection(0, false)
             onItemSelectedListener = viewModel
             prompt = "Select your Blood Group"
             gravity = Gravity.CENTER
@@ -81,7 +94,7 @@ class InformationFragment : DaggerFragment(),  View.OnTouchListener {
         //NavigationUI.setupWithNavController(binding.infoToolbar, findNavController())
         viewModel.uiError.observe(viewLifecycleOwner, Observer {
             if (it.equals("OK")) {
-                showAlertDialog()
+                showSnackBar()
             }
         })
         viewModel.getBloodList().observe(viewLifecycleOwner, Observer {
@@ -91,10 +104,12 @@ class InformationFragment : DaggerFragment(),  View.OnTouchListener {
                     val response = it.data
                     if (response != null) {
                         if (response.code == 200 && response.status) {
-                            val bG = ArrayList<String>()
+                            bGHashMap?.clear()
+                            bGHashMap = HashMap()
                             for (item in response.data)
-                                bG.add(item.blood)
-                            bloodGroups = bG
+                                bGHashMap!![item.blood] = item.id
+                            bloodGroups = ArrayList()
+                            bloodGroups = bGHashMap?.keys?.toList()
                             initializeSpinners(bloodGroups as ArrayList<String>)
                         } else {
                             val message = response.messages.toString()
@@ -119,28 +134,17 @@ class InformationFragment : DaggerFragment(),  View.OnTouchListener {
         })
     }
 
-    private fun showAlertDialog() {
-
-        builder.setTitle("Sure to update?")
-
-        val message = "Blood Group : ${bloodGroups?.get(viewModel.bloodGroup-1)}\n" +
-                "Date Of Birth : ${viewModel.dateOfBirth}\n" +
-                "Gender : ${genders[viewModel.gender-1]}"
-
-
-        builder.setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("Yes") { dialog, id ->
+    private fun showSnackBar() {
+        val snackbar = Snackbar.make(binding.root, "Other Information is being updated", Snackbar.LENGTH_LONG)
+        snackbar.addCallback(object : Snackbar.Callback() {
+            override fun onDismissed(transientBottomBar: Snackbar, event: Int) {
+                if (event != DISMISS_EVENT_ACTION) if (event == DISMISS_EVENT_TIMEOUT) {
                     update()
                 }
-                .setNegativeButton("No") { dialog, id -> //  Action for 'NO' Button
-                    dialog.cancel()
-                }
-        //Creating dialog box
-        //Creating dialog box
-        val alert = builder.create()
-
-        alert.show()
+            }
+        })
+        snackbar.setAction("UNDO", View.OnClickListener { }).setActionTextColor(Color.GREEN)
+        snackbar.show()
     }
 
     private fun update() {
@@ -156,6 +160,18 @@ class InformationFragment : DaggerFragment(),  View.OnTouchListener {
                                     response.messages[0],
                                     Toast.LENGTH_SHORT
                             ).show()
+                            prefsHelper.updateInfo(
+                                SettingsRequest(
+                                    blood = viewModel.bGroup_id?.let { it1 ->
+                                        getKey(
+                                            bGHashMap, it1
+                                        )
+                                    },
+                                    gender = genders[viewModel.gender_id-1],
+                                    date_of_birth = viewModel.dateOfBirth)
+                            )
+                            initialiseVM()
+                            updateUi()
 
                         } else {
                             val message = response.messages.toString()
@@ -180,11 +196,19 @@ class InformationFragment : DaggerFragment(),  View.OnTouchListener {
         })
     }
 
+    private fun updateUi() {
+        binding.tbBlood.text = viewModel.bloodGroup
+        binding.tbDoF.text = viewModel.pDoB
+        binding.tbGender.text = viewModel.gender
+    }
+
     private fun progressVisibility(visibility: Int) {
         binding.pbInfo.visibility = visibility
     }
 
     companion object {
+
+        var bGHashMap: HashMap<String, Int>? = null
         var bloodGroups : List<String>? = null
         val genders = arrayOf("Male", "Female")
         private const val TAG = "InformationFragment"
@@ -214,6 +238,20 @@ class InformationFragment : DaggerFragment(),  View.OnTouchListener {
             }
         }
         return false
+    }
+
+    override fun onClick(v: View?) {
+        when(v){
+            binding.btnCancel->{
+                requireActivity().onBackPressed()
+            }
+        }
+    }
+
+    fun getKey(hashMap: HashMap<String, Int>?, target: Int): String? {
+        val rValue = hashMap?.filter { target == it.value }?.keys?.first()
+        Log.d(TAG, "getKey: $rValue")
+        return rValue
     }
 
 

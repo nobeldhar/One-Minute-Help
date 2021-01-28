@@ -12,7 +12,6 @@ import com.decimalab.minutehelp.data.remote.responses.AuthResponse
 import com.decimalab.minutehelp.data.remote.responses.BloodResponse
 import com.decimalab.minutehelp.data.repository.SettingsRepository
 import com.decimalab.minutehelp.utils.Resource
-import kotlinx.android.synthetic.main.fragment_information.view.*
 import java.util.*
 import javax.inject.Inject
 
@@ -26,8 +25,11 @@ InformationViewModel
     val day = cldr.get(Calendar.DAY_OF_MONTH);
     val month = cldr.get(Calendar.MONTH);
     val year = cldr.get(Calendar.YEAR);
-    var bloodGroup: Int = 1
-    var gender: Int = 1
+    var bGroup_id: Int = 1
+    var gender_id: Int = 1
+    var bloodGroup = "None"
+    var gender = "None"
+    var pDoB = "None"
     var dateOfBirth = "$year/${month+1}/$day"
     val uiError = MutableLiveData<String>()
 
@@ -43,11 +45,13 @@ InformationViewModel
         when(parent?.id){
             R.id.sp_gender -> {
                 Log.d(TAG, "onItemSelected: sp_gender")
-                gender = position + 1
+                gender_id = position + 1
             }
             R.id.sp_blood_group -> {
                 Log.d(TAG, "onItemSelected: sp_bloodGroup")
-                bloodGroup = position + 1
+                bGroup_id = InformationFragment.bloodGroups?.let {
+                    InformationFragment.bGHashMap?.get(it.get(position))
+                }!!
             }
         }
 
@@ -63,7 +67,7 @@ InformationViewModel
 
     fun update(): LiveData<Resource<AuthResponse>> {
 
-        val settingsRequest = SettingsRequest(blood_id = bloodGroup, date_of_birth = dateOfBirth, gender = gender)
+        val settingsRequest = SettingsRequest(blood_id = bGroup_id, date_of_birth = dateOfBirth, gender_id = gender_id)
         return settingsRepository.updateOtherInfo(settingsRequest)
     }
 

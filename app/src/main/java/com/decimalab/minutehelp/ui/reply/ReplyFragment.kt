@@ -1,9 +1,7 @@
 package com.decimalab.minutehelp.ui.reply
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +12,6 @@ import androidx.lifecycle.Observer
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.FragmentReplyBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
-import com.decimalab.minutehelp.ui.profile.timeline.TimelineFragment
-import com.decimalab.minutehelp.ui.profile.timeline.TimelinePostAdapter
-import com.decimalab.minutehelp.ui.profile.timeline.TimelineViewModel
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerFragment
@@ -62,7 +57,7 @@ class ReplyFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getRegisterResult.observe(viewLifecycleOwner, Observer {
+        viewModel.getReplyResult.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     progressVisibility(View.GONE)

@@ -99,6 +99,20 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/colorPrimary" />
 
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/id_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ts"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="40dp"
+            android:layout_toEndOf="@id/id_reply"
+            android:onClick="@{() -> listener.onMainCommentUpdate(comment)}"
+            android:text="Update"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/colorPrimary" />
+
 
     </RelativeLayout>
 </layout>

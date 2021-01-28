@@ -12,7 +12,7 @@ import com.decimalab.minutehelp.data.local.entities.Comment
 import com.decimalab.minutehelp.databinding.RowCommentsBinding
 import com.decimalab.minutehelp.utils.CustomOnClickListener
 
-class CommentsAdapter(val commentList: List<Comment>, val customOnClickListener: CustomOnClickListener) : RecyclerView.Adapter<CommentsAdapter.MyViewHolder>() {
+class CommentsAdapter(val commentList: List<Comment>, val customOnClickListener: CustomOnClickListener, val userId: Int) : RecyclerView.Adapter<CommentsAdapter.MyViewHolder>() {
     private lateinit var binding: RowCommentsBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.row_comments, parent, false)
@@ -23,7 +23,10 @@ class CommentsAdapter(val commentList: List<Comment>, val customOnClickListener:
         val comment = commentList[position]
         if (comment.childs.isNotEmpty()){
             holder.binding.hideReplies.visibility = View.VISIBLE
-            holder.binding.childCommentRecycler.adapter = ChildCommentAdapter(comment.childs, customOnClickListener, comment)
+            holder.binding.childCommentRecycler.adapter = ChildCommentAdapter(comment.childs, customOnClickListener, comment, userId)
+        }
+        if (comment.user.id == userId){
+            holder.binding.idUpdate.visibility = View.VISIBLE
         }
 
         holder.bind(comment)

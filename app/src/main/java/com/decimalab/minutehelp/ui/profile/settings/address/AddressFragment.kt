@@ -17,7 +17,6 @@ import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.data.remote.requests.SettingsRequest
 import com.decimalab.minutehelp.databinding.FragmentAddressBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
-import com.decimalab.minutehelp.ui.profile.createpost.CreatePostFragment
 import com.decimalab.minutehelp.utils.Resource
 import com.decimalab.minutehelp.utils.SharedPrefsHelper
 import com.decimalab.minutehelp.utils.ViewUtils
@@ -25,7 +24,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class AddressFragment : DaggerFragment() {
+class AddressFragment : DaggerFragment(), View.OnClickListener {
 
 
     @Inject
@@ -43,7 +42,9 @@ class AddressFragment : DaggerFragment() {
             savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_address, container, false)
+        initializeVM()
         binding.viewModel = viewModel
+        binding.btnCancel.setOnClickListener(this)
         builder = AlertDialog.Builder(requireActivity())
         return binding.root
     }
@@ -65,13 +66,7 @@ class AddressFragment : DaggerFragment() {
                             districtsMap!![item.name] = item.id
                         districts = ArrayList()
                         districts = districtsMap?.keys?.toList()
-                        val id = prefsHelper.getAddress()?.district_id
-                        val name = districtsMap?.filterValues { value ->
-                            value == id
-                        }?.keys?.toList()
-                        Log.d(TAG, "onViewCreated: ${name?.get(0)}")
-                        val position = districts?.indexOf(name?.get(0))
-                        Companion.districts?.let { it1 -> initializeSpinners(it1, binding.spDistrict, position) }
+                        Companion.districts?.let { it1 -> initializeSpinners(it1, binding.spDistrict) }
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -101,11 +96,8 @@ class AddressFragment : DaggerFragment() {
                             thanasMap!![item.name] = item.id
                         thanas = ArrayList()
                         thanas = thanasMap?.keys?.toList()
-                        val id = prefsHelper.getAddress()?.thana_id
-                        val name = thanasMap?.filterValues {  value ->
-                            value == id }?.keys?.toList()
-                        val position = thanas?.indexOf(name?.get(0))
-                        Companion.thanas?.let { it1 -> initializeSpinners(it1, binding.spUpzillaThana, position) }
+
+                        Companion.thanas?.let { it1 -> initializeSpinners(it1, binding.spUpzillaThana) }
 
                     }
                 }
@@ -137,12 +129,7 @@ class AddressFragment : DaggerFragment() {
                             citiesMap!![item.name] = item.id
                         cities = ArrayList()
                         cities = citiesMap?.keys?.toList()
-
-                        val id = prefsHelper.getAddress()?.city_id
-                        val name = citiesMap?.filterValues { value ->
-                            value == id }?.keys?.toList()
-                        val position = cities?.indexOf(name?.get(0))
-                        Companion.cities?.let { it1 -> initializeSpinners(it1, binding.spVillageCity, position) }
+                        Companion.cities?.let { it1 -> initializeSpinners(it1, binding.spVillageCity) }
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -160,32 +147,31 @@ class AddressFragment : DaggerFragment() {
             }
         })
 
-        prefsHelper.getAddress()?.let {
-             it.district_id?.let {it1->
-                 viewModel.district.value = it1
-                 viewModel.thana.value = it.thana_id
-                 viewModel.postcode = it.postcode.toString()
-                 Log.d(TAG, "onViewCreated: address not null")
-             }
-        }
-
         viewModel.showAlert.observe(viewLifecycleOwner, Observer {
             if (it)
                 showSnackBar()
         })
     }
 
-    private fun initializeSpinners(bGroups: List<String>, sp: AppCompatSpinner, position: Int?) {
+    fun initializeVM(){
+        prefsHelper.getAddress()?.let {
+            it.district?.let {it1->
+                viewModel.district = it1
+                viewModel.thana= it.thana.toString()
+                viewModel.city = it.city.toString()
+                viewModel.postcode = it.postcode.toString()
+                Log.d(TAG, "onViewCreated: address not null")
+            }
+        }
+    }
+
+    private fun initializeSpinners(bGroups: List<String>, sp: AppCompatSpinner) {
         val aa = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, bGroups)
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
 
         with(sp) {
             adapter = aa
-            position?.let {
-                setSelection(it , false)
-                Log.d(TAG, "initializeSpinners: $it")
-            }
             onItemSelectedListener = viewModel
             gravity = android.view.Gravity.CENTER
         }
@@ -227,9 +213,9 @@ class AddressFragment : DaggerFragment() {
 
         var message = ""
         if (districts?.size != 0 && thanas?.size != 0 && cities?.size != 0) {
-            message = "District : ${viewModel.district.value?.minus(1)?.let { districts?.get(it) }}\n" +
-                    "Upzilla/Thana : ${viewModel.thana.value?.minus(1)?.let { thanas?.get(it) }}\n" +
-                    "Village/City : ${viewModel.city?.minus(1)?.let { cities?.get(it) }}\n" +
+            message = "District : ${viewModel.district_id.value?.minus(1)?.let { districts?.get(it) }}\n" +
+                    "Upzilla/Thana : ${viewModel.thana_id.value?.minus(1)?.let { thanas?.get(it) }}\n" +
+                    "Village/City : ${viewModel.city_id?.minus(1)?.let { cities?.get(it) }}\n" +
                     "Postcode : ${viewModel.postcode}"
         }
 
@@ -265,10 +251,24 @@ class AddressFragment : DaggerFragment() {
 
                             prefsHelper.updateAddress(
                                     SettingsRequest(
-                                            district_id = viewModel.district.value,
-                                            thana_id = viewModel.thana.value,
-                                            city_id = viewModel.city,
+                                            district = viewModel.district_id.value?.let { it1 ->
+                                                getKey(
+                                                    districtsMap, it1
+                                                )
+                                            },
+                                            thana = viewModel.thana_id.value?.let { it1 ->
+                                                getKey(
+                                                    thanasMap, it1
+                                                )
+                                            },
+                                            city = viewModel.city_id?.let { it1 ->
+                                                getKey(
+                                                    citiesMap, it1
+                                                )
+                                            },
                                             postcode = viewModel.postcode))
+                            initializeVM()
+                            updateUI()
 
                         } else {
                             val message = response.messages.toString()
@@ -291,6 +291,27 @@ class AddressFragment : DaggerFragment() {
                     progressVisibility(View.VISIBLE)
             }
         })
+    }
+
+    private fun updateUI() {
+        binding.tbDistrict.text = viewModel.district
+        binding.tbThana.text = viewModel.thana
+        binding.tbCity.text = viewModel.city
+        binding.tbPostcode.text = viewModel.postcode
+    }
+
+    override fun onClick(v: View?) {
+        when(v){
+            binding.btnCancel->{
+                requireActivity().onBackPressed()
+            }
+        }
+    }
+
+    fun getKey(hashMap: HashMap<String, Int>?, target: Int): String? {
+        val rValue = hashMap?.filter { target == it.value }?.keys?.first()
+        Log.d(TAG, "getKey: $rValue")
+        return rValue
     }
 
 }

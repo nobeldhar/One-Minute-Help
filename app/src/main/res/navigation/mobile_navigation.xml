@@ -205,6 +205,20 @@
         android:id="@+id/nav_update_com"
         android:name="com.decimalab.minutehelp.ui.updatecomment.UpdateComFragment"
         android:label="Update"
-        tools:layout="@layout/fragment_update_com" />
+        tools:layout="@layout/fragment_update_com" >
+        <argument
+            android:name="isMain"
+            app:argType="boolean" />
+        <argument
+            android:name="myComment"
+            app:argType="com.decimalab.minutehelp.data.local.entities.Comment"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="myChild"
+            app:argType="com.decimalab.minutehelp.data.local.entities.Comment$Child"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
 </navigation>
