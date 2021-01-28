@@ -18,7 +18,6 @@ OneMinuteHelpViewModel
     var getLogoutResult = Transformations.switchMap(_logout) {
         authRepository.logoutUser()
     }
-
     fun logoutUser(){
         _logout.value = true
     }
