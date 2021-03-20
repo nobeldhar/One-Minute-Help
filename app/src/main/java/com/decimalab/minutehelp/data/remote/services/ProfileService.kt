@@ -28,9 +28,13 @@ interface ProfileService {
     suspend fun createPost(@Body createPostRequest: CreatePostRequest)
             : Response<AuthResponse>
 
+    @POST("auth/group/post/create")
+    suspend fun groupCreatePost(@Body createPostRequest: CreatePostRequest)
+            : Response<AuthResponse>
+
     @GET("auth/user")
     suspend fun getTimeLinePosts()
-            : Response<UserResponse2>
+            : Response<UserResponse3>
 
     @Multipart
     @POST("auth/update/image")

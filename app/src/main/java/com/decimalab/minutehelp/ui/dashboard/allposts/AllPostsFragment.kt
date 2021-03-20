@@ -68,10 +68,12 @@ class AllPostsFragment : DaggerFragment(), SwipeRefreshLayout.OnRefreshListener,
     private fun getPosts() {
         viewModel.getPosts().observe(viewLifecycleOwner, Observer {
             binding.allPostsSwipe.isRefreshing = false
+            var count = 1
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     val list = it.data
-                    Log.d(TAG, "onViewCreated: adapter set")
+                    Log.d(TAG, "count : $count")
+                    count++
                     bindAdapter(list)
                 }
                 Resource.Status.ERROR -> {
@@ -96,7 +98,7 @@ class AllPostsFragment : DaggerFragment(), SwipeRefreshLayout.OnRefreshListener,
                     val parser = SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss", Locale.US)
                     val formatter = SimpleDateFormat("EEE, MMM d, 'at' hh:mm aaa", Locale.US)
                     val output =
-                        formatter.format(parser.parse(post.createdAt.replace("T", " ")))
+                        formatter.format(parser.parse(post.createdAt?.replace("T", " ")))
                     post.createdAt = output
                 } catch (e: Exception){
                     Log.d(TAG, "bindAdapter: ${e.message}")
@@ -122,7 +124,6 @@ class AllPostsFragment : DaggerFragment(), SwipeRefreshLayout.OnRefreshListener,
     }
 
     override fun onRefresh() {
-        getPosts()
         getPosts()
     }
 

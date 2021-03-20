@@ -38,7 +38,7 @@ data class TimeLinePost(
     val districtId: Int,
     @SerializedName("group")
     @ColumnInfo(name = "group")
-    val group: String?,
+    val group: Group?,
     @SerializedName("group_id")
     @ColumnInfo(name = "group_id")
     val groupId: Int?,
@@ -91,56 +91,59 @@ data class TimeLinePost(
     var isLiked:Boolean = false
     data class User(
         @SerializedName("code")
-        val code: Any,
+        val code: Any?,
         @SerializedName("email")
-        val email: String,
+        val email: String?,
         @SerializedName("email_verified_at")
-        val emailVerifiedAt: Any,
+        val emailVerifiedAt: Any?,
         @SerializedName("group_id")
-        val groupId: Any,
+        val groupId: Any?,
         @SerializedName("id")
-        val id: Int,
+        val id: Int?,
         @SerializedName("info")
-        val info: Info,
+        val info: Info?,
         @SerializedName("isDonor")
-        val isDonor: Int,
+        val isDonor: Int?,
         @SerializedName("isVerified")
-        val isVerified: Int,
+        val isVerified: Int?,
         @SerializedName("name")
-        val name: String,
+        val name: String?,
         @SerializedName("phone")
-        val phone: String,
+        val phone: String?,
         @SerializedName("role")
-        val role: Role,
+        val role: Role?,
         @SerializedName("role_id")
-        val roleId: Any,
+        val roleId: Any?,
         @SerializedName("status")
-        val status: Int,
+        val status: Int?,
         @SerializedName("username")
-        val username: String
+        val username: String?
     ) {
         data class Info(
             @SerializedName("blood_id")
-            val bloodId: Int,
+            val bloodId: Int?,
+            @SerializedName("blood")
+            val blood: Blood?,
             @SerializedName("city_id")
-            val cityId: Int,
+            val cityId: Int?,
             @SerializedName("date_of_birth")
-            val dateOfBirth: String,
+            val dateOfBirth: String?,
             @SerializedName("district_id")
-            val districtId: Int,
+            val districtId: Int?,
             @SerializedName("gender")
-            val gender: Any,
+            val gender: Any?,
             @SerializedName("id")
-            val id: Int,
+            val id: Int?,
             @SerializedName("image")
-            val image: String,
+            val image: String?,
             @SerializedName("postcode")
-            val postcode: String,
+            val postcode: String?,
             @SerializedName("thana_id")
-            val thanaId: Int,
+            val thanaId: Int?,
             @SerializedName("user_id")
-            val userId: Int
-        )
+            val userId: Int?
+        ){
+        }
         data class Role(
             @SerializedName("created_at")
             val createdAt: Any,

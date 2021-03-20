@@ -98,6 +98,11 @@
         <action
             android:id="@+id/action_nav_dashboard_to_nav_comments"
             app:destination="@id/nav_comments" />
+        <action
+            android:id="@+id/action_nav_dashboard_to_nav_group_details"
+            app:destination="@id/nav_group_details"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/nav_verify_code"
@@ -220,5 +225,52 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_group_details"
+        android:name="com.decimalab.minutehelp.ui.groupdetails.GroupDetailsFragment"
+        android:label="Group Details"
+        tools:layout="@layout/fragment_group_details" >
+        <argument
+            android:name="groupId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nav_group_details_to_nav_comments"
+            app:destination="@id/nav_comments" />
+        <action
+            android:id="@+id/action_nav_group_details_to_groupPermissionFragment"
+            app:destination="@id/groupPermissionFragment" />
+        <action
+            android:id="@+id/action_nav_group_details_to_groupBasicFragment"
+            app:destination="@id/groupBasicFragment" />
+        <action
+            android:id="@+id/action_nav_group_details_to_groupAddreeFragment"
+            app:destination="@id/groupAddreeFragment" />
+        <action
+            android:id="@+id/action_nav_group_details_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
+        <action
+            android:id="@+id/action_nav_group_details_to_groupInfoFragment"
+            app:destination="@id/groupInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupBasicFragment"
+        android:name="com.decimalab.minutehelp.ui.groupdetails.settings.groupbasic.GroupBasicFragment"
+        android:label="fragment_group_basic"
+        tools:layout="@layout/fragment_group_basic" />
+    <fragment
+        android:id="@+id/groupAddreeFragment"
+        android:name="com.decimalab.minutehelp.ui.groupdetails.settings.groupaddress.GroupAddreeFragment"
+        android:label="fragment_group_addree"
+        tools:layout="@layout/fragment_group_addree" />
+    <fragment
+        android:id="@+id/groupInfoFragment"
+        android:name="com.decimalab.minutehelp.ui.groupdetails.settings.groupinfo.GroupInfoFragment"
+        android:label="fragment_group_info"
+        tools:layout="@layout/fragment_group_info" />
+    <fragment
+        android:id="@+id/groupPermissionFragment"
+        android:name="com.decimalab.minutehelp.ui.groupdetails.settings.grouppermission.GroupPermissionFragment"
+        android:label="fragment_group_premission"
+        tools:layout="@layout/fragment_group_premission" />
 
 </navigation>

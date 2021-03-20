@@ -12,79 +12,79 @@ data class Post (
     val id: Int,
     @SerializedName("blood")
     @ColumnInfo(name = "blood")
-    val blood: Blood,
+    val blood: Blood?,
     @SerializedName("blood_id")
     @ColumnInfo(name = "blood_id")
-    val bloodId: Int,
+    val bloodId: Int?,
     @SerializedName("city")
     @ColumnInfo(name = "city")
-    val city: City,
+    val city: City?,
     @SerializedName("city_id")
     @ColumnInfo(name = "city_id")
-    val cityId: Int,
+    val cityId: Int?,
     @SerializedName("created_at")
     @ColumnInfo(name = "created_at")
-    var createdAt: String,
+    var createdAt: String?,
     @SerializedName("date")
     @ColumnInfo(name = "date")
-    val date: String,
+    val date: String?,
     @SerializedName("district")
     @ColumnInfo(name = "district")
-    val district: District,
+    val district: District?,
     @SerializedName("district_id")
     @ColumnInfo(name = "district_id")
-    val districtId: Int,
+    val districtId: Int?,
     @SerializedName("group")
     @ColumnInfo(name = "group")
-    val group: String?,
+    val group: Group?,
     @SerializedName("group_id")
     @ColumnInfo(name = "group_id")
     val groupId: Int?,
     @SerializedName("lat")
     @ColumnInfo(name = "lat")
-    val lat: String,
+    val lat: String?,
     @SerializedName("location")
     @ColumnInfo(name = "location")
-    val location: String,
+    val location: String?,
     @SerializedName("long")
     @ColumnInfo(name = "long")
-    val lon: String,
+    val lon: String?,
     @SerializedName("phone")
     @ColumnInfo(name = "phone")
-    val phone: String,
+    val phone: String?,
     @SerializedName("problem")
     @ColumnInfo(name = "problem")
-    val problem: String,
+    val problem: String?,
     @SerializedName("thana")
     @ColumnInfo(name = "thana")
-    val thana: Upazilla,
+    val thana: Upazilla?,
     @SerializedName("thana_id")
     @ColumnInfo(name = "thana_id")
-    val thanaId: Int,
+    val thanaId: Int?,
     @SerializedName("time")
     @ColumnInfo(name = "time")
-    val time: String,
+    val time: String?,
     @SerializedName("updated_at")
     @ColumnInfo(name = "updated_at")
-    val updatedAt: String,
+    val updatedAt: String?,
     @SerializedName("user")
     @ColumnInfo(name = "user")
-    val user: TimeLinePost.User,
+    val user: TimeLinePost.User?,
     @SerializedName("user_id")
     @ColumnInfo(name = "user_id")
-    val userId: Int,
+    val userId: Int?,
     @SerializedName("volume")
     @ColumnInfo(name = "volume")
-    val volume: Int,
+    val volume: Int?,
     @SerializedName("comments_count")
     @ColumnInfo(name = "comments_count")
-    val comments_count: Int,
+    val comments_count: Int?,
     @SerializedName("like")
     @ColumnInfo(name = "likes")
     val likes: List<TimeLinePost.Like>,
     @SerializedName("like_count")
     @ColumnInfo(name = "like_count")
-    val like_count: Int,
+    val like_count: Int?,
 ) {
     var isLiked:Boolean = false
 }

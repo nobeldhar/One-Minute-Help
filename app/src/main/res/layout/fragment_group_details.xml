@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="group"
+            type="com.decimalab.minutehelp.data.local.entities.Group" />
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        tools:context=".ui.groupdetails.GroupDetailsFragment">
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/group_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:id="@+id/grp_frame"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/grp_cover_pic"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:background="@drawable/round_corners"
+                            android:scaleType="center"
+                            android:src="@drawable/cover_icon" />
+
+                        <RelativeLayout
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="80dp"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp">
+                            <ProgressBar
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:visibility="visible"
+                                android:id="@+id/pb_grp_details"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                bind:imageUrl="@{group.image}"
+                                android:id="@+id/group_pic"
+                                bind:name="@{group.name}"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/pro_pic_placeholder" />
+                            <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:layout_alignParentEnd="true"
+                                android:id="@+id/fab_update_image"
+                                android:scaleType="center"
+                                app:fabSize="mini"
+                                app:tint="@android:color/white"
+                                android:src="@drawable/ic_baseline_camera_alt_24"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:layout_alignParentBottom="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>-->
+                        </RelativeLayout>
+
+                    </FrameLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/pro_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/grp_name"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="center_horizontal">
+
+
+                        <Button
+                            android:visibility="gone"
+                            android:id="@+id/bt_grp_create_post"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:text="Create Post"
+                            android:textSize="12sp" />
+
+                        <Button
+                            android:visibility="gone"
+                            android:id="@+id/bt_add_member"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_toEndOf="@+id/bt_grp_create_post"
+                            android:backgroundTint="#FE4F60"
+                            android:text="Add Member"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/grp_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/grp_frame"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="@{group.name}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/profile_tab"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pro_btn"
+                        android:layout_marginTop="10dp"
+                        app:tabBackground="?attr/selectableItemBackground"
+                        app:tabGravity="fill"
+                        app:tabIndicator="@drawable/tab_indecator"
+                        app:tabIndicatorFullWidth="false"
+                        app:tabIndicatorGravity="bottom"
+                        app:tabIndicatorHeight="3dp"
+                        app:tabMode="scrollable"
+                        app:tabPaddingEnd="6dp"
+                        app:tabPaddingStart="6dp"
+                        app:tabSelectedTextColor="@color/app_black"
+                        app:tabTextAppearance="@style/TabTextAppearance"
+                        app:tabTextColor="@color/app_grey" />
+                </RelativeLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</layout>

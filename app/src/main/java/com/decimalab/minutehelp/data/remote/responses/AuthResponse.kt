@@ -69,7 +69,7 @@ data class AuthResponse(
             @SerializedName("id")
             val id: Int,
             @SerializedName("image")
-            val image: Any,
+            val image: String?,
             @SerializedName("postcode")
             val postcode: String,
             @SerializedName("thana")

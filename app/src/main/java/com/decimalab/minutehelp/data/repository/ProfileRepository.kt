@@ -38,7 +38,9 @@ class ProfileRepository @Inject constructor(
             networkCall = { remoteDataSource.createPost(createPostRequest) }
     )
 
-
+    fun groupCreatePost(createPostRequest: CreatePostRequest) = performAuthOperation(
+        networkCall = { remoteDataSource.groupCreatePost(createPostRequest) }
+    )
 
     fun uploadProfileImage(part: MultipartBody.Part) = performAuthOperation(
     networkCall = { remoteDataSource.uploadProfileImage(part) }
@@ -51,7 +53,7 @@ class ProfileRepository @Inject constructor(
     fun getTimeLinePosts() = performGetOperation(
         databaseQuery = {localDataSource.getTimeLinePosts()},
         networkCall = { remoteDataSource.getTimeLinePosts()},
-        saveCallResult = {localDataSource.insertTimeLinePost(it.data.posts)}
+        saveCallResult = {localDataSource.insertTimeLinePost(it.posts)}
     )
 
     fun likePost(id: Int) = performAuthOperation(

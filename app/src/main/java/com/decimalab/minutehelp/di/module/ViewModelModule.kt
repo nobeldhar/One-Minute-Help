@@ -18,6 +18,16 @@ import com.decimalab.minutehelp.ui.profile.createpost.CreatePostViewModel
 import com.decimalab.minutehelp.ui.profile.donatehistory.DonateHistoryViewModel
 import com.decimalab.minutehelp.ui.dashboard.members.MembersViewModel
 import com.decimalab.minutehelp.ui.dashboard.topdoner.TopDonorsViewModel
+import com.decimalab.minutehelp.ui.groupdetails.GroupDetailsViewModel
+import com.decimalab.minutehelp.ui.groupdetails.groupcreatepost.GroupCreatePostViewModel
+import com.decimalab.minutehelp.ui.groupdetails.members.GroupMembersViewModel
+import com.decimalab.minutehelp.ui.groupdetails.settings.GroupSettingsViewModel
+import com.decimalab.minutehelp.ui.groupdetails.settings.groupaddress.GroupAddreeFragment
+import com.decimalab.minutehelp.ui.groupdetails.settings.groupaddress.GroupAddreeViewModel
+import com.decimalab.minutehelp.ui.groupdetails.settings.groupbasic.GroupBasicViewModel
+import com.decimalab.minutehelp.ui.groupdetails.settings.groupinfo.GroupInfoViewModel
+import com.decimalab.minutehelp.ui.groupdetails.settings.grouppermission.GroupPermissionViewModel
+import com.decimalab.minutehelp.ui.groupdetails.timeline.GroupTimelineViewModel
 import com.decimalab.minutehelp.ui.profile.settings.address.AddressViewModel
 import com.decimalab.minutehelp.ui.profile.settings.basic.BasicViewModel
 import com.decimalab.minutehelp.ui.profile.settings.information.InformationViewModel
@@ -143,6 +153,51 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(GroupViewModel::class)
     abstract fun bindGroupViewModel(groupViewModel: GroupViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupMembersViewModel::class)
+    abstract fun bindGroupMembersViewModel(groupViewModel: GroupMembersViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupSettingsViewModel::class)
+    abstract fun bindGroupSettingsViewModel(groupViewModel: GroupSettingsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupTimelineViewModel::class)
+    abstract fun bindGroupTimelineViewModel(groupViewModel: GroupTimelineViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupDetailsViewModel::class)
+    abstract fun bindGroupDetailsViewModel(groupViewModel: GroupDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupBasicViewModel::class)
+    abstract fun bindGroupBasicViewModel(groupViewModel: GroupBasicViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupInfoViewModel::class)
+    abstract fun bindGroupInfoViewModel(groupViewModel: GroupInfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupAddreeViewModel::class)
+    abstract fun bindGroupAddreeViewModel(groupViewModel: GroupAddreeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupPermissionViewModel::class)
+    abstract fun bindGroupPermissionViewModel(groupViewModel: GroupPermissionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GroupCreatePostViewModel::class)
+    abstract fun bindGroupCreatePostViewModel(groupViewModel: GroupCreatePostViewModel): ViewModel
 
 
     @Binds

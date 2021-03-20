@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="user"
+            type="com.decimalab.minutehelp.data.local.entities.TimeLinePost.User" />
+    </data>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        bind:cardCornerRadius="5dp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:background="@drawable/rounded_white_back"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/member_image"
+                bind:CornerRoundImageUrl="@{user.info.image}"
+                android:layout_width="80dp"
+                bind:name="@{user.name}"
+                android:layout_height="80dp"/>
+            <TextView
+                android:id="@+id/menber_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="20sp"
+                android:text="@{user.name}"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/member_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Blood Group : "
+                android:textColor="@android:color/holo_red_light"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"
+                android:id="@+id/mem_bl"
+                android:layout_marginStart="10dp"
+                android:layout_below="@id/menber_name"
+                android:layout_toEndOf="@id/member_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/blood_group"
+                android:text="@{user.info.blood.blood}"
+                android:textColor="@android:color/holo_red_light"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"
+                android:layout_below="@id/menber_name"
+                android:layout_toEndOf="@id/mem_bl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="13dp"
+                android:layout_below="@id/blood_group"
+                android:id="@+id/view_details"
+                android:textSize="14sp"
+                android:gravity="start"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:text="View Details "
+                android:layout_toEndOf="@+id/member_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="18dp"
+                android:layout_below="@id/blood_group"
+                android:layout_toEndOf="@+id/view_details"
+                android:src="@drawable/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

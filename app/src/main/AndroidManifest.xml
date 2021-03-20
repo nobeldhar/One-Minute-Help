@@ -15,14 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Minutehelp">
-
         <activity
             android:name=".ui.OneMinuteHelpActivity"
             android:label="@string/title_activity_one_minute_help"
             android:theme="@style/Theme.Minutehelp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -33,7 +31,5 @@
             </intent-filter>
         </receiver>
     </application>
-
-
 
 </manifest>

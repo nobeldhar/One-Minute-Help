@@ -8,6 +8,7 @@ class SettingsRequest(
         @SerializedName("blood_id") val blood_id: Int? = null,
         @SerializedName("date_of_birth") val date_of_birth: String? = null,
         @SerializedName("gender") val gender_id: Int? = null,
+        @SerializedName("image") val image: String? = null,
         @SerializedName("district_id") val district_id: Int? = null,
         @SerializedName("thana_id") val thana_id: Int? = null,
         @SerializedName("city_id") val city_id: Int? = null,

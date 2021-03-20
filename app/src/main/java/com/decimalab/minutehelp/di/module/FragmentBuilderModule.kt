@@ -9,6 +9,15 @@ import com.decimalab.minutehelp.ui.dashboard.allposts.AllPostsFragment
 import com.decimalab.minutehelp.ui.dashboard.group.GroupFragment
 import com.decimalab.minutehelp.ui.dashboard.members.MembersFragment
 import com.decimalab.minutehelp.ui.dashboard.topdoner.TopDonorsFragment
+import com.decimalab.minutehelp.ui.groupdetails.GroupDetailsFragment
+import com.decimalab.minutehelp.ui.groupdetails.groupcreatepost.GroupCreatePostFragment
+import com.decimalab.minutehelp.ui.groupdetails.members.GroupMembersFragment
+import com.decimalab.minutehelp.ui.groupdetails.settings.GroupSettingsFragment
+import com.decimalab.minutehelp.ui.groupdetails.settings.groupaddress.GroupAddreeFragment
+import com.decimalab.minutehelp.ui.groupdetails.settings.groupbasic.GroupBasicFragment
+import com.decimalab.minutehelp.ui.groupdetails.settings.groupinfo.GroupInfoFragment
+import com.decimalab.minutehelp.ui.groupdetails.settings.grouppermission.GroupPermissionFragment
+import com.decimalab.minutehelp.ui.groupdetails.timeline.GroupTimelineFragment
 import com.decimalab.minutehelp.ui.login.LoginFragment
 import com.decimalab.minutehelp.ui.profile.ProfileFragment
 import com.decimalab.minutehelp.ui.profile.addhistory.AddHistoryFragment
@@ -104,5 +113,32 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeGroupFragment(): GroupFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupMembersFragment(): GroupMembersFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupSettingsFragment(): GroupSettingsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupTimelineFragment(): GroupTimelineFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupDetailsFragment(): GroupDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupBasicFragment(): GroupBasicFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupInfoFragment(): GroupInfoFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupAddreeFragment(): GroupAddreeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupCreatePostFragment(): GroupCreatePostFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGroupPermissionFragment(): GroupPermissionFragment
 
 }

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -21,6 +22,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.ui.*
+import coil.load
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
+import com.avatarfirst.avatargenlib.AvatarConstants
+import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.decimalab.minutehelp.R
 import com.decimalab.minutehelp.databinding.NavHeaderMainBinding
 import com.decimalab.minutehelp.factory.AppViewModelFactory
@@ -30,7 +36,8 @@ import com.decimalab.minutehelp.utils.ViewUtils
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+class OneMinuteHelpActivity : DaggerAppCompatActivity(),
+    NavigationView.OnNavigationItemSelectedListener,
     NavController.OnDestinationChangedListener, DrawerListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -39,9 +46,11 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
     private lateinit var progressBar: ProgressBar
     private lateinit var navView: NavigationView
     private lateinit var toolbar: Toolbar
+    private lateinit var headerMainBinding: NavHeaderMainBinding
 
     @Inject
     lateinit var viewModelFactory: AppViewModelFactory
+
     @Inject
     lateinit var prefsHelper: SharedPrefsHelper
     private val viewModel by viewModels<OneMinuteHelpViewModel> { viewModelFactory }
@@ -75,11 +84,13 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
     }
 
     private fun setNavViewHeader() {
-        val headerMainBinding = DataBindingUtil
-            .inflate<NavHeaderMainBinding>(layoutInflater,
+        headerMainBinding = DataBindingUtil
+            .inflate<NavHeaderMainBinding>(
+                layoutInflater,
                 R.layout.nav_header_main,
                 navView,
-                false)
+                false
+            )
 
         navView.addHeaderView(headerMainBinding.root)
         headerMainBinding.activity = this
@@ -138,9 +149,9 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.nav_logout-> logout()
-            R.id.nav_profile->navController.navigate(R.id.nav_profile)
+        when (item.itemId) {
+            R.id.nav_logout -> logout()
+            R.id.nav_profile -> navController.navigate(R.id.nav_profile)
         }
         Log.d(TAG, "onNavigationItemSelected: outside")
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -160,10 +171,11 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
         }
     }
 
-    fun onViewProfileClicked(){
+    fun onViewProfileClicked() {
         drawerLayout.closeDrawer(GravityCompat.START)
         navController.navigate(R.id.nav_profile)
     }
+
     companion object {
         private const val TAG = "OneMinuteHelpActivity"
     }
@@ -173,12 +185,12 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        when(destination.id){
+        when (destination.id) {
             R.id.nav_splash,
             R.id.nav_login,
             R.id.nav_register,
             R.id.nav_create_group,
-            R.id.nav_forgot_password->{
+            R.id.nav_forgot_password -> {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 toolbar.visibility = View.GONE
             }
@@ -204,12 +216,54 @@ class OneMinuteHelpActivity : DaggerAppCompatActivity(), NavigationView.OnNaviga
     private fun setHeaderElements() {
 
         val nameText = navView.getHeaderView(0).findViewById<TextView>(R.id.header_user_name)
+        val imageView = navView.getHeaderView(0).findViewById<ImageView>(R.id.imageView)
+
 
         prefsHelper.getUser()?.let {
             nameText.text = it.name
+            setNavHeadImage(imageView, it.image, it.name)
             nameText.setTextColor(Color.WHITE)
             Log.d(TAG, "onCreate: profile name set")
         }
+    }
+
+    private fun setNavHeadImage(imageView: ImageView, image: String?, name: String) {
+        /*if (!image.isNullOrBlank()) {
+            imageView.load("http://oneminutehelp.com/uploads/images/$image") {
+                crossfade(true)
+                crossfade(300)
+                placeholder(name?.let { it1 ->
+                    AvatarGenerator.avatarImage(
+                        imageView.context, 200, AvatarConstants.CIRCLE,
+                        it1
+                    )
+                })
+                transformations(RoundedCornersTransformation(radius = 10f))
+            }
+            Log.d("TAG", "loadImage: url:$image name:$name")
+        } else {
+            imageView.load(name.let {
+                AvatarGenerator.avatarImage(
+                    headerMainBinding.imageView.context,
+                    200,
+                    AvatarConstants.RECTANGLE,
+                    it
+                )
+            }) {
+                crossfade(true)
+                crossfade(300)
+                transformations(RoundedCornersTransformation(radius = 10f))
+            }
+            Log.d("TAG", "loadImage: url:$image name:$name")
+        }*/
+
+        imageView.load("http://oneminutehelp.com/uploads/images/$image") {
+            crossfade(true)
+            crossfade(300)
+            placeholder(R.drawable.pro_pic_placeholder)
+            transformations(CircleCropTransformation())
+        }
+
     }
 
     override fun onDrawerClosed(drawerView: View) {

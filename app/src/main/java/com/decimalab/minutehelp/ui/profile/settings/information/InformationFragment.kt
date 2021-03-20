@@ -110,11 +110,16 @@ class InformationFragment : DaggerFragment(),  View.OnTouchListener, View.OnClic
                                 bGHashMap!![item.blood] = item.id
                             bloodGroups = ArrayList()
                             bloodGroups = bGHashMap?.keys?.toList()
+                            Log.d(TAG, "onViewCreated: ${bGHashMap.toString()}")
                             initializeSpinners(bloodGroups as ArrayList<String>)
                         } else {
                             val message = response.messages.toString()
                             Log.d(TAG, "onViewCreated: failed $message")
-                            ViewUtils.toastFailedWithMessage(requireActivity(), requireContext(), message)
+                            ViewUtils.toastFailedWithMessage(
+                                requireActivity(),
+                                requireContext(),
+                                message
+                            )
                         }
                     }
                 }

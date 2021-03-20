@@ -30,6 +30,9 @@ class ProfileRemoteDataSource @Inject constructor(
     suspend fun createPost(createPostRequest: CreatePostRequest) =
         getResult { profileService.createPost(createPostRequest) }
 
+    suspend fun groupCreatePost(createPostRequest: CreatePostRequest) =
+        getResult { profileService.groupCreatePost(createPostRequest) }
+
     suspend fun uploadProfileImage(part: MultipartBody.Part) =
         getResult { profileService.uploadProfileImage(part) }
 

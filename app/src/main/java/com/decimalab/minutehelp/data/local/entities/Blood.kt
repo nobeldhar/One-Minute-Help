@@ -8,11 +8,11 @@ data class Blood(
         @PrimaryKey
         @SerializedName("id")
         @ColumnInfo(name = "id")
-        val id: Int,
+        val id: Int?,
         @SerializedName("slug")
         @ColumnInfo(name = "slug")
-        val slug: String,
+        val slug: String?,
         @SerializedName("blood")
         @ColumnInfo(name = "blood")
-        val blood: String
+        val blood: String?
 )

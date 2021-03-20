@@ -11,6 +11,7 @@ import javax.inject.Singleton
 class SharedPrefsHelper @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
 
+    private val USER_IMAGE: String = "one_minute_help_image"
     private val SHARED_PREFS_NAME = "one_minute_help_shared_pref"
     private val USER_ID = "one_minute_help_user_id"
     private val USER_NAME = "one_minute_help_user_name"
@@ -89,7 +90,10 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
             val email = get<String>(USER_EMAIL)!!
             val phone = get<String>(USER_PHONE)!!
             val isVerified = get<Int>(USER_IS_VERIFIED)!!
-            val user = User(id, name, email, phone, isVerified)
+            var user = User(id, name, email, phone, isVerified)
+            get<String>(USER_IMAGE)?.let {
+                user = User(id, name, email, phone, isVerified, it)
+            }
             user
         } else {
             null
@@ -126,6 +130,9 @@ class SharedPrefsHelper @Inject constructor(private val sharedPreferences: Share
         save(USER_DATEOFBIRTH, authResponse.data.info?.dateOfBirth)
         save(USER_BLOOD, authResponse.data.info?.blood?.blood)
         save(USER_GENDER, authResponse.data.info?.gender?.name)
+        save(USER_IMAGE, authResponse.data.info?.image)
+
+
     }
 
     fun saveAuthToken(token: String) {

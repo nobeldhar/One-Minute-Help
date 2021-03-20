@@ -3,6 +3,7 @@ package com.decimalab.minutehelp.data.remote.requests
 import com.google.gson.annotations.SerializedName
 
 class CreatePostRequest(
+        @SerializedName("group_id") val group_id: Int? = null,
         @SerializedName("problem") val problem: String? = null,
         @SerializedName("blood_id") val blood_id: Int? = null,
         @SerializedName("date") val date: String? = null,

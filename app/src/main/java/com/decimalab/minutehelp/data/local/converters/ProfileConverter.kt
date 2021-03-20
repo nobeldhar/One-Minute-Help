@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken
 class ProfileConverter {
     @TypeConverter
     fun fromStringToBlood(value: String): Blood? {
-        val listType = object : TypeToken<Blood>() {}.type
+        val listType = object : TypeToken<Blood?>() {}.type
         return Gson().fromJson(value, listType)
     }
 
@@ -116,12 +116,12 @@ class ProfileConverter {
 
     @TypeConverter
     fun fromStringToUserInfo(value: String): TimeLinePost.User.Info? {
-        val listType = object : TypeToken<TimeLinePost.User.Info>() {}.type
+        val listType = object : TypeToken<TimeLinePost.User.Info?>() {}.type
         return Gson().fromJson(value, listType)
     }
 
     @TypeConverter
-    fun fromUserInfoToString(info: TimeLinePost.User.Info): String {
+    fun fromUserInfoToString(info: TimeLinePost.User.Info?): String {
         val gson = Gson()
         return gson.toJson(info)
     }
@@ -164,13 +164,14 @@ class ProfileConverter {
 
     @TypeConverter
     fun fromStringToGroup(value: String): Group? {
-        val listType = object : TypeToken<Group>() {}.type
+        val listType = object : TypeToken<Group?>() {}.type
         return Gson().fromJson(value, listType)
     }
 
     @TypeConverter
-    fun fromHistoryToString(group: Group): String {
+    fun fromGroupToString(group: Group?): String {
         val gson = Gson()
         return gson.toJson(group)
     }
+
 }

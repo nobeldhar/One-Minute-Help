@@ -1,7 +1,6 @@
 package com.decimalab.minutehelp.data.remote.responses
 
 
-import com.decimalab.minutehelp.data.local.entities.Comment
 import com.decimalab.minutehelp.data.local.entities.TimeLinePost
 import com.google.gson.annotations.SerializedName
 

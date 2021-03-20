@@ -2,6 +2,7 @@ package com.decimalab.minutehelp.utils
 
 import android.widget.TextView
 import com.decimalab.minutehelp.data.local.entities.Comment
+import com.decimalab.minutehelp.data.local.entities.Group
 import com.decimalab.minutehelp.data.local.entities.Post
 import com.decimalab.minutehelp.data.local.entities.TimeLinePost
 
@@ -18,4 +19,5 @@ interface CustomOnClickListener {
     fun onTMInterestedClicked(timeLinePost: TimeLinePost){}
     fun onTMCommentsClicked(timeLinePost: TimeLinePost){}
     fun onTMShareClicked(timeLinePost: TimeLinePost){}
+    fun onGroupClicked(group: Group){}
 }

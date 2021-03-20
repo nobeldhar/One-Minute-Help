@@ -56,7 +56,7 @@ class PostAdapter(val postList: List<Post>, val customOnClickListener: CustomOnC
                         post.isLiked = true
                         binding.icInterest.setImageDrawable(ContextCompat.getDrawable(v.context, R.drawable.ic_interest_colored))
                         binding.interested.textColor = Color.parseColor("#039EFF")
-                        binding.tbLkCt.text = (post.like_count + 1).toString()
+                        binding.tbLkCt.text = (post.like_count?.plus(1)).toString()
                     }
                     customOnClickListener.onInterestedClicked(post)
                 }

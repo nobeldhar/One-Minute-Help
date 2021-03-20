@@ -35,10 +35,24 @@ class DashboardRepository @Inject constructor(
         networkCall = { remoteDataSource.deleteComment(commentId) }
     )
 
+    fun getGroupById(groupId: Int)  = performAuthOperation(
+        networkCall = { remoteDataSource.getGroupById(groupId) }
+    )
+
+    fun getUser()  = performAuthOperation(
+        networkCall = { remoteDataSource.getUser() }
+    )
+
     fun getPosts() = performGetOperation(
         databaseQuery = {localDataSource.getPosts()},
         networkCall = { remoteDataSource.getTimeLinePosts()},
         saveCallResult = {localDataSource.insertPosts(it.data)}
+    )
+
+    fun getGroups() = performGetOperation(
+        databaseQuery = {localDataSource.getGroups()},
+        networkCall = { remoteDataSource.getGroups()},
+        saveCallResult = {localDataSource.insertGroup(it.data)}
     )
 
     fun likePost(id: Int)= performAuthOperation(

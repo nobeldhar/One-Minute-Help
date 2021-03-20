@@ -1,6 +1,7 @@
 package com.decimalab.minutehelp.data.remote.responses
 
 
+import com.decimalab.minutehelp.data.local.entities.Blood
 import com.google.gson.annotations.SerializedName
 
 data class TimeLineResponse2(
@@ -159,7 +160,7 @@ data class TimeLineResponse2(
                 @SerializedName("id")
                 val id: Int,
                 @SerializedName("image")
-                val image: Any,
+                val image: String,
                 @SerializedName("postcode")
                 val postcode: String,
                 @SerializedName("thana_id")
@@ -167,7 +168,9 @@ data class TimeLineResponse2(
                 @SerializedName("updated_at")
                 val updatedAt: String,
                 @SerializedName("user_id")
-                val userId: Int
+                val userId: Int,
+                @SerializedName("blood")
+                val blood: com.decimalab.minutehelp.data.local.entities.Blood
             )
         }
     }
